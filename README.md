@@ -118,8 +118,7 @@ Prepare a JSON file that contains the survey that you wish to present. Example `
                     "value": 3,
                     "label": "Very hot",
                     "color": "c7520e"
-                },
-                ...
+                }
             ]
         }
     ],
