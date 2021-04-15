@@ -1,0 +1,979 @@
+[
+    {
+        "title": "Thermal model evaluation in wework Munich",
+        "description": "We developed a thermal model that aims to predict the mean thermal sensation of occupants in large commercial buildings. In order to evaluate the model, we need actual occupant feedback to compare the results. We appreciate your participation.",
+        "researcher": {
+            "name": "Richard",
+            "mail": "hey@richard.org",
+        },
+        "allowsMultipleSubmissions": true,
+        "startDate": "2021-04-06T15:00:00Z",
+        "endDate": "2021-04-06T20:00:00Z",
+        "color": "00A2FF",
+        "items": [
+            {
+                "type": "ordinalScale",
+                "identifier": "0",
+                "question": "How do you currently feel?",
+                "description": "You can select one option.",
+                "isOptional": false,
+                "scaleTitle": "Thermal Sensation Scale",
+                "isScaleContinous": false,
+                "ordinalScaleSteps": [
+                    {
+                        "value": 3,
+                        "label": "Very hot",
+                        "color": "c7520e"
+                    },
+                    {
+                        "value": 2,
+                        "label": "Hot",
+                        "color": "e3970b"
+                    },
+                    {
+                        "value": 1,
+                        "label": "Warm",
+                        "color": "e3bf0e"
+                    },
+                    {
+                        "value": 0,
+                        "label": "Comfortable / Neutral",
+                        "color": "adadad"
+                    },
+                    {
+                        "value": -1,
+                        "label": "Cool",
+                        "color": "a6c7e3"
+                    },
+                    {
+                        "value": -2,
+                        "label": "Cold",
+                        "color": "5ba9eb"
+                    },
+                    {
+                        "value": -3,
+                        "label": "Very cold",
+                        "color": "0b80e3"
+                    }
+                ]
+            }
+        ],
+        "reminders": [
+            {
+                "type": "dateTime",
+                "description": "When survey starts",
+                "date": "2021-02-21T08:00:00Z"
+            },
+            {
+                "type": "interval",
+                "description": "Every hour",
+                "startTime": "2021-02-21T08:00:00Z",
+                "endTime": "2021-02-21T20:00:00Z"
+            }
+        ]
+    },
+    {
+        "title": "In-Depth Field Study about Thermal Comfort",
+        "description": "We investigate occupants' thermal comfort in buildings with heating, ventilation and air-conditioning (HVAC) systems. We are particularly interested in occupants' response to thermal discomfort. We appreciate your participation.",
+        "researcher": {
+            "name": "Mike",
+            "mail": "hey@mike.org",
+        },
+        "allowsMultipleSubmissions": true,
+        "startDate": "2021-04-07T08:00:00Z",
+        "endDate": "2021-06-07T20:00:00Z",
+        "color": "F8BA00",
+        "items": [
+            {
+                "type": "ordinalScale",
+                "identifier": "0",
+                "question": "How would you assess your current thermal sensation? How do you feel?",
+                "description": "You can select one option.",
+                "isOptional": false,
+                "scaleTitle": "Thermal Sensation Scale",
+                "isScaleContinous": false,
+                "ordinalScaleSteps": [
+                    {
+                        "value": 3,
+                        "label": "Very hot",
+                        "color": "c7520e"
+                    },
+                    {
+                        "value": 2,
+                        "label": "Hot",
+                        "color": "e3970b"
+                    },
+                    {
+                        "value": 1,
+                        "label": "Warm",
+                        "color": "e3bf0e"
+                    },
+                    {
+                        "value": 0,
+                        "label": "Comfortable / Neutral",
+                        "color": "adadad"
+                    },
+                    {
+                        "value": -1,
+                        "label": "Cool",
+                        "color": "a6c7e3"
+                    },
+                    {
+                        "value": -2,
+                        "label": "Cold",
+                        "color": "5ba9eb"
+                    },
+                    {
+                        "value": -3,
+                        "label": "Very cold",
+                        "color": "0b80e3"
+                    }
+                ]
+            },
+            {
+                "type": "ordinalScale",
+                "identifier": "1",
+                "question": "How would you assess your current thermal sensation? How do you feel?",
+                "description": "Adjust the slider to fit your assessment",
+                "isOptional": false,
+                "scaleTitle": "Continous Thermal Sensation Scale",
+                "isScaleContinous": true,
+                "ordinalScaleSteps": [
+                    {
+                        "value": 3,
+                        "label": "Very hot",
+                        "color": "c7520e"
+                    },
+                    {
+                        "value": 2,
+                        "label": "Hot",
+                        "color": "e3970b"
+                    },
+                    {
+                        "value": 1,
+                        "label": "Warm",
+                        "color": "e3bf0e"
+                    },
+                    {
+                        "value": 0,
+                        "label": "Comfortable / Neutral",
+                        "color": "adadad"
+                    },
+                    {
+                        "value": -1,
+                        "label": "Cool",
+                        "color": "a6c7e3"
+                    },
+                    {
+                        "value": -2,
+                        "label": "Cold",
+                        "color": "5ba9eb"
+                    },
+                    {
+                        "value": -3,
+                        "label": "Very cold",
+                        "color": "0b80e3"
+                    }
+                ]
+            },
+            {
+                "type": "ordinalScale",
+                "identifier": "2",
+                "question": "Do you think the current room temperature is acceptable?",
+                "description": "Adjust the slider to fit your assessment",
+                "isOptional": false,
+                "scaleTitle": "Continous Thermal Acceptability Scale",
+                "isScaleContinous": true,
+                "ordinalScaleSteps": [
+                    {
+                        "value": 1,
+                        "label": "Acceptable",
+                        "color": "3eab32"
+                    },
+                    {
+                        "value": 0,
+                        "label": "Neutral",
+                        "color": "b3b5b3"
+                    },
+                    {
+                        "value": -1,
+                        "label": "Unacceptable",
+                        "color": "eb4034"
+                    }
+                ]
+            },
+            {
+                "type": "nominalScale",
+                "identifier": "3",
+                "question": "Which of the following options describes best what you have been doing today?",
+                "description": "You can select one option.",
+                "isOptional": false,
+                "scaleTitle": "Nominal Scale",
+                "nominalScaleSteps": [
+                    {
+                        "identifier": 0,
+                        "label": "Physical work"
+                    },
+                    {
+                        "identifier": 1,
+                        "label": "Relaxing, not working at all"
+                    },
+                    {
+                        "identifier": 2,
+                        "label": "Studying"
+                    },
+                    {
+                        "identifier": 3,
+                        "label": "Working on the computer"
+                    },
+                    {
+                        "identifier": 4,
+                        "label": "I've been doing sports"
+                    }
+                ]
+            },
+            {
+                "type": "multipleChoice",
+                "identifier": "4",
+                "question": "Which of the following statements to you agree with?",
+                "description": "You can select multiple options.",
+                "isOptional": false,
+                "scaleTitle": "Multiple Choice",
+                "multipleChoiceOptions": [
+                    {
+                        "value": 0,
+                        "label": "I usually prefer it warm"
+                    },
+                    {
+                        "value": 1,
+                        "label": "It's important to me that my co-workers feel comfortable as well"
+                    },
+                    {
+                        "value": 2,
+                        "label": "I accept thermal conditions even if they make me feel uncomfortable as long as they satisfy the majority"
+                    },
+                    {
+                        "value": 3,
+                        "label": "In terms of room temperature at work I am very tolerant"
+                    },
+                    {
+                        "value": 4,
+                        "label": "I usually prefer it cold"
+                    }
+                ]
+            },
+            {
+                "type": "textInput",
+                "identifier": "5",
+                "question": "Please describe in a few sentences how you felt today in terms of thermal comfort. Has your thermal satisfaction changed over the day?",
+                "description": "You can enter as much text as you want",
+                "isOptional": true,
+                "scaleTitle": "Text Input",
+            },
+            {
+                "type": "locationPicker",
+                "identifier": "6",
+                "question": "For a better avaluation we would like to access your current location.",
+                "description": "This will access your current location",
+                "isOptional": true,
+                "scaleTitle": "Location Picker"
+            }
+        ],
+        "reminders": [
+            {
+                "type": "dateTime",
+                "description": "When survey starts",
+                "date": "2021-02-21T08:00:00Z"
+            },
+            {
+                "type": "locationChange",
+                "description": "When location changes",
+                "threshold": 500
+            },
+            {
+                "type": "interval",
+                "description": "Every hour",
+                "startTime": "2021-02-21T08:00:00Z",
+                "endTime": "2021-02-21T20:00:00Z"
+            }
+        ]
+    },
+    {
+        "title": "Thermal comfort in buildings with HVAC system",
+        "description": "We investigate occupants' thermal comfort in buildings with heating, ventilation and air-conditioning (HVAC) systems. We are particularly interested in occupants' response to thermal discomfort. We appreciate your participation.",
+        "researcher": {
+            "name": "Powl Ole Fanger",
+            "mail": "hey@fanger.com",
+        },
+        "allowsMultipleSubmissions": true,
+        "startDate": "2021-02-21T08:00:00Z",
+        "endDate": "2021-02-21T20:00:00Z",
+        "color": "8f4068",
+        "items": [
+            {
+                "type": "ordinalScale",
+                "identifier": "0",
+                "question": "How would you assess your current thermal sensation? How do you feel?",
+                "description": "You can select one option.",
+                "isOptional": false,
+                "scaleTitle": "Thermal Sensation Scale",
+                "isScaleContinous": false,
+                "ordinalScaleSteps": [
+                    {
+                        "value": 3,
+                        "label": "Very hot",
+                        "color": "c7520e"
+                    },
+                    {
+                        "value": 2,
+                        "label": "Hot",
+                        "color": "e3970b"
+                    },
+                    {
+                        "value": 1,
+                        "label": "Warm",
+                        "color": "e3bf0e"
+                    },
+                    {
+                        "value": 0,
+                        "label": "Comfortable / Neutral",
+                        "color": "adadad"
+                    },
+                    {
+                        "value": -1,
+                        "label": "Cool",
+                        "color": "a6c7e3"
+                    },
+                    {
+                        "value": -2,
+                        "label": "Cold",
+                        "color": "5ba9eb"
+                    },
+                    {
+                        "value": -3,
+                        "label": "Very cold",
+                        "color": "0b80e3"
+                    }
+                ]
+            },
+            {
+                "type": "ordinalScale",
+                "identifier": "1",
+                "question": "How would you assess your current thermal sensation? How do you feel?",
+                "description": "Adjust the slider to fit your assessment",
+                "isOptional": false,
+                "scaleTitle": "Continous Thermal Sensation Scale",
+                "isScaleContinous": true,
+                "ordinalScaleSteps": [
+                    {
+                        "value": 3,
+                        "label": "Very hot",
+                        "color": "c7520e"
+                    },
+                    {
+                        "value": 2,
+                        "label": "Hot",
+                        "color": "e3970b"
+                    },
+                    {
+                        "value": 1,
+                        "label": "Warm",
+                        "color": "e3bf0e"
+                    },
+                    {
+                        "value": 0,
+                        "label": "Comfortable / Neutral",
+                        "color": "adadad"
+                    },
+                    {
+                        "value": -1,
+                        "label": "Cool",
+                        "color": "a6c7e3"
+                    },
+                    {
+                        "value": -2,
+                        "label": "Cold",
+                        "color": "5ba9eb"
+                    },
+                    {
+                        "value": -3,
+                        "label": "Very cold",
+                        "color": "0b80e3"
+                    }
+                ]
+            },
+            {
+                "type": "ordinalScale",
+                "identifier": "2",
+                "question": "Do you think the current room temperature is acceptable?",
+                "description": "Adjust the slider to fit your assessment",
+                "isOptional": false,
+                "scaleTitle": "Continous Thermal Acceptability Scale",
+                "isScaleContinous": true,
+                "ordinalScaleSteps": [
+                    {
+                        "value": 1,
+                        "label": "Acceptable",
+                        "color": "3eab32"
+                    },
+                    {
+                        "value": 0,
+                        "label": "Neutral",
+                        "color": "b3b5b3"
+                    },
+                    {
+                        "value": -1,
+                        "label": "Unacceptable",
+                        "color": "eb4034"
+                    }
+                ]
+            },
+            {
+                "type": "nominalScale",
+                "identifier": "3",
+                "question": "Which of the following options describes best what you have been doing today?",
+                "description": "You can select one option.",
+                "isOptional": false,
+                "scaleTitle": "Nominal Scale",
+                "nominalScaleSteps": [
+                    {
+                        "identifier": 0,
+                        "label": "Physical work"
+                    },
+                    {
+                        "identifier": 1,
+                        "label": "Relaxing, not working at all"
+                    },
+                    {
+                        "identifier": 2,
+                        "label": "Studying"
+                    },
+                    {
+                        "identifier": 3,
+                        "label": "Working on the computer"
+                    },
+                    {
+                        "identifier": 4,
+                        "label": "I've been doing sports"
+                    }
+                ]
+            },
+            {
+                "type": "multipleChoice",
+                "identifier": "4",
+                "question": "Which of the following statements to you agree with?",
+                "description": "You can select multiple options.",
+                "isOptional": false,
+                "scaleTitle": "Multiple Choice",
+                "multipleChoiceOptions": [
+                    {
+                        "value": 0,
+                        "label": "I usually prefer it warm"
+                    },
+                    {
+                        "value": 1,
+                        "label": "It's important to me that my co-workers feel comfortable as well"
+                    },
+                    {
+                        "value": 2,
+                        "label": "I accept thermal conditions even if they make me feel uncomfortable as long as they satisfy the majority"
+                    },
+                    {
+                        "value": 3,
+                        "label": "In terms of room temperature at work I am very tolerant"
+                    },
+                    {
+                        "value": 4,
+                        "label": "I usually prefer it cold"
+                    }
+                ]
+            },
+            {
+                "type": "textInput",
+                "identifier": "5",
+                "question": "Please describe in a few sentences how you felt today in terms of thermal comfort. Has your thermal satisfaction changed over the day?",
+                "description": "You can enter as much text as you want",
+                "isOptional": true,
+                "scaleTitle": "Text Input"
+            },
+            {
+                "type": "locationPicker",
+                "identifier": "6",
+                "question": "For a better avaluation we would like to access your current location.",
+                "description": "This will access your current location",
+                "isOptional": true,
+                "scaleTitle": "Location Picker"
+            }
+        ],
+        "reminders": [
+            {
+                "type": "dateTime",
+                "description": "When survey starts",
+                "date": "2021-02-21T08:00:00Z"
+            },
+            {
+                "type": "locationChange",
+                "description": "When location changes",
+                "threshold": 500
+            },
+            {
+                "type": "interval",
+                "description": "Every hour",
+                "startTime": "2021-02-21T08:00:00Z",
+                "endTime": "2021-02-21T20:00:00Z"
+            }
+        ]
+    },
+    {
+        "title": "Occupant satisfaction in naturally ventilated office buildings",
+        "description": "We investigate occupants' thermal comfort in buildings with heating, ventilation and air-conditioning (HVAC) systems. We are particularly interested in occupants' response to thermal discomfort. We appreciate your participation.",
+        "researcher": {
+            "name": "Victor Prüfer",
+            "mail": "hey@victor.com",
+        },
+        "allowsMultipleSubmissions": true,
+        "startDate": "2021-04-10T08:00:00Z",
+        "endDate": "2021-05-21T20:00:00Z",
+        "color": "3a6351",
+        "items": [
+            {
+                "type": "ordinalScale",
+                "identifier": "0",
+                "question": "How would you assess your current thermal sensation? How do you feel?",
+                "description": "You can select one option.",
+                "isOptional": false,
+                "scaleTitle": "Thermal Sensation Scale",
+                "isScaleContinous": false,
+                "ordinalScaleSteps": [
+                    {
+                        "value": 3,
+                        "label": "Very hot",
+                        "color": "c7520e"
+                    },
+                    {
+                        "value": 2,
+                        "label": "Hot",
+                        "color": "e3970b"
+                    },
+                    {
+                        "value": 1,
+                        "label": "Warm",
+                        "color": "e3bf0e"
+                    },
+                    {
+                        "value": 0,
+                        "label": "Comfortable / Neutral",
+                        "color": "adadad"
+                    },
+                    {
+                        "value": -1,
+                        "label": "Cool",
+                        "color": "a6c7e3"
+                    },
+                    {
+                        "value": -2,
+                        "label": "Cold",
+                        "color": "5ba9eb"
+                    },
+                    {
+                        "value": -3,
+                        "label": "Very cold",
+                        "color": "0b80e3"
+                    }
+                ]
+            },
+            {
+                "type": "ordinalScale",
+                "identifier": "1",
+                "question": "How would you assess your current thermal sensation? How do you feel?",
+                "description": "Adjust the slider to fit your assessment",
+                "isOptional": false,
+                "scaleTitle": "Continous Thermal Sensation Scale",
+                "isScaleContinous": true,
+                "ordinalScaleSteps": [
+                    {
+                        "value": 3,
+                        "label": "Very hot",
+                        "color": "c7520e"
+                    },
+                    {
+                        "value": 2,
+                        "label": "Hot",
+                        "color": "e3970b"
+                    },
+                    {
+                        "value": 1,
+                        "label": "Warm",
+                        "color": "e3bf0e"
+                    },
+                    {
+                        "value": 0,
+                        "label": "Comfortable / Neutral",
+                        "color": "adadad"
+                    },
+                    {
+                        "value": -1,
+                        "label": "Cool",
+                        "color": "a6c7e3"
+                    },
+                    {
+                        "value": -2,
+                        "label": "Cold",
+                        "color": "5ba9eb"
+                    },
+                    {
+                        "value": -3,
+                        "label": "Very cold",
+                        "color": "0b80e3"
+                    }
+                ]
+            },
+            {
+                "type": "ordinalScale",
+                "identifier": "2",
+                "question": "Do you think the current room temperature is acceptable?",
+                "description": "Adjust the slider to fit your assessment",
+                "isOptional": false,
+                "scaleTitle": "Continous Thermal Acceptability Scale",
+                "isScaleContinous": true,
+                "ordinalScaleSteps": [
+                    {
+                        "value": 1,
+                        "label": "Acceptable",
+                        "color": "3eab32"
+                    },
+                    {
+                        "value": 0,
+                        "label": "Neutral",
+                        "color": "b3b5b3"
+                    },
+                    {
+                        "value": -1,
+                        "label": "Unacceptable",
+                        "color": "eb4034"
+                    }
+                ]
+            },
+            {
+                "type": "nominalScale",
+                "identifier": "3",
+                "question": "Which of the following options describes best what you have been doing today?",
+                "description": "You can select one option.",
+                "isOptional": false,
+                "scaleTitle": "Nominal Scale",
+                "nominalScaleSteps": [
+                    {
+                        "identifier": 0,
+                        "label": "Physical work"
+                    },
+                    {
+                        "identifier": 1,
+                        "label": "Relaxing, not working at all"
+                    },
+                    {
+                        "identifier": 2,
+                        "label": "Studying"
+                    },
+                    {
+                        "identifier": 3,
+                        "label": "Working on the computer"
+                    },
+                    {
+                        "identifier": 4,
+                        "label": "I've been doing sports"
+                    }
+                ]
+            },
+            {
+                "type": "multipleChoice",
+                "identifier": "4",
+                "question": "Which of the following statements to you agree with?",
+                "description": "You can select multiple options.",
+                "isOptional": false,
+                "scaleTitle": "Multiple Choice",
+                "multipleChoiceOptions": [
+                    {
+                        "value": 0,
+                        "label": "I usually prefer it warm"
+                    },
+                    {
+                        "value": 1,
+                        "label": "It's important to me that my co-workers feel comfortable as well"
+                    },
+                    {
+                        "value": 2,
+                        "label": "I accept thermal conditions even if they make me feel uncomfortable as long as they satisfy the majority"
+                    },
+                    {
+                        "value": 3,
+                        "label": "In terms of room temperature at work I am very tolerant"
+                    },
+                    {
+                        "value": 4,
+                        "label": "I usually prefer it cold"
+                    }
+                ]
+            },
+            {
+                "type": "textInput",
+                "identifier": "5",
+                "question": "Please describe in a few sentences how you felt today in terms of thermal comfort. Has your thermal satisfaction changed over the day?",
+                "description": "You can enter as much text as you want",
+                "isOptional": true,
+                "scaleTitle": "Text Input"
+            },
+            {
+                "type": "locationPicker",
+                "identifier": "6",
+                "question": "For a better avaluation we would like to access your current location.",
+                "description": "This will access your current location",
+                "isOptional": true,
+                "scaleTitle": "Location Picker"
+            }
+        ],
+        "reminders": [
+            {
+                "type": "dateTime",
+                "description": "When survey starts",
+                "date": "2021-02-21T08:00:00Z"
+            },
+            {
+                "type": "locationChange",
+                "description": "When location changes",
+                "threshold": 500
+            },
+            {
+                "type": "interval",
+                "description": "Every hour",
+                "startTime": "2021-02-21T08:00:00Z",
+                "endTime": "2021-02-21T20:00:00Z"
+            }
+        ]
+    },
+    {
+        "title": "Identifying personas in thermal comfort research",
+        "description": "We investigate occupants' thermal comfort in buildings with heating, ventilation and air-conditioning (HVAC) systems. We are particularly interested in occupants' response to thermal discomfort. We appreciate your participation.",
+        "researcher": {
+            "name": "LS1 Chair @ TUM",
+            "mail": "hey@victor.com",
+        },
+        "allowsMultipleSubmissions": true,
+        "startDate": "2021-02-21T08:00:00Z",
+        "endDate": "2021-02-21T20:00:00Z",
+        "color": "e48257",
+        "items": [
+            {
+                "type": "ordinalScale",
+                "identifier": "0",
+                "question": "How would you assess your current thermal sensation? How do you feel?",
+                "description": "You can select one option.",
+                "isOptional": false,
+                "scaleTitle": "Thermal Sensation Scale",
+                "isScaleContinous": false,
+                "ordinalScaleSteps": [
+                    {
+                        "value": 3,
+                        "label": "Very hot",
+                        "color": "c7520e"
+                    },
+                    {
+                        "value": 2,
+                        "label": "Hot",
+                        "color": "e3970b"
+                    },
+                    {
+                        "value": 1,
+                        "label": "Warm",
+                        "color": "e3bf0e"
+                    },
+                    {
+                        "value": 0,
+                        "label": "Comfortable / Neutral",
+                        "color": "adadad"
+                    },
+                    {
+                        "value": -1,
+                        "label": "Cool",
+                        "color": "a6c7e3"
+                    },
+                    {
+                        "value": -2,
+                        "label": "Cold",
+                        "color": "5ba9eb"
+                    },
+                    {
+                        "value": -3,
+                        "label": "Very cold",
+                        "color": "0b80e3"
+                    }
+                ]
+            },
+            {
+                "type": "ordinalScale",
+                "identifier": "1",
+                "question": "How would you assess your current thermal sensation? How do you feel?",
+                "description": "Adjust the slider to fit your assessment",
+                "isOptional": false,
+                "scaleTitle": "Continous Thermal Sensation Scale",
+                "isScaleContinous": true,
+                "ordinalScaleSteps": [
+                    {
+                        "value": 3,
+                        "label": "Very hot",
+                        "color": "c7520e"
+                    },
+                    {
+                        "value": 2,
+                        "label": "Hot",
+                        "color": "e3970b"
+                    },
+                    {
+                        "value": 1,
+                        "label": "Warm",
+                        "color": "e3bf0e"
+                    },
+                    {
+                        "value": 0,
+                        "label": "Comfortable / Neutral",
+                        "color": "adadad"
+                    },
+                    {
+                        "value": -1,
+                        "label": "Cool",
+                        "color": "a6c7e3"
+                    },
+                    {
+                        "value": -2,
+                        "label": "Cold",
+                        "color": "5ba9eb"
+                    },
+                    {
+                        "value": -3,
+                        "label": "Very cold",
+                        "color": "0b80e3"
+                    }
+                ]
+            },
+            {
+                "type": "ordinalScale",
+                "identifier": "2",
+                "question": "Do you think the current room temperature is acceptable?",
+                "description": "Adjust the slider to fit your assessment",
+                "isOptional": false,
+                "scaleTitle": "Continous Thermal Acceptability Scale",
+                "isScaleContinous": true,
+                "ordinalScaleSteps": [
+                    {
+                        "value": 1,
+                        "label": "Acceptable",
+                        "color": "3eab32"
+                    },
+                    {
+                        "value": 0,
+                        "label": "Neutral",
+                        "color": "b3b5b3"
+                    },
+                    {
+                        "value": -1,
+                        "label": "Unacceptable",
+                        "color": "eb4034"
+                    }
+                ]
+            },
+            {
+                "type": "nominalScale",
+                "identifier": "3",
+                "question": "Which of the following options describes best what you have been doing today?",
+                "description": "You can select one option.",
+                "isOptional": false,
+                "scaleTitle": "Nominal Scale",
+                "nominalScaleSteps": [
+                    {
+                        "identifier": 0,
+                        "label": "Physical work"
+                    },
+                    {
+                        "identifier": 1,
+                        "label": "Relaxing, not working at all"
+                    },
+                    {
+                        "identifier": 2,
+                        "label": "Studying"
+                    },
+                    {
+                        "identifier": 3,
+                        "label": "Working on the computer"
+                    },
+                    {
+                        "identifier": 4,
+                        "label": "I've been doing sports"
+                    }
+                ]
+            },
+            {
+                "type": "multipleChoice",
+                "identifier": "4",
+                "question": "Which of the following statements to you agree with?",
+                "description": "You can select multiple options.",
+                "isOptional": false,
+                "scaleTitle": "Multiple Choice",
+                "multipleChoiceOptions": [
+                    {
+                        "value": 0,
+                        "label": "I usually prefer it warm"
+                    },
+                    {
+                        "value": 1,
+                        "label": "It's important to me that my co-workers feel comfortable as well"
+                    },
+                    {
+                        "value": 2,
+                        "label": "I accept thermal conditions even if they make me feel uncomfortable as long as they satisfy the majority"
+                    },
+                    {
+                        "value": 3,
+                        "label": "In terms of room temperature at work I am very tolerant"
+                    },
+                    {
+                        "value": 4,
+                        "label": "I usually prefer it cold"
+                    }
+                ]
+            },
+            {
+                "type": "textInput",
+                "identifier": "5",
+                "question": "Please describe in a few sentences how you felt today in terms of thermal comfort. Has your thermal satisfaction changed over the day?",
+                "description": "You can enter as much text as you want",
+                "isOptional": true,
+                "scaleTitle": "Text Input"
+            },
+            {
+                "type": "locationPicker",
+                "identifier": "6",
+                "question": "For a better avaluation we would like to access your current location.",
+                "description": "This will access your current location",
+                "isOptional": true,
+                "scaleTitle": "Location Picker"
+            }
+        ],
+        "reminders": [
+            {
+                "type": "dateTime",
+                "description": "When survey starts",
+                "date": "2021-02-21T08:00:00Z"
+            },
+            {
+                "type": "locationChange",
+                "description": "When location changes",
+                "threshold": 500
+            },
+            {
+                "type": "interval",
+                "description": "Every hour",
+                "startTime": "2021-02-21T08:00:00Z",
+                "endTime": "2021-02-21T20:00:00Z"
+            }
+        ]
+    }
+]
