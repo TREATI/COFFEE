@@ -49,12 +49,8 @@ struct SurveyItemView: View {
                                 if ordinalScaleItem.isScaleContinous == true {
                                     ContinousOrdinalScaleView(viewModel: ContinousOrdinalScaleView.ViewModel(itemToRender: ordinalScaleItem, surveyViewModel: surveyViewModel))
                                 } else {
-                                    OrdinalScaleView(viewModel: OrdinalScaleView.ViewModel(itemToRender: ordinalScaleItem, surveyViewModel: surveyViewModel))
+                                    NumericScaleView(viewModel: NumericScaleView.ViewModel(itemToRender: ordinalScaleItem, surveyViewModel: surveyViewModel))
                                 }
-                            }
-                        case .nominalScale:
-                            if let nominalScaleItem = currentItem as? NominalScaleSurveyItem {
-                                NominalScaleView(viewModel: NominalScaleView.ViewModel(itemToRender: nominalScaleItem, surveyViewModel: surveyViewModel))
                             }
                         case .multipleChoice:
                             if let multipleChoiceItem = currentItem as? MultipleChoiceItem {
@@ -65,7 +61,7 @@ struct SurveyItemView: View {
                                 TextInputView(viewModel: TextInputView.ViewModel(itemToRender: textInputItem, surveyViewModel: surveyViewModel))
                             }
                         case .locationPicker:
-                            if let locationPickerItem = currentItem as? LocationPickerSurveyItem {
+                            if let locationPickerItem = currentItem as? LocationPickerItem {
                                 LocationPickerView(viewModel: LocationPickerView.ViewModel(itemToRender: locationPickerItem, surveyViewModel: surveyViewModel))
                             }
                     }

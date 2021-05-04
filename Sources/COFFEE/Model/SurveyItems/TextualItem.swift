@@ -16,7 +16,7 @@ public struct TextualItem: SurveyItem, Codable {
     public let description: String
     public let isOptional: Bool
     
-    public init(identifier: String, question: String, description: String, isOptional: Bool) {
+    public init(identifier: String = UUID().uuidString, question: String, description: String, isOptional: Bool) {
         self.type = .text
         self.identifier = identifier
         self.question = question

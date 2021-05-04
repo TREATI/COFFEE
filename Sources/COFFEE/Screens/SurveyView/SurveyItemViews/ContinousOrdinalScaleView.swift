@@ -61,7 +61,10 @@ struct ContinousOrdinalScaleView: View {
         // Binding to the slider, defining the current value in range 0 to 1
         @Published var currentSliderValue: Double = 0 {
             didSet {
-                surveyViewModel.currentItemResponse?.responseOrdinalScale = currentSliderValue
+                if let currentItemResponse = surveyViewModel.currentItemResponse as? NumericScaleResponse {
+                    currentItemResponse.value = currentSliderValue
+                }
+                //surveyViewModel.currentItemResponse?.responseOrdinalScale = currentSliderValue
             }
         }
         
@@ -94,13 +97,14 @@ struct ContinousOrdinalScaleView: View {
         
         // User tapped on one item
         func selectStep(stepIndex: Int) {
+            /*
             if surveyViewModel.currentItemResponse?.responseOrdinalScale == steps[stepIndex].value {
                 // If the new selection is already selected, toggle it
                 surveyViewModel.currentItemResponse?.responseOrdinalScale = nil
             } else {
                 // Otherwise, update the item response to reflect the current selection
                 surveyViewModel.currentItemResponse?.responseOrdinalScale = steps[stepIndex].value
-            }
+            }*/
             // Notify the view that changes occurred
             objectWillChange.send()
             surveyViewModel.objectWillChange.send()

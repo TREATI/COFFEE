@@ -8,22 +8,25 @@
 import Foundation
 
 /// All item responses need to implement this protocol
-public protocol ItemResponse2: Codable {
-    /// The value type of the response value, depends on the survey item type
-    associatedtype ResponseValueType
+public protocol ItemResponse: Codable {
     /// Specifies the type of the item this response is referring to
     var type: SurveyItemType { get }
     /// The unique identifier of the item this response is referring to
     var itemIdentifier: String { get }
-    /// The value of the response
-    var value: ResponseValueType? { get }
+    /// Return a readable description of the value
+    var valueDescription: String { get }
     /// Boolean defining whether the current input is valid
     var isValidInput: Bool { get }
 }
 
+extension ItemResponse {
+    public var description: String {
+        return "Response to <\(itemIdentifier)>: \(valueDescription)"
+    }
+}
 
 /// Reflects the response to one survey question. Note that this is a temporary implementation that will be transformed into an object-oriented approach in the future
-public class ItemResponse: Codable, ObservableObject {
+/*public class ItemResponse2: Codable, ObservableObject {
     // General attributes
     public let type: SurveyItemType
     public let surveyItemID: String
@@ -65,8 +68,9 @@ public class ItemResponse: Codable, ObservableObject {
     }
 }
 
+
 /// Make item respone printable on console
-extension ItemResponse: CustomStringConvertible {
+extension ItemResponse2: CustomStringConvertible {
     public var description: String {
         if let responseOrdinalScale = responseOrdinalScale {
             return "Selection on ordinal scale in question <\(surveyItemID)>: \(responseOrdinalScale)"
@@ -82,3 +86,4 @@ extension ItemResponse: CustomStringConvertible {
         return "Unknown or invalid response in question <\(surveyItemID)>"
     }
 }
+*/

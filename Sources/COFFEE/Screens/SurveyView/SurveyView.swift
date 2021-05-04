@@ -145,14 +145,15 @@ extension SurveyView {
         
         // Setup the initial item response for a new survey item
         func prepareItemResponse() {
-            currentItemResponse = ItemResponse(type: currentSurveyItem.type, surveyItemID: currentSurveyItem.identifier)
-            if currentSurveyItem.type == .multipleChoice {
-                currentItemResponse?.responseMultipleChoice = [Int]()
-            }
-            if currentSurveyItem.type == .numericScale,
-               let ordinalScaleItem = currentSurveyItem as? NumericScaleItem,
-               ordinalScaleItem.isScaleContinous == true {
-                currentItemResponse?.responseOrdinalScale = 0
+            switch currentSurveyItem.type {
+                case .numericScale:
+                    currentItemResponse = NumericScaleResponse(itemIdentifier: currentSurveyItem.identifier, initialValue: 0)
+                case .multipleChoice:
+                    currentItemResponse = MultipleChoiceResponse(itemIdentifier: currentSurveyItem.identifier)
+                case .text:
+                    currentItemResponse = TextualResponse(itemIdentifier: currentSurveyItem.identifier)
+                case .locationPicker:
+                    currentItemResponse = LocationPickerResponse(itemIdentifier: currentSurveyItem.identifier)
             }
         }
     }

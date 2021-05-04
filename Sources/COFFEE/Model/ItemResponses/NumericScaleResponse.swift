@@ -7,23 +7,27 @@
 
 import Foundation
 
-public struct NumericScaleResponse: ItemResponse2, Codable {
-    
-    /// The value type is a double which reflects the selected numeric scale step / position
-    public typealias ResponseValueType = Double
+public class NumericScaleResponse: ObservableObject, ItemResponse, Codable {
     
     /// Specifies the type of the item this response is referring to
     public var type: SurveyItemType
     /// The unique identifier of the item this response is referring to
     public var itemIdentifier: String
-    /// The value of the response
-    public var value: ResponseValueType?
+    /// The value of the response. The value type is a double which reflects the selected numeric scale step / position
+    public var value: Double?
     /// Boolean defining whether the current input is valid
     public var isValidInput: Bool {
         return value != nil
     }
+    /// A description of the value
+    public var valueDescription: String {
+        guard let value = value else {
+            return "No value"
+        }
+        return String(value)
+    }
     
-    public init(itemIdentifier: String, initialValue: ResponseValueType?) {
+    public init(itemIdentifier: String, initialValue: Double?) {
         self.type = .numericScale
         self.itemIdentifier = itemIdentifier
         self.value = initialValue

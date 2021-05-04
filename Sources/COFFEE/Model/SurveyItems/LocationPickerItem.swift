@@ -1,5 +1,5 @@
 //
-//  LocationPickerSurveyItem.swift
+//  LocationPickerItem.swift
 //  
 //
 //  Created by Victor Prüfer on 13.04.21.
@@ -8,7 +8,7 @@
 import Foundation
 
 /// This item asks the respondent to share their current location
-public struct LocationPickerSurveyItem: SurveyItem, Codable {
+public struct LocationPickerItem: SurveyItem, Codable {
     // General attributes
     public let type: SurveyItemType
     public let identifier: String
@@ -16,8 +16,8 @@ public struct LocationPickerSurveyItem: SurveyItem, Codable {
     public let description: String
     public let isOptional: Bool
     
-    public init(type: SurveyItemType = .locationPicker, identifier: String, question: String, description: String, isOptional: Bool) {
-        self.type = type
+    public init(identifier: String = UUID().uuidString, question: String, description: String, isOptional: Bool) {
+        self.type = .locationPicker
         self.identifier = identifier
         self.question = question
         self.description = description

@@ -8,7 +8,7 @@
 #if !os(macOS)
 
 import SwiftUI
-
+/*
 struct NominalScaleView: View {
     
     @ObservedObject var viewModel: ViewModel
@@ -68,5 +68,5 @@ struct NominalScaleView: View {
         }
     }
 }
-
+*/
 #endif

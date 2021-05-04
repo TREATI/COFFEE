@@ -9,7 +9,7 @@
 
 import SwiftUI
 
-struct OrdinalScaleView: View {
+struct NumericScaleView: View {
     
     @ObservedObject var viewModel: ViewModel
     
@@ -30,7 +30,7 @@ struct OrdinalScaleView: View {
                 }.padding(.leading, 8)
                 .padding(.trailing)
                 .padding(.vertical, 12)
-                .background(Color(surveyViewModel.currentItemResponse?.responseOrdinalScale == viewModel.steps[stepIndex].value ? .systemGray3 : .systemGray5))
+                .background(viewModel.getBackgroundColor(stepIndex: stepIndex))
                 .cornerRadius(6)
                 .padding(.bottom, 4)
             })
@@ -42,7 +42,7 @@ struct OrdinalScaleView: View {
         private var itemToRender: NumericScaleItem
         // Reference to the environment object, the survey view model
         private var surveyViewModel: SurveyView.ViewModel
-        
+                
         // Compute the ordinal scale steps for this question
         var steps: [NumericScaleStep] {
             return itemToRender.steps
@@ -55,16 +55,32 @@ struct OrdinalScaleView: View {
         
         // User tapped on one item
         func selectStep(stepIndex: Int) {
-            if surveyViewModel.currentItemResponse?.responseOrdinalScale == steps[stepIndex].value {
+            if let currentItemResponse = surveyViewModel.currentItemResponse as? NumericScaleResponse {
+                if currentItemResponse.value == steps[stepIndex].value {
+                    // If the new selection is already selected, toggle it
+                    currentItemResponse.value = nil
+                } else {
+                    // Otherwise, update the item response to reflect the current selection
+                    currentItemResponse.value = steps[stepIndex].value
+                }
+            }
+            /*if surveyViewModel.currentItemResponse?.responseOrdinalScale == steps[stepIndex].value {
                 // If the new selection is already selected, toggle it
                 surveyViewModel.currentItemResponse?.responseOrdinalScale = nil
             } else {
                 // Otherwise, update the item response to reflect the current selection
                 surveyViewModel.currentItemResponse?.responseOrdinalScale = steps[stepIndex].value
-            }
+            }*/
             // Notify the view that changes occurred
             objectWillChange.send()
             surveyViewModel.objectWillChange.send()
+        }
+        
+        func getBackgroundColor(stepIndex: Int) -> Color {
+            guard let currentItemResponse = surveyViewModel.currentItemResponse as? NumericScaleResponse else {
+                return Color(.systemGray5)
+            }
+            return Color(currentItemResponse.value == steps[stepIndex].value ? .systemGray3 : .systemGray5)
         }
     }
 }

@@ -24,7 +24,6 @@ public protocol SurveyItem: Codable {
 /// Enum to specify the type of a survey item
 public enum SurveyItemType: String, Codable {
     case numericScale
-    case nominalScale
     case multipleChoice
     case locationPicker
     case text

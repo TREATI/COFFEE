@@ -11,14 +11,13 @@
     "color": "8f4068",
     "items": [
         {
-            "type": "ordinalScale",
+            "type": "numericScale",
             "identifier": "0",
             "question": "How would you assess your current thermal sensation? How do you feel?",
             "description": "You can select one option.",
             "isOptional": false,
-            "scaleTitle": "Thermal Sensation Scale",
             "isScaleContinous": false,
-            "ordinalScaleSteps": [
+            "steps": [
                 {
                     "value": 3,
                     "label": "Very hot",
@@ -57,14 +56,13 @@
             ]
         },
         {
-            "type": "ordinalScale",
+            "type": "numericScale",
             "identifier": "1",
             "question": "How would you assess your current thermal sensation? How do you feel?",
             "description": "Adjust the slider to fit your assessment",
             "isOptional": false,
-            "scaleTitle": "Continous Thermal Sensation Scale",
             "isScaleContinous": true,
-            "ordinalScaleSteps": [
+            "steps": [
                 {
                     "value": 3,
                     "label": "Very hot",
@@ -103,14 +101,13 @@
             ]
         },
         {
-            "type": "ordinalScale",
+            "type": "numericScale",
             "identifier": "2",
             "question": "Do you think the current room temperature is acceptable?",
             "description": "Adjust the slider to fit your assessment",
             "isOptional": false,
-            "scaleTitle": "Continous Thermal Acceptability Scale",
             "isScaleContinous": true,
-            "ordinalScaleSteps": [
+            "steps": [
                 {
                     "value": 1,
                     "label": "Acceptable",
@@ -129,72 +126,40 @@
             ]
         },
         {
-            "type": "nominalScale",
-            "identifier": "3",
-            "question": "Which of the following options describes best what you have been doing today?",
-            "description": "You can select one option.",
-            "isOptional": false,
-            "scaleTitle": "Nominal Scale",
-            "nominalScaleSteps": [
-                {
-                    "identifier": 0,
-                    "label": "Physical work"
-                },
-                {
-                    "identifier": 1,
-                    "label": "Relaxing, not working at all"
-                },
-                {
-                    "identifier": 2,
-                    "label": "Studying"
-                },
-                {
-                    "identifier": 3,
-                    "label": "Working on the computer"
-                },
-                {
-                    "identifier": 4,
-                    "label": "I've been doing sports"
-                }
-            ]
-        },
-        {
             "type": "multipleChoice",
             "identifier": "4",
             "question": "Which of the following statements to you agree with?",
             "description": "You can select multiple options.",
             "isOptional": false,
-            "scaleTitle": "Multiple Choice",
             "multipleChoiceOptions": [
                 {
-                    "value": 0,
+                    "identifier": 0,
                     "label": "I usually prefer it warm"
                 },
                 {
-                    "value": 1,
+                    "identifier": 1,
                     "label": "It's important to me that my co-workers feel comfortable as well"
                 },
                 {
-                    "value": 2,
+                    "identifier": 2,
                     "label": "I accept thermal conditions even if they make me feel uncomfortable as long as they satisfy the majority"
                 },
                 {
-                    "value": 3,
+                    "identifier": 3,
                     "label": "In terms of room temperature at work I am very tolerant"
                 },
                 {
-                    "value": 4,
+                    "identifier": 4,
                     "label": "I usually prefer it cold"
                 }
             ]
         },
         {
-            "type": "textInput",
+            "type": "text",
             "identifier": "5",
             "question": "Please describe in a few sentences how you felt today in terms of thermal comfort. Has your thermal satisfaction changed over the day?",
             "description": "You can enter as much text as you want",
             "isOptional": true,
-            "scaleTitle": "Text Input"
         },
         {
             "type": "locationPicker",
@@ -202,7 +167,6 @@
             "question": "For a better avaluation we would like to access your current location.",
             "description": "This will access your current location",
             "isOptional": true,
-            "scaleTitle": "Location Picker"
         }
     ],
     "reminders": [

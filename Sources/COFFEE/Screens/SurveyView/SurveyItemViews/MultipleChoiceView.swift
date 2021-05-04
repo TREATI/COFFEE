@@ -20,7 +20,7 @@ struct MultipleChoiceView: View {
             Button(action: { viewModel.selectStep(optionIndex: optionIndex) }, label: {
                 VStack(alignment: .leading) {
                     HStack(alignment: .center, spacing: 6) {
-                        Image(systemName: (surveyViewModel.currentItemResponse?.responseMultipleChoice?.contains(viewModel.options[optionIndex].identifier) ?? false) ? "circle.fill" : "circle").font(.callout)
+                        Image(systemName: viewModel.getImage(optionIndex: optionIndex)).font(.callout)
                             .foregroundColor(Color(.systemGray2))
                         Text(viewModel.options[optionIndex].label)
                             .font(.callout)
@@ -30,7 +30,7 @@ struct MultipleChoiceView: View {
                 }.padding(.leading, 8)
                 .padding(.trailing)
                 .padding(.vertical, 12)
-                .background(Color((surveyViewModel.currentItemResponse?.responseMultipleChoice?.contains(viewModel.options[optionIndex].identifier) ?? false) ? .systemGray3 : .systemGray5))
+                .background(viewModel.getBackgroundColor(optionIndex: optionIndex))
                 .cornerRadius(6)
                 .padding(.bottom, 4)
             })
@@ -55,25 +55,45 @@ struct MultipleChoiceView: View {
         
         // User tapped on one item
         func selectStep(optionIndex: Int) {
-            if getIsSelected(optionIndex: optionIndex) {
+            if let currentItemResponse = surveyViewModel.currentItemResponse as? MultipleChoiceResponse {
+                if getIsSelected(optionIndex: optionIndex) {
+                    // If the new selection is already selected, toggle it
+                    currentItemResponse.value.removeAll(where: { $0 == options[optionIndex].identifier })
+                } else {
+                    // Otherwise, update the item response to reflect the current selection
+                    currentItemResponse.value.append(options[optionIndex].identifier)
+                }
+            }
+            /*if getIsSelected(optionIndex: optionIndex) {
                 // If the new selection is already selected, toggle it
                 surveyViewModel.currentItemResponse?.responseMultipleChoice?.removeAll(where: { $0 == options[optionIndex].identifier })
             } else {
                 // Otherwise, update the item response to reflect the current selection
                 surveyViewModel.currentItemResponse?.responseMultipleChoice?.append(options[optionIndex].identifier)
-            }
+            }*/
             // Notify the view that changes occurred
             objectWillChange.send()
             surveyViewModel.objectWillChange.send()
         }
         
-        // Returns whether an option at a given index is selected
+        /// Returns whether an option at a given index is selected or not
         func getIsSelected(optionIndex: Int) -> Bool {
-            guard let currentMCResponse = surveyViewModel.currentItemResponse?.responseMultipleChoice else {
+            guard let currentItemResponse = surveyViewModel.currentItemResponse as? MultipleChoiceResponse else {
                 return false
             }
-            return currentMCResponse.contains(options[optionIndex].identifier)
+            return currentItemResponse.value.contains(options[optionIndex].identifier)
         }
+        
+        /// Returns the background color for an option row at a given index
+        func getBackgroundColor(optionIndex: Int) -> Color {
+            return Color(getIsSelected(optionIndex: optionIndex) ? .systemGray3 : .systemGray5)
+        }
+        
+        /// Returns the image name for an option row at a given index
+        func getImage(optionIndex: Int) -> String {
+            return getIsSelected(optionIndex: optionIndex) ? "circle.fill" : "circle"
+        }
+        
     }
 }
 

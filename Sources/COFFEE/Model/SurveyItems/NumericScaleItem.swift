@@ -21,7 +21,7 @@ public struct NumericScaleItem: SurveyItem, Codable {
     /// Specify at least two steps to define the scale's range
     public let steps: [NumericScaleStep]
     
-    public init(identifier: String, question: String, description: String, isOptional: Bool, isScaleContinous: Bool, ordinalScaleSteps: [NumericScaleStep]) {
+    public init(identifier: String = UUID().uuidString, question: String, description: String, isOptional: Bool, isScaleContinous: Bool, ordinalScaleSteps: [NumericScaleStep]) {
         self.type = .numericScale
         self.identifier = identifier
         self.question = question

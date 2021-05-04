@@ -55,7 +55,7 @@ struct LocationPickerView: View {
     
     class ViewModel: NSObject, CLLocationManagerDelegate, ObservableObject {
         // The currently displayed survey question
-        private var itemToRender: LocationPickerSurveyItem
+        private var itemToRender: LocationPickerItem
         // Reference to the environment object, the survey view model
         private var surveyViewModel: SurveyView.ViewModel
         // Location manager to access the user's location
@@ -76,7 +76,7 @@ struct LocationPickerView: View {
             return surveyViewModel.surveyColor
         }
         
-        init(itemToRender: LocationPickerSurveyItem, surveyViewModel: SurveyView.ViewModel) {
+        init(itemToRender: LocationPickerItem, surveyViewModel: SurveyView.ViewModel) {
             self.itemToRender = itemToRender
             self.surveyViewModel = surveyViewModel
             self.manager = CLLocationManager()
@@ -93,8 +93,16 @@ struct LocationPickerView: View {
             guard let currentLocation = lastKnownLocation else {
                 return
             }
-            surveyViewModel.currentItemResponse?.responseLocationPickerLatitude = currentLocation.coordinate.latitude
-            surveyViewModel.currentItemResponse?.responseLocationPickerLongitude = currentLocation.coordinate.longitude
+            
+            if let currentItemResponse = surveyViewModel.currentItemResponse as? LocationPickerResponse {
+                currentItemResponse.value = [
+                    CoordinateType.longitude: currentLocation.coordinate.longitude,
+                    CoordinateType.latitude: currentLocation.coordinate.latitude
+                ]
+            }
+            
+            /*surveyViewModel.currentItemResponse?.responseLocationPickerLatitude = currentLocation.coordinate.latitude
+            surveyViewModel.currentItemResponse?.responseLocationPickerLongitude = currentLocation.coordinate.longitude*/
             
             hasSharedLocation = true
         }

@@ -37,7 +37,10 @@ struct TextInputView: View {
             
             // Once the text is changed locally, update the item response
             handler = $currentTextInput.sink { (textChange) in
-                surveyViewModel.currentItemResponse?.responseTextInput = textChange
+                if let currentItemResponse = surveyViewModel.currentItemResponse as? TextualResponse {
+                    currentItemResponse.value = textChange
+                }
+                //surveyViewModel.currentItemResponse?.responseTextInput = textChange
             }
         }
     }

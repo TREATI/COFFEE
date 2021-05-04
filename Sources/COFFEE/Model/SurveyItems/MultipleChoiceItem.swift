@@ -19,7 +19,7 @@ public struct MultipleChoiceItem: SurveyItem, Codable {
     /// Specify a set of available options
     public let multipleChoiceOptions: [MultipleChoiceOption]
     
-    public init(identifier: String, question: String, description: String, isOptional: Bool, multipleChoiceOptions: [MultipleChoiceOption]) {
+    public init(identifier: String = UUID().uuidString, question: String, description: String, isOptional: Bool, multipleChoiceOptions: [MultipleChoiceOption]) {
         self.type = .multipleChoice
         self.identifier = identifier
         self.question = question

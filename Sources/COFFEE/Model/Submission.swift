@@ -8,7 +8,7 @@
 import Foundation
 
 /// A submission groups multiple item responses
-public struct Submission: Codable {
+public struct Submission {
     public let submissionDate: Date
     public let responses: [ItemResponse]
 }
