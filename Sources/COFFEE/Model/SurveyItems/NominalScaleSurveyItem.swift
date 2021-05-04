@@ -15,19 +15,16 @@ public struct NominalScaleSurveyItem: SurveyItem, Codable {
     public let question: String
     public let description: String
     public let isOptional: Bool
-    public let scaleTitle: String?
     
-    // Additional attributes for item type "NominalScale"
     /// Specify a set of available options
     public let nominalScaleSteps: [NominalScaleStep]
     
-    public init(type: SurveyItemType = .nominalScale, identifier: String, question: String, description: String, isOptional: Bool, scaleTitle: String?, nominalScaleSteps: [NominalScaleStep]) {
+    public init(type: SurveyItemType = .nominalScale, identifier: String, question: String, description: String, isOptional: Bool, nominalScaleSteps: [NominalScaleStep]) {
         self.type = type
         self.identifier = identifier
         self.question = question
         self.description = description
         self.isOptional = isOptional
-        self.scaleTitle = scaleTitle
         self.nominalScaleSteps = nominalScaleSteps
     }
 }

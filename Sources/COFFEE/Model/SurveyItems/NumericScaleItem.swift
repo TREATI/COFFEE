@@ -15,21 +15,18 @@ public struct NumericScaleItem: SurveyItem, Codable {
     public let question: String
     public let description: String
     public let isOptional: Bool
-    public let scaleTitle: String?
     
-    // Additional attributes for item type "OrdinalScale"
     /// Specify whether the scale is discrete or continous
     public let isScaleContinous: Bool
     /// Specify at least two steps to define the scale's range
     public let steps: [NumericScaleStep]
     
-    public init(identifier: String, question: String, description: String, isOptional: Bool, scaleTitle: String?, isScaleContinous: Bool, ordinalScaleSteps: [NumericScaleStep]) {
+    public init(identifier: String, question: String, description: String, isOptional: Bool, isScaleContinous: Bool, ordinalScaleSteps: [NumericScaleStep]) {
         self.type = .numericScale
         self.identifier = identifier
         self.question = question
         self.description = description
         self.isOptional = isOptional
-        self.scaleTitle = scaleTitle
         self.isScaleContinous = isScaleContinous
         self.steps = ordinalScaleSteps
     }

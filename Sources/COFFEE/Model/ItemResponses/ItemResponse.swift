@@ -57,7 +57,7 @@ public class ItemResponse: Codable, ObservableObject {
                 return responseNominalScale != nil
             case .multipleChoice:
                 return !(responseMultipleChoice?.isEmpty ?? true)
-            case .textInput:
+            case .text:
                 return true
             case .locationPicker:
                 return true

@@ -19,8 +19,6 @@ public protocol SurveyItem: Codable {
     var description: String { get }
     /// Specifies whether the survey item can be skipped
     var isOptional: Bool { get }
-    /// Specifies the title of the scale (e.g. 'Thermal Sensation Scale')
-    var scaleTitle: String? { get }
 }
 
 /// Enum to specify the type of a survey item

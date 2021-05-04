@@ -18,9 +18,6 @@ struct SurveyItemView: View {
     
     var descriptionText: String {
         var tempDescription = currentItem.description
-        if let scaleTitle = currentItem.scaleTitle {
-            tempDescription += " (\(scaleTitle))"
-        }
         if currentItem.isOptional {
             tempDescription += " – You can skip this question"
         }
