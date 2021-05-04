@@ -149,8 +149,8 @@ extension SurveyView {
             if currentSurveyItem.type == .multipleChoice {
                 currentItemResponse?.responseMultipleChoice = [Int]()
             }
-            if currentSurveyItem.type == .ordinalScale,
-               let ordinalScaleItem = currentSurveyItem as? OrdinalScaleSurveyItem,
+            if currentSurveyItem.type == .numericScale,
+               let ordinalScaleItem = currentSurveyItem as? NumericScaleItem,
                ordinalScaleItem.isScaleContinous == true {
                 currentItemResponse?.responseOrdinalScale = 0
             }

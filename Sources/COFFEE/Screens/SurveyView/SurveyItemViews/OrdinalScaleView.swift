@@ -39,16 +39,16 @@ struct OrdinalScaleView: View {
     
     class ViewModel: ObservableObject {
         // The currently displayed survey question
-        private var itemToRender: OrdinalScaleSurveyItem
+        private var itemToRender: NumericScaleItem
         // Reference to the environment object, the survey view model
         private var surveyViewModel: SurveyView.ViewModel
         
         // Compute the ordinal scale steps for this question
-        var steps: [OrdinalScaleStep] {
-            return itemToRender.ordinalScaleSteps
+        var steps: [NumericScaleStep] {
+            return itemToRender.steps
         }
         
-        init(itemToRender: OrdinalScaleSurveyItem, surveyViewModel: SurveyView.ViewModel) {
+        init(itemToRender: NumericScaleItem, surveyViewModel: SurveyView.ViewModel) {
             self.itemToRender = itemToRender
             self.surveyViewModel = surveyViewModel
         }

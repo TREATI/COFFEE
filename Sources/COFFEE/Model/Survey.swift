@@ -53,7 +53,7 @@ public struct Survey: Codable {
         // Encode the items array (needs special treatment as they need to be assigned manually)
         var itemsContainer = container.nestedUnkeyedContainer(forKey: .items)
         for anItem in items {
-            if let ordinalScaleItem = anItem as? OrdinalScaleSurveyItem {
+            if let ordinalScaleItem = anItem as? NumericScaleItem {
                 try itemsContainer.encode(ordinalScaleItem)
             } else if let nominalScaleItem = anItem as? NominalScaleSurveyItem {
                 try itemsContainer.encode(nominalScaleItem)
@@ -103,8 +103,8 @@ public struct Survey: Codable {
             let itemType = try item.decode(SurveyItemType.self, forKey: SurveyItemTypeKey.type)
 
             switch itemType {
-                case .ordinalScale:
-                    items.append(try itemsArray.decode(OrdinalScaleSurveyItem.self))
+                case .numericScale:
+                    items.append(try itemsArray.decode(NumericScaleItem.self))
                 case .nominalScale:
                     items.append(try itemsArray.decode(NominalScaleSurveyItem.self))
                 case .multipleChoice:

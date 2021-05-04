@@ -1,5 +1,5 @@
 //
-//  OrdinalScaleSurveyItem.swift
+//  NumericScaleSurveyItem.swift
 //  
 //
 //  Created by Victor Prüfer on 13.04.21.
@@ -8,7 +8,7 @@
 import Foundation
 
 /// This question type displays a numeric scale
-public struct OrdinalScaleSurveyItem: SurveyItem, Codable {
+public struct NumericScaleItem: SurveyItem, Codable {
     // General attributes
     public let type: SurveyItemType
     public let identifier: String
@@ -21,22 +21,22 @@ public struct OrdinalScaleSurveyItem: SurveyItem, Codable {
     /// Specify whether the scale is discrete or continous
     public let isScaleContinous: Bool
     /// Specify at least two steps to define the scale's range
-    public let ordinalScaleSteps: [OrdinalScaleStep]
+    public let steps: [NumericScaleStep]
     
-    public init(type: SurveyItemType = .ordinalScale, identifier: String, question: String, description: String, isOptional: Bool, scaleTitle: String?, isScaleContinous: Bool, ordinalScaleSteps: [OrdinalScaleStep]) {
-        self.type = type
+    public init(identifier: String, question: String, description: String, isOptional: Bool, scaleTitle: String?, isScaleContinous: Bool, ordinalScaleSteps: [NumericScaleStep]) {
+        self.type = .numericScale
         self.identifier = identifier
         self.question = question
         self.description = description
         self.isOptional = isOptional
         self.scaleTitle = scaleTitle
         self.isScaleContinous = isScaleContinous
-        self.ordinalScaleSteps = ordinalScaleSteps
+        self.steps = ordinalScaleSteps
     }
 }
 
 /// A single step on an ordinal scale
-public struct OrdinalScaleStep: Codable {
+public struct NumericScaleStep: Codable {
     /// A unique numeric value to describe the step's position on the scale
     public let value: Double
     /// Human-readable description of the step

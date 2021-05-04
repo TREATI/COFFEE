@@ -48,7 +48,7 @@ struct ContinousOrdinalScaleView: View {
     
     class ViewModel: ObservableObject {
         // The currently displayed survey question
-        private var itemToRender: OrdinalScaleSurveyItem
+        private var itemToRender: NumericScaleItem
         // Reference to the environment object, the survey view model
         private var surveyViewModel: SurveyView.ViewModel
         
@@ -66,8 +66,8 @@ struct ContinousOrdinalScaleView: View {
         }
         
         // Compute the ordinal scale steps for this question
-        var steps: [OrdinalScaleStep] {
-            return itemToRender.ordinalScaleSteps.reversed()
+        var steps: [NumericScaleStep] {
+            return itemToRender.steps.reversed()
         }
         
         // The value range of the scale (from min to max)
@@ -81,13 +81,13 @@ struct ContinousOrdinalScaleView: View {
         }
         
         // The step that the current slider position is nearest to
-        var nearestStep: OrdinalScaleStep? {
+        var nearestStep: NumericScaleStep? {
             return steps.map({ (difference: currentSliderValue - $0.value, step: $0) }).min { (a, b) -> Bool in
                 return abs(a.difference) < abs(b.difference)
             }?.step
         }
         
-        init(itemToRender: OrdinalScaleSurveyItem, surveyViewModel: SurveyView.ViewModel) {
+        init(itemToRender: NumericScaleItem, surveyViewModel: SurveyView.ViewModel) {
             self.itemToRender = itemToRender
             self.surveyViewModel = surveyViewModel
         }

@@ -35,12 +35,12 @@ public struct MultipleChoiceSurveyItem: SurveyItem, Codable {
 /// One multiple choice option
 public struct MultipleChoiceOption: Codable {
     /// A unique numeric value for identification purposes
-    public let value: Int
+    public let identifier: Int
     /// Human-readable description of the option
     public let label: String
     
-    public init(value: Int, label: String) {
-        self.value = value
+    public init(identifier: Int, label: String) {
+        self.identifier = identifier
         self.label = label
     }
 }

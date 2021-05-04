@@ -7,6 +7,21 @@
 
 import Foundation
 
+/// All item responses need to implement this protocol
+public protocol ItemResponse2: Codable {
+    /// The value type of the response value, depends on the survey item type
+    associatedtype ResponseValueType
+    /// Specifies the type of the item this response is referring to
+    var type: SurveyItemType { get }
+    /// The unique identifier of the item this response is referring to
+    var itemIdentifier: String { get }
+    /// The value of the response
+    var value: ResponseValueType? { get }
+    /// Boolean defining whether the current input is valid
+    var isValidInput: Bool { get }
+}
+
+
 /// Reflects the response to one survey question. Note that this is a temporary implementation that will be transformed into an object-oriented approach in the future
 public class ItemResponse: Codable, ObservableObject {
     // General attributes
@@ -36,7 +51,7 @@ public class ItemResponse: Codable, ObservableObject {
     
     public var isValidInput: Bool {
         switch type {
-            case .ordinalScale:
+            case .numericScale:
                 return responseOrdinalScale != nil
             case .nominalScale:
                 return responseNominalScale != nil
