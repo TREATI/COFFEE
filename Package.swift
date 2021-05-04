@@ -22,9 +22,6 @@ let package = Package(
             name: "COFFEE",
             dependencies: [.product(name: "Sliders", package: "Sliders")],
             resources: [.process("Resources")]
-        ),
-        .testTarget(
-            name: "COFFEETests",
-            dependencies: ["COFFEE"]),
+        )
     ]
 )
