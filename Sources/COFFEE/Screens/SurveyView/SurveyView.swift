@@ -1,5 +1,5 @@
 //
-//  TakeSurveyScreen.swift
+//  SurveyView.swift
 //  COFFEE
 //
 //  Created by Victor Prüfer on 22.02.21.
@@ -10,7 +10,7 @@ import SwiftUI
 #if !os(macOS)
 
 /// A screen presenting a given survey
-struct TakeSurveyScreen: View {
+struct SurveyView: View {
     
     // View model for this survey session, also provided to the subviews as environment object
     @StateObject var viewModel: ViewModel
@@ -52,7 +52,7 @@ struct TakeSurveyScreen: View {
     }
 }
 
-extension TakeSurveyScreen {
+extension SurveyView {
     
     class ViewModel: ObservableObject {
         // The survey to take

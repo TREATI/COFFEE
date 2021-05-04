@@ -14,7 +14,7 @@ struct ContinousOrdinalScaleView: View {
     
     @ObservedObject var viewModel: ViewModel
     
-    @EnvironmentObject var surveyViewModel: TakeSurveyScreen.ViewModel
+    @EnvironmentObject var surveyViewModel: SurveyView.ViewModel
     
     var body: some View {
         VStack(alignment: .center) {
@@ -50,7 +50,7 @@ struct ContinousOrdinalScaleView: View {
         // The currently displayed survey question
         private var itemToRender: OrdinalScaleSurveyItem
         // Reference to the environment object, the survey view model
-        private var surveyViewModel: TakeSurveyScreen.ViewModel
+        private var surveyViewModel: SurveyView.ViewModel
         
         var numberFormatter: NumberFormatter = {
             let numberFormatter = NumberFormatter()
@@ -87,7 +87,7 @@ struct ContinousOrdinalScaleView: View {
             }?.step
         }
         
-        init(itemToRender: OrdinalScaleSurveyItem, surveyViewModel: TakeSurveyScreen.ViewModel) {
+        init(itemToRender: OrdinalScaleSurveyItem, surveyViewModel: SurveyView.ViewModel) {
             self.itemToRender = itemToRender
             self.surveyViewModel = surveyViewModel
         }

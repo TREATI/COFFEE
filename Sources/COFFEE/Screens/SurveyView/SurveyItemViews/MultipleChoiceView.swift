@@ -13,7 +13,7 @@ struct MultipleChoiceView: View {
     
     @ObservedObject var viewModel: ViewModel
     
-    @EnvironmentObject var surveyViewModel: TakeSurveyScreen.ViewModel
+    @EnvironmentObject var surveyViewModel: SurveyView.ViewModel
         
     var body: some View {
         ForEach(viewModel.options.indices, id: \.self) { optionIndex in
@@ -41,14 +41,14 @@ struct MultipleChoiceView: View {
         // The currently displayed survey question
         private var itemToRender: MultipleChoiceSurveyItem
         // Reference to the environment object, the survey view model
-        private var surveyViewModel: TakeSurveyScreen.ViewModel
+        private var surveyViewModel: SurveyView.ViewModel
         
         // Compute the ordinal scale steps for this question
         var options: [MultipleChoiceOption] {
             return itemToRender.multipleChoiceOptions
         }
         
-        init(itemToRender: MultipleChoiceSurveyItem, surveyViewModel: TakeSurveyScreen.ViewModel) {
+        init(itemToRender: MultipleChoiceSurveyItem, surveyViewModel: SurveyView.ViewModel) {
             self.itemToRender = itemToRender
             self.surveyViewModel = surveyViewModel
         }

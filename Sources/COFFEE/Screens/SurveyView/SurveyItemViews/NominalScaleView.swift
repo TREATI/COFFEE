@@ -1,27 +1,27 @@
 //
-//  OrdinalScaleView.swift
+//  NominalScaleView.swift
 //  COFFEE
 //
-//  Created by Victor Prüfer on 22.02.21.
+//  Created by Victor Prüfer on 01.03.21.
 //
 
 #if !os(macOS)
 
 import SwiftUI
 
-struct OrdinalScaleView: View {
+struct NominalScaleView: View {
     
     @ObservedObject var viewModel: ViewModel
     
-    @EnvironmentObject var surveyViewModel: TakeSurveyScreen.ViewModel
+    @EnvironmentObject var surveyViewModel: SurveyView.ViewModel
         
     var body: some View {
         ForEach(viewModel.steps.indices, id: \.self) { stepIndex in
             Button(action: { viewModel.selectStep(stepIndex: stepIndex) }, label: {
                 VStack(alignment: .leading) {
                     HStack(alignment: .center, spacing: 6) {
-                        Image(systemName: "circle.fill").font(.callout)
-                            .foregroundColor(Color(UIColor.init(hexString: viewModel.steps[stepIndex].color)))
+                        Image(systemName: surveyViewModel.currentItemResponse?.responseNominalScale == viewModel.steps[stepIndex].identifier ? "circle.fill" : "circle").font(.callout)
+                            .foregroundColor(Color(.systemGray2))
                         Text(viewModel.steps[stepIndex].label)
                             .font(.callout)
                             .foregroundColor(.primary)
@@ -30,7 +30,7 @@ struct OrdinalScaleView: View {
                 }.padding(.leading, 8)
                 .padding(.trailing)
                 .padding(.vertical, 12)
-                .background(Color(surveyViewModel.currentItemResponse?.responseOrdinalScale == viewModel.steps[stepIndex].value ? .systemGray3 : .systemGray5))
+                .background(Color(surveyViewModel.currentItemResponse?.responseNominalScale == viewModel.steps[stepIndex].identifier ? .systemGray3 : .systemGray5))
                 .cornerRadius(6)
                 .padding(.bottom, 4)
             })
@@ -39,28 +39,28 @@ struct OrdinalScaleView: View {
     
     class ViewModel: ObservableObject {
         // The currently displayed survey question
-        private var itemToRender: OrdinalScaleSurveyItem
+        private var itemToRender: NominalScaleSurveyItem
         // Reference to the environment object, the survey view model
-        private var surveyViewModel: TakeSurveyScreen.ViewModel
+        private var surveyViewModel: SurveyView.ViewModel
         
         // Compute the ordinal scale steps for this question
-        var steps: [OrdinalScaleStep] {
-            return itemToRender.ordinalScaleSteps
+        var steps: [NominalScaleStep] {
+            return itemToRender.nominalScaleSteps
         }
         
-        init(itemToRender: OrdinalScaleSurveyItem, surveyViewModel: TakeSurveyScreen.ViewModel) {
+        init(itemToRender: NominalScaleSurveyItem, surveyViewModel: SurveyView.ViewModel) {
             self.itemToRender = itemToRender
             self.surveyViewModel = surveyViewModel
         }
         
         // User tapped on one item
         func selectStep(stepIndex: Int) {
-            if surveyViewModel.currentItemResponse?.responseOrdinalScale == steps[stepIndex].value {
+            if surveyViewModel.currentItemResponse?.responseNominalScale == steps[stepIndex].identifier {
                 // If the new selection is already selected, toggle it
-                surveyViewModel.currentItemResponse?.responseOrdinalScale = nil
+                surveyViewModel.currentItemResponse?.responseNominalScale = nil
             } else {
                 // Otherwise, update the item response to reflect the current selection
-                surveyViewModel.currentItemResponse?.responseOrdinalScale = steps[stepIndex].value
+                surveyViewModel.currentItemResponse?.responseNominalScale = steps[stepIndex].identifier
             }
             // Notify the view that changes occurred
             objectWillChange.send()

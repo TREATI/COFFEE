@@ -1,5 +1,5 @@
 //
-//  SurveyOverviewScreen.swift
+//  SurveyOverviewView.swift
 //  COFFEE
 //
 //  Created by Victor Prüfer on 21.02.21.
@@ -10,7 +10,7 @@
 import SwiftUI
 
 /// A screen that shows details of a given survey and allows the user to start it.
-public struct SurveyOverviewScreen: View {
+public struct SurveyOverviewView: View {
     
     /// The survey to display
     public var survey: Survey
@@ -137,9 +137,9 @@ public struct SurveyOverviewScreen: View {
             Spacer()
             
             // Lower part: button to start the survey in case the survey is valid
-            if let takeSurveyViewModel = TakeSurveyScreen.ViewModel(survey: survey, completionHandler: completionHandler, showSurvey: $showSurvey) {
+            if let takeSurveyViewModel = SurveyView.ViewModel(survey: survey, completionHandler: completionHandler, showSurvey: $showSurvey) {
                 NavigationLink(
-                    destination: TakeSurveyScreen(viewModel: takeSurveyViewModel),
+                    destination: SurveyView(viewModel: takeSurveyViewModel),
                     isActive: $showSurvey,
                     label: {
                         HStack() {

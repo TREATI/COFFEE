@@ -14,7 +14,7 @@ struct TextInputView: View {
     
     @ObservedObject var viewModel: ViewModel
     
-    @EnvironmentObject var surveyViewModel: TakeSurveyScreen.ViewModel
+    @EnvironmentObject var surveyViewModel: SurveyView.ViewModel
             
     var body: some View {
         TextField("Write here...", text: $viewModel.currentTextInput)
@@ -24,14 +24,14 @@ struct TextInputView: View {
         // The currently displayed survey question
         private var itemToRender: TextInputSurveyItem
         // Reference to the environment object, the survey view model
-        private var surveyViewModel: TakeSurveyScreen.ViewModel
+        private var surveyViewModel: SurveyView.ViewModel
         
         // Store the current text input locally
         @Published var currentTextInput: String = ""
         
         var handler: AnyCancellable?
         
-        init(itemToRender: TextInputSurveyItem, surveyViewModel: TakeSurveyScreen.ViewModel) {
+        init(itemToRender: TextInputSurveyItem, surveyViewModel: SurveyView.ViewModel) {
             self.itemToRender = itemToRender
             self.surveyViewModel = surveyViewModel
             

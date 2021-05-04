@@ -14,7 +14,7 @@ struct SurveyItemView: View {
     
     var currentItem: SurveyItem
     
-    @EnvironmentObject var surveyViewModel: TakeSurveyScreen.ViewModel
+    @EnvironmentObject var surveyViewModel: SurveyView.ViewModel
     
     var descriptionText: String {
         var tempDescription = currentItem.description
