@@ -59,7 +59,7 @@ extension NumericScaleView {
             self.itemResponse = surveyViewModel.currentItemResponse as? NumericScaleResponse
         }
         
-        // User tapped on one item
+        /// Action to perform when tapping on step at given index
         func selectStep(stepIndex: Int) {
             if let itemResponse = itemResponse {
                 if itemResponse.value == steps[stepIndex].value {
@@ -75,6 +75,7 @@ extension NumericScaleView {
             surveyViewModel.objectWillChange.send()
         }
         
+        /// Return background color of step row at given index
         func getBackgroundColor(stepIndex: Int) -> Color {
             guard let currentItemResponse = surveyViewModel.currentItemResponse as? NumericScaleResponse else {
                 return Color(.systemGray5)

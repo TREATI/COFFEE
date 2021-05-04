@@ -18,7 +18,7 @@ public protocol SurveyItem: Codable {
     /// A description giving possible additional information such as what input is expected
     var description: String { get }
     /// Specifies whether the survey item can be skipped
-    var isOptional: Bool { get }
+    var isMandatory: Bool { get }
 }
 
 /// Enum to specify the type of a survey item

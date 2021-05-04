@@ -18,7 +18,7 @@ struct SurveyItemView: View {
     
     var descriptionText: String {
         var tempDescription = currentItem.description
-        if currentItem.isOptional {
+        if currentItem.isMandatory {
             tempDescription += " – You can skip this question"
         }
         return tempDescription

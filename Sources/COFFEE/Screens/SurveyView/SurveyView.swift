@@ -19,7 +19,7 @@ struct SurveyView: View {
         VStack(alignment: .leading, spacing: 6) {
             // Progress indicator
             ProgressView(value: Double(viewModel.currentSurveyItemIndex + 1), total: Double(viewModel.numberOfSurveyItems), label: {
-                Text("\(viewModel.currentSurveyItemIndex) of \(viewModel.numberOfSurveyItems) questions completed")
+                Text("Question \(viewModel.currentSurveyItemIndex + 1) of \(viewModel.numberOfSurveyItems)")
                     .font(.caption)
                     .foregroundColor(.secondary)
             })
@@ -93,7 +93,7 @@ extension SurveyView {
         
         // Compute whether continueing is allowed
         var isContinueAllowed: Bool {
-            return currentSurveyItem.isOptional || currentItemResponse?.isValidInput == true
+            return !currentSurveyItem.isMandatory || currentItemResponse?.isValidInput == true
         }
         
         init?(survey: Survey, completionHandler: ((Submission) -> ())?, showSurvey: Binding<Bool>) {
@@ -160,7 +160,9 @@ extension SurveyView {
                         }
                     }
                 case .multipleChoice:
-                    currentItemResponse = MultipleChoiceResponse(itemIdentifier: currentSurveyItem.identifier)
+                    if let currentSurveyItem = currentSurveyItem as? MultipleChoiceItem {
+                        currentItemResponse = MultipleChoiceResponse(itemIdentifier: currentSurveyItem.identifier, minNumberOfSelections: currentSurveyItem.minNumberOfSelections ?? 1, maxNumberOfSelections: currentSurveyItem.maxNumberOfSelections ?? Int.max)
+                    }
                 case .text:
                     currentItemResponse = TextualResponse(itemIdentifier: currentSurveyItem.identifier)
                 case .locationPicker:

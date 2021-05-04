@@ -15,7 +15,7 @@
             "identifier": "0",
             "question": "How would you assess your current thermal sensation? How do you feel?",
             "description": "You can select one option.",
-            "isOptional": false,
+            "isMandatory": true,
             "isScaleContinous": false,
             "steps": [
                 {
@@ -60,7 +60,7 @@
             "identifier": "1",
             "question": "How would you assess your current thermal sensation? How do you feel?",
             "description": "Adjust the slider to fit your assessment",
-            "isOptional": false,
+            "isMandatory": true,
             "isScaleContinous": true,
             "steps": [
                 {
@@ -105,7 +105,7 @@
             "identifier": "2",
             "question": "Do you think the current room temperature is acceptable?",
             "description": "Adjust the slider to fit your assessment",
-            "isOptional": false,
+            "isMandatory": true,
             "isScaleContinous": true,
             "steps": [
                 {
@@ -130,7 +130,7 @@
             "identifier": "4",
             "question": "Which of the following statements to you agree with?",
             "description": "You can select multiple options.",
-            "isOptional": false,
+            "isMandatory": true,
             "multipleChoiceOptions": [
                 {
                     "identifier": 0,
@@ -159,14 +159,14 @@
             "identifier": "5",
             "question": "Please describe in a few sentences how you felt today in terms of thermal comfort. Has your thermal satisfaction changed over the day?",
             "description": "You can enter as much text as you want",
-            "isOptional": false,
+            "isMandatory": true,
         },
         {
             "type": "locationPicker",
             "identifier": "6",
             "question": "For a better avaluation we would like to access your current location.",
             "description": "This will access your current location",
-            "isOptional": true,
+            "isMandatory": false,
         }
     ],
     "reminders": [

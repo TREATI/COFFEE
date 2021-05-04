@@ -101,9 +101,6 @@ struct LocationPickerView: View {
                 ]
             }
             
-            /*surveyViewModel.currentItemResponse?.responseLocationPickerLatitude = currentLocation.coordinate.latitude
-            surveyViewModel.currentItemResponse?.responseLocationPickerLongitude = currentLocation.coordinate.longitude*/
-            
             hasSharedLocation = true
         }
         

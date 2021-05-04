@@ -14,13 +14,13 @@ public struct TextualItem: SurveyItem, Codable {
     public let identifier: String
     public let question: String
     public let description: String
-    public let isOptional: Bool
+    public var isMandatory: Bool
     
-    public init(identifier: String = UUID().uuidString, question: String, description: String, isOptional: Bool) {
+    public init(identifier: String = UUID().uuidString, question: String, description: String) {
         self.type = .text
         self.identifier = identifier
         self.question = question
         self.description = description
-        self.isOptional = isOptional
+        self.isMandatory = true
     }
 }

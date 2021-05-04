@@ -36,12 +36,17 @@ struct MultipleChoiceView: View {
             })
         }
     }
+}
+
+extension MultipleChoiceView {
     
     class ViewModel: ObservableObject {
         // The currently displayed survey question
         private var itemToRender: MultipleChoiceItem
         // Reference to the environment object, the survey view model
         private var surveyViewModel: SurveyView.ViewModel
+        // Reference to the item response
+        private var itemResponse: MultipleChoiceResponse?
         
         // Compute the ordinal scale steps for this question
         var options: [MultipleChoiceOption] {
@@ -51,19 +56,19 @@ struct MultipleChoiceView: View {
         init(itemToRender: MultipleChoiceItem, surveyViewModel: SurveyView.ViewModel) {
             self.itemToRender = itemToRender
             self.surveyViewModel = surveyViewModel
+            self.itemResponse = surveyViewModel.currentItemResponse as? MultipleChoiceResponse
         }
         
         /// Action when user tapped at option row at given index
         func selectStep(optionIndex: Int) {
-            if let currentItemResponse = surveyViewModel.currentItemResponse as? MultipleChoiceResponse {
-                if getIsSelected(optionIndex: optionIndex) {
-                    // If the new selection is already selected, toggle it
-                    currentItemResponse.value.removeAll(where: { $0 == options[optionIndex].identifier })
-                } else {
-                    // Otherwise, update the item response to reflect the current selection
-                    currentItemResponse.value.append(options[optionIndex].identifier)
-                }
+            if getIsSelected(optionIndex: optionIndex) {
+                // If the new selection is already selected, toggle it
+                itemResponse?.value.removeAll(where: { $0 == options[optionIndex].identifier })
+            } else {
+                // Otherwise, update the item response to reflect the current selection
+                itemResponse?.value.append(options[optionIndex].identifier)
             }
+            
             // Notify the view that changes occurred
             objectWillChange.send()
             surveyViewModel.objectWillChange.send()
@@ -86,7 +91,6 @@ struct MultipleChoiceView: View {
         func getImage(optionIndex: Int) -> String {
             return getIsSelected(optionIndex: optionIndex) ? "circle.fill" : "circle"
         }
-        
     }
 }
 
