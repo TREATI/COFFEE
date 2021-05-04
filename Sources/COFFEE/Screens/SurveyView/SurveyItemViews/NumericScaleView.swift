@@ -36,12 +36,17 @@ struct NumericScaleView: View {
             })
         }
     }
+}
+
+extension NumericScaleView {
     
     class ViewModel: ObservableObject {
         // The currently displayed survey question
         private var itemToRender: NumericScaleItem
         // Reference to the environment object, the survey view model
         private var surveyViewModel: SurveyView.ViewModel
+        // Reference to the item response
+        private var itemResponse: NumericScaleResponse?
                 
         // Compute the ordinal scale steps for this question
         var steps: [NumericScaleStep] {
@@ -51,26 +56,20 @@ struct NumericScaleView: View {
         init(itemToRender: NumericScaleItem, surveyViewModel: SurveyView.ViewModel) {
             self.itemToRender = itemToRender
             self.surveyViewModel = surveyViewModel
+            self.itemResponse = surveyViewModel.currentItemResponse as? NumericScaleResponse
         }
         
         // User tapped on one item
         func selectStep(stepIndex: Int) {
-            if let currentItemResponse = surveyViewModel.currentItemResponse as? NumericScaleResponse {
-                if currentItemResponse.value == steps[stepIndex].value {
+            if let itemResponse = itemResponse {
+                if itemResponse.value == steps[stepIndex].value {
                     // If the new selection is already selected, toggle it
-                    currentItemResponse.value = nil
+                    itemResponse.value = nil
                 } else {
                     // Otherwise, update the item response to reflect the current selection
-                    currentItemResponse.value = steps[stepIndex].value
+                    itemResponse.value = steps[stepIndex].value
                 }
             }
-            /*if surveyViewModel.currentItemResponse?.responseOrdinalScale == steps[stepIndex].value {
-                // If the new selection is already selected, toggle it
-                surveyViewModel.currentItemResponse?.responseOrdinalScale = nil
-            } else {
-                // Otherwise, update the item response to reflect the current selection
-                surveyViewModel.currentItemResponse?.responseOrdinalScale = steps[stepIndex].value
-            }*/
             // Notify the view that changes occurred
             objectWillChange.send()
             surveyViewModel.objectWillChange.send()

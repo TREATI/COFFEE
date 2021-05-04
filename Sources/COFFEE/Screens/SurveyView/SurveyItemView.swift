@@ -47,7 +47,7 @@ struct SurveyItemView: View {
                         case .numericScale:
                             if let ordinalScaleItem = currentItem as? NumericScaleItem {
                                 if ordinalScaleItem.isScaleContinous == true {
-                                    ContinousOrdinalScaleView(viewModel: ContinousOrdinalScaleView.ViewModel(itemToRender: ordinalScaleItem, surveyViewModel: surveyViewModel))
+                                    ContinousNumericScaleView(viewModel: ContinousNumericScaleView.ViewModel(itemToRender: ordinalScaleItem, surveyViewModel: surveyViewModel))
                                 } else {
                                     NumericScaleView(viewModel: NumericScaleView.ViewModel(itemToRender: ordinalScaleItem, surveyViewModel: surveyViewModel))
                                 }

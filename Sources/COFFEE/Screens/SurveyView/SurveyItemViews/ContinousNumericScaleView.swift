@@ -1,5 +1,5 @@
 //
-//  ContinousOrdinalScaleView.swift
+//  ContinousNumericScaleView.swift
 //  COFFEE
 //
 //  Created by Victor Prüfer on 22.02.21.
@@ -10,7 +10,7 @@
 import SwiftUI
 import Sliders
 
-struct ContinousOrdinalScaleView: View {
+struct ContinousNumericScaleView: View {
     
     @ObservedObject var viewModel: ViewModel
     
@@ -45,12 +45,17 @@ struct ContinousOrdinalScaleView: View {
             Spacer()
         }
     }
+}
+
+extension ContinousNumericScaleView {
     
     class ViewModel: ObservableObject {
         // The currently displayed survey question
         private var itemToRender: NumericScaleItem
         // Reference to the environment object, the survey view model
         private var surveyViewModel: SurveyView.ViewModel
+        // Reference to the item response
+        private var itemResponse: NumericScaleResponse?
         
         var numberFormatter: NumberFormatter = {
             let numberFormatter = NumberFormatter()
@@ -61,10 +66,7 @@ struct ContinousOrdinalScaleView: View {
         // Binding to the slider, defining the current value in range 0 to 1
         @Published var currentSliderValue: Double = 0 {
             didSet {
-                if let currentItemResponse = surveyViewModel.currentItemResponse as? NumericScaleResponse {
-                    currentItemResponse.value = currentSliderValue
-                }
-                //surveyViewModel.currentItemResponse?.responseOrdinalScale = currentSliderValue
+                itemResponse?.value = currentSliderValue
             }
         }
         
@@ -93,21 +95,7 @@ struct ContinousOrdinalScaleView: View {
         init(itemToRender: NumericScaleItem, surveyViewModel: SurveyView.ViewModel) {
             self.itemToRender = itemToRender
             self.surveyViewModel = surveyViewModel
-        }
-        
-        // User tapped on one item
-        func selectStep(stepIndex: Int) {
-            /*
-            if surveyViewModel.currentItemResponse?.responseOrdinalScale == steps[stepIndex].value {
-                // If the new selection is already selected, toggle it
-                surveyViewModel.currentItemResponse?.responseOrdinalScale = nil
-            } else {
-                // Otherwise, update the item response to reflect the current selection
-                surveyViewModel.currentItemResponse?.responseOrdinalScale = steps[stepIndex].value
-            }*/
-            // Notify the view that changes occurred
-            objectWillChange.send()
-            surveyViewModel.objectWillChange.send()
+            self.itemResponse = surveyViewModel.currentItemResponse as? NumericScaleResponse
         }
     }
 }

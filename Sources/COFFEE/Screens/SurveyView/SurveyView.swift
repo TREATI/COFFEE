@@ -147,7 +147,18 @@ extension SurveyView {
         func prepareItemResponse() {
             switch currentSurveyItem.type {
                 case .numericScale:
-                    currentItemResponse = NumericScaleResponse(itemIdentifier: currentSurveyItem.identifier, initialValue: 0)
+                    if let currentSurveyItem = currentSurveyItem as? NumericScaleItem {
+                        if currentSurveyItem.isScaleContinous {
+                            // For continous scales, center slider position
+                            let scaleRangeMax = currentSurveyItem.steps.max(by: { $0.value < $1.value })?.value ?? -1
+                            let scaleRangeMin = currentSurveyItem.steps.min(by: { $0.value < $1.value })?.value ?? 1
+                            let scaleRangeCenter = (scaleRangeMax - scaleRangeMin) / 2
+                            currentItemResponse = NumericScaleResponse(itemIdentifier: currentSurveyItem.identifier, initialValue: scaleRangeCenter)
+                        } else {
+                            // For non-continous scales, make no pre-selection
+                            currentItemResponse = NumericScaleResponse(itemIdentifier: currentSurveyItem.identifier, initialValue: nil)
+                        }
+                    }
                 case .multipleChoice:
                     currentItemResponse = MultipleChoiceResponse(itemIdentifier: currentSurveyItem.identifier)
                 case .text:

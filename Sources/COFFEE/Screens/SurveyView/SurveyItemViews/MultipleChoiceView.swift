@@ -53,7 +53,7 @@ struct MultipleChoiceView: View {
             self.surveyViewModel = surveyViewModel
         }
         
-        // User tapped on one item
+        /// Action when user tapped at option row at given index
         func selectStep(optionIndex: Int) {
             if let currentItemResponse = surveyViewModel.currentItemResponse as? MultipleChoiceResponse {
                 if getIsSelected(optionIndex: optionIndex) {
@@ -64,13 +64,6 @@ struct MultipleChoiceView: View {
                     currentItemResponse.value.append(options[optionIndex].identifier)
                 }
             }
-            /*if getIsSelected(optionIndex: optionIndex) {
-                // If the new selection is already selected, toggle it
-                surveyViewModel.currentItemResponse?.responseMultipleChoice?.removeAll(where: { $0 == options[optionIndex].identifier })
-            } else {
-                // Otherwise, update the item response to reflect the current selection
-                surveyViewModel.currentItemResponse?.responseMultipleChoice?.append(options[optionIndex].identifier)
-            }*/
             // Notify the view that changes occurred
             objectWillChange.send()
             surveyViewModel.objectWillChange.send()

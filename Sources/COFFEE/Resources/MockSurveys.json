@@ -159,7 +159,7 @@
             "identifier": "5",
             "question": "Please describe in a few sentences how you felt today in terms of thermal comfort. Has your thermal satisfaction changed over the day?",
             "description": "You can enter as much text as you want",
-            "isOptional": true,
+            "isOptional": false,
         },
         {
             "type": "locationPicker",
