@@ -1,5 +1,5 @@
 //
-//  MultipleChoiceSurveyItem.swift
+//  MultipleChoiceItem.swift
 //  
 //
 //  Created by Victor Prüfer on 13.04.21.
@@ -8,7 +8,7 @@
 import Foundation
 
 /// This item displays a set of options and lets the respondent choose multiple ones
-public struct MultipleChoiceSurveyItem: SurveyItem, Codable {
+public struct MultipleChoiceItem: SurveyItem, Codable {
     // General attributes
     public let type: SurveyItemType
     public let identifier: String
@@ -21,8 +21,8 @@ public struct MultipleChoiceSurveyItem: SurveyItem, Codable {
     /// Specify a set of available options
     public let multipleChoiceOptions: [MultipleChoiceOption]
     
-    public init(type: SurveyItemType = .multipleChoice, identifier: String, question: String, description: String, isOptional: Bool, scaleTitle: String?, multipleChoiceOptions: [MultipleChoiceOption]) {
-        self.type = type
+    public init(identifier: String, question: String, description: String, isOptional: Bool, scaleTitle: String?, multipleChoiceOptions: [MultipleChoiceOption]) {
+        self.type = .multipleChoice
         self.identifier = identifier
         self.question = question
         self.description = description

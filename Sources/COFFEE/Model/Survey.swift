@@ -57,11 +57,11 @@ public struct Survey: Codable {
                 try itemsContainer.encode(ordinalScaleItem)
             } else if let nominalScaleItem = anItem as? NominalScaleSurveyItem {
                 try itemsContainer.encode(nominalScaleItem)
-            } else if let multipleChoiceItem = anItem as? MultipleChoiceSurveyItem {
+            } else if let multipleChoiceItem = anItem as? MultipleChoiceItem {
                 try itemsContainer.encode(multipleChoiceItem)
             } else if let locationPickerItem = anItem as? LocationPickerSurveyItem {
                 try itemsContainer.encode(locationPickerItem)
-            } else if let textInputItem = anItem as? TextInputSurveyItem {
+            } else if let textInputItem = anItem as? TextualItem {
                 try itemsContainer.encode(textInputItem)
             }
         }
@@ -108,9 +108,9 @@ public struct Survey: Codable {
                 case .nominalScale:
                     items.append(try itemsArray.decode(NominalScaleSurveyItem.self))
                 case .multipleChoice:
-                    items.append(try itemsArray.decode(MultipleChoiceSurveyItem.self))
-                case .textInput:
-                    items.append(try itemsArray.decode(TextInputSurveyItem.self))
+                    items.append(try itemsArray.decode(MultipleChoiceItem.self))
+                case .text:
+                    items.append(try itemsArray.decode(TextualItem.self))
                 case .locationPicker:
                     items.append(try itemsArray.decode(LocationPickerSurveyItem.self))
             }

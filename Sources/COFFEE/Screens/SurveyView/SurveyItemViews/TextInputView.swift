@@ -22,7 +22,7 @@ struct TextInputView: View {
     
     class ViewModel: ObservableObject {
         // The currently displayed survey question
-        private var itemToRender: TextInputSurveyItem
+        private var itemToRender: TextualItem
         // Reference to the environment object, the survey view model
         private var surveyViewModel: SurveyView.ViewModel
         
@@ -31,7 +31,7 @@ struct TextInputView: View {
         
         var handler: AnyCancellable?
         
-        init(itemToRender: TextInputSurveyItem, surveyViewModel: SurveyView.ViewModel) {
+        init(itemToRender: TextualItem, surveyViewModel: SurveyView.ViewModel) {
             self.itemToRender = itemToRender
             self.surveyViewModel = surveyViewModel
             

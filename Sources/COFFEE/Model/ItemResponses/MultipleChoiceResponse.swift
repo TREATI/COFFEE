@@ -21,18 +21,21 @@ public struct MultipleChoiceResponse: ItemResponse2, Codable {
     /// Boolean defining whether the current input is valid
     public var isValidInput: Bool {
         if let selections = value {
-            return selections.count > 0 && selections.count <= maxNumberOfSelections
+            return (minNumberOfSelections...maxNumberOfSelections) ~= selections.count
         }
         return false
     }
     
-    /// The maximum number of items allowed
+    /// The minimum number of selections required
+    private var minNumberOfSelections: Int
+    /// The maximum number of selections allowed
     private var maxNumberOfSelections: Int
     
-    public init(itemIdentifier: String, initialValue: ResponseValueType?, maxNumberOfSelections: Int = Int.max) {
+    public init(itemIdentifier: String, initialValue: ResponseValueType?, minNumberOfSelections: Int = 1, maxNumberOfSelections: Int = Int.max) {
         self.type = .numericScale
         self.itemIdentifier = itemIdentifier
         self.value = initialValue ?? []
+        self.minNumberOfSelections = minNumberOfSelections
         self.maxNumberOfSelections = maxNumberOfSelections
     }
 }

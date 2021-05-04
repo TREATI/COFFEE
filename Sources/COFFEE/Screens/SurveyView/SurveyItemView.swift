@@ -60,11 +60,11 @@ struct SurveyItemView: View {
                                 NominalScaleView(viewModel: NominalScaleView.ViewModel(itemToRender: nominalScaleItem, surveyViewModel: surveyViewModel))
                             }
                         case .multipleChoice:
-                            if let multipleChoiceItem = currentItem as? MultipleChoiceSurveyItem {
+                            if let multipleChoiceItem = currentItem as? MultipleChoiceItem {
                                 MultipleChoiceView(viewModel: MultipleChoiceView.ViewModel(itemToRender: multipleChoiceItem, surveyViewModel: surveyViewModel))
                             }
-                        case .textInput:
-                            if let textInputItem = currentItem as? TextInputSurveyItem {
+                        case .text:
+                            if let textInputItem = currentItem as? TextualItem {
                                 TextInputView(viewModel: TextInputView.ViewModel(itemToRender: textInputItem, surveyViewModel: surveyViewModel))
                             }
                         case .locationPicker:

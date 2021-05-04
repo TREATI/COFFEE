@@ -29,5 +29,5 @@ public enum SurveyItemType: String, Codable {
     case nominalScale
     case multipleChoice
     case locationPicker
-    case textInput
+    case text
 }

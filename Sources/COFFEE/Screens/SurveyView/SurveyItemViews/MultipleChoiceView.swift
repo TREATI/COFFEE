@@ -39,7 +39,7 @@ struct MultipleChoiceView: View {
     
     class ViewModel: ObservableObject {
         // The currently displayed survey question
-        private var itemToRender: MultipleChoiceSurveyItem
+        private var itemToRender: MultipleChoiceItem
         // Reference to the environment object, the survey view model
         private var surveyViewModel: SurveyView.ViewModel
         
@@ -48,7 +48,7 @@ struct MultipleChoiceView: View {
             return itemToRender.multipleChoiceOptions
         }
         
-        init(itemToRender: MultipleChoiceSurveyItem, surveyViewModel: SurveyView.ViewModel) {
+        init(itemToRender: MultipleChoiceItem, surveyViewModel: SurveyView.ViewModel) {
             self.itemToRender = itemToRender
             self.surveyViewModel = surveyViewModel
         }
