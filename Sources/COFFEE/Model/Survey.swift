@@ -68,6 +68,8 @@ public struct Survey: Codable {
     public init(items: [SurveyItem], color: Color = Color(UIColor.init(hexString: "#8f4068"))) {
         self.items = items
         self.color = color
+        // Ensure the survey is not empty
+        assert(!items.isEmpty, "Survey is empty. The survey should have at least one item.")
     }
     
     /// Creates a new instance of survey from a decoder

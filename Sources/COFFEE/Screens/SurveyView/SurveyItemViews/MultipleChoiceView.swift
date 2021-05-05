@@ -50,7 +50,7 @@ extension MultipleChoiceView {
         
         // Compute the ordinal scale steps for this question
         var options: [MultipleChoiceOption] {
-            return itemToRender.multipleChoiceOptions
+            return itemToRender.options
         }
         
         init(itemToRender: MultipleChoiceItem, surveyViewModel: SurveyView.ViewModel) {

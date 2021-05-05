@@ -17,18 +17,18 @@ public struct NumericScaleItem: SurveyItem, Codable {
     public var isMandatory: Bool
     
     /// Specify whether the scale is discrete or continous
-    public let isScaleContinous: Bool
+    public var isScaleContinous: Bool
     /// Specify at least two steps to define the scale's range
     public let steps: [NumericScaleStep]
     
-    public init(identifier: String = UUID().uuidString, question: String, description: String, isScaleContinous: Bool, ordinalScaleSteps: [NumericScaleStep]) {
+    public init(identifier: String = UUID().uuidString, question: String, description: String, isScaleContinous: Bool = false, steps: [NumericScaleStep]) {
         self.type = .numericScale
         self.identifier = identifier
         self.question = question
         self.description = description
         self.isMandatory = true
         self.isScaleContinous = isScaleContinous
-        self.steps = ordinalScaleSteps
+        self.steps = steps
     }
 }
 

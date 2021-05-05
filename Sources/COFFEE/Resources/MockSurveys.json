@@ -131,7 +131,7 @@
             "question": "Which of the following statements to you agree with?",
             "description": "You can select multiple options.",
             "isMandatory": true,
-            "multipleChoiceOptions": [
+            "options": [
                 {
                     "identifier": 0,
                     "label": "I usually prefer it warm"

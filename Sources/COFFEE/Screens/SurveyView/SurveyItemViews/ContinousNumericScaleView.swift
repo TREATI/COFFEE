@@ -72,7 +72,7 @@ extension ContinousNumericScaleView {
         
         // Compute the ordinal scale steps for this question
         var steps: [NumericScaleStep] {
-            return itemToRender.steps.reversed()
+            return itemToRender.steps.sorted(by: { $0.value < $1.value }) //reversed()
         }
         
         // The value range of the scale (from min to max)

@@ -17,19 +17,19 @@ public struct MultipleChoiceItem: SurveyItem, Codable {
     public var isMandatory: Bool
     
     /// Specify a set of available options
-    public let multipleChoiceOptions: [MultipleChoiceOption]
+    public let options: [MultipleChoiceOption]
     /// The minimum number of selections required
     public var minNumberOfSelections: Int?
     /// The maximum number of selections allowed
     public var maxNumberOfSelections: Int?
     
-    public init(identifier: String = UUID().uuidString, question: String, description: String, multipleChoiceOptions: [MultipleChoiceOption]) {
+    public init(identifier: String = UUID().uuidString, question: String, description: String, options: [MultipleChoiceOption]) {
         self.type = .multipleChoice
         self.identifier = identifier
         self.question = question
         self.description = description
         self.isMandatory = true
-        self.multipleChoiceOptions = multipleChoiceOptions
+        self.options = options
     }
 }
 
