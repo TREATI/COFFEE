@@ -21,7 +21,7 @@ struct NumericScaleView: View {
                 VStack(alignment: .leading) {
                     HStack(alignment: .center, spacing: 6) {
                         Image(systemName: "circle.fill").font(.callout)
-                            .foregroundColor(Color(UIColor.init(hexString: viewModel.steps[stepIndex].color)))
+                            .foregroundColor(viewModel.steps[stepIndex].color)
                         Text(viewModel.steps[stepIndex].label)
                             .font(.callout)
                             .foregroundColor(.primary)

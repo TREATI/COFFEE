@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 /// This question type displays a numeric scale
 public struct NumericScaleItem: SurveyItem, Codable {
@@ -39,11 +40,40 @@ public struct NumericScaleStep: Codable {
     /// Human-readable description of the step
     public let label: String
     /// A color in hex-format
-    public let color: String
+    public let color: Color
     
-    public init(value: Double, label: String, color: String) {
+    /// The coding keys for a numeric scale step
+    enum CodingKeys: String, CodingKey {
+        case value
+        case label
+        case color
+    }
+    
+    public init(value: Double, label: String, color: Color) {
         self.value = value
         self.label = label
         self.color = color
     }
+    
+    /// Encodes an instance of numeric scale step
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        // Encode all regular values
+        try container.encode(value, forKey: .value)
+        try container.encode(label, forKey: .label)
+        try container.encode("8f4068", forKey: .color)
+    }
+    
+    /// Creates a new instance of numeric scale step from a decoder
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        // Decode all regular values
+        value = try container.decode(Double.self, forKey: .value)
+        label = try container.decode(String.self, forKey: .label)
+        let colorHex = try container.decode(String.self, forKey: .color)
+        color = Color(UIColor.init(hexString: colorHex))
+    }
+    
 }
