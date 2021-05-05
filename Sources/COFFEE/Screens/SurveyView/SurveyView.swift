@@ -80,15 +80,15 @@ extension SurveyView {
         // Compute the background color for the continue button
         var nextButtonColor: Color {
             if isNextSurveyItemAvailable {
-                return Color(UIColor.init(hexString: survey.color)).opacity(isContinueAllowed ? 1.0 : 0.6)
+                return survey.color.opacity(isContinueAllowed ? 1.0 : 0.6)
             } else {
-                return (Color.green.opacity(isContinueAllowed ? 1.0 : 0.6))
+                return Color.green.opacity(isContinueAllowed ? 1.0 : 0.6)
             }
         }
         
         // Return the color for the progress indicator
         var surveyColor: Color {
-            return Color(UIColor.init(hexString: survey.color))
+            return survey.color
         }
         
         // Compute whether continueing is allowed

@@ -6,17 +6,17 @@
 //
 
 import Foundation
+import SwiftUI
 
 public struct Survey: Codable {
-    public let title: String
-    public let description: String
+    public var title: String?
+    public var description: String?
     public var researcher: Researcher?
-    public let allowsMultipleSubmissions: Bool
-    public let startDate: Date
-    public let endDate: Date
+    public var startDate: Date?
+    public var endDate: Date?
     public var items: [SurveyItem] = []
-    public let color: String
-    public let reminders: [Reminder]
+    public var color: Color
+    public var reminders: [Reminder]?
     
     /// The coding keys for survey
     enum CodingKeys: String, CodingKey {
@@ -44,10 +44,9 @@ public struct Survey: Codable {
         try container.encode(title, forKey: .title)
         try container.encode(description, forKey: .description)
         try container.encode(researcher, forKey: .researcher)
-        try container.encode(allowsMultipleSubmissions, forKey: .allowsMultipleSubmissions)
         try container.encode(startDate, forKey: .startDate)
         try container.encode(endDate, forKey: .endDate)
-        try container.encode(color, forKey: .color)
+        try container.encode("8f4068", forKey: .color)
         try container.encode(reminders, forKey: .reminders)
 
         // Encode the items array (needs special treatment as they need to be assigned manually)
@@ -66,16 +65,9 @@ public struct Survey: Codable {
     }
     
     /// Memberwise initializer
-    public init(title: String, description: String, researcher: Researcher? = nil, allowsMultipleSubmissions: Bool, startDate: Date, endDate: Date, items: [SurveyItem], color: String, reminders: [Reminder] = []) {
-        self.title = title
-        self.description = description
-        self.researcher = researcher
-        self.allowsMultipleSubmissions = allowsMultipleSubmissions
-        self.startDate = startDate
-        self.endDate = endDate
+    public init(items: [SurveyItem], color: Color = Color(UIColor.init(hexString: "#8f4068"))) {
         self.items = items
         self.color = color
-        self.reminders = reminders
     }
     
     /// Creates a new instance of survey from a decoder
@@ -83,16 +75,16 @@ public struct Survey: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         // Decode all regular values
-        title = try container.decode(String.self, forKey: .title)
-        description = try container.decode(String.self, forKey: .description)
-        researcher = try container.decode(Researcher.self, forKey: .researcher)
-        allowsMultipleSubmissions = try container.decode(Bool.self, forKey: .allowsMultipleSubmissions)
-        startDate = try container.decode(Date.self, forKey: .startDate)
-        endDate = try container.decode(Date.self, forKey: .endDate)
-        color = try container.decode(String.self, forKey: .color)
-        reminders = try container.decode([Reminder].self, forKey: .reminders)
+        title = try? container.decode(String.self, forKey: .title)
+        description = try? container.decode(String.self, forKey: .description)
+        researcher = try? container.decode(Researcher.self, forKey: .researcher)
+        startDate = try? container.decode(Date.self, forKey: .startDate)
+        endDate = try? container.decode(Date.self, forKey: .endDate)
+        let colorHex = try container.decode(String.self, forKey: .color)
+        color = Color(UIColor.init(hexString: colorHex))
+        reminders = try? container.decode([Reminder].self, forKey: .reminders)
         
-        // Decode the items array (needs special treatment as items need to be manually)
+        // Decode the items array (needs special treatment as items need to be assigned manually)
         // We create a copy as calling decode() is necessary to get the type but increases the decoder's current index
         var itemsArrayForType = try container.nestedUnkeyedContainer(forKey: CodingKeys.items)
         var itemsArray = itemsArrayForType
