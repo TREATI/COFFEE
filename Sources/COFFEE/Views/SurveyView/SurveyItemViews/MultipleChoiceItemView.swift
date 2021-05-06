@@ -1,5 +1,5 @@
 //
-//  MultipleChoiceView.swift
+//  MultipleChoiceItemView.swift
 //  COFFEE
 //
 //  Created by Victor Prüfer on 02.03.21.
@@ -9,7 +9,7 @@
 
 import SwiftUI
 
-struct MultipleChoiceView: View {
+struct MultipleChoiceItemView: View {
     
     @ObservedObject var viewModel: ViewModel
     
@@ -38,7 +38,7 @@ struct MultipleChoiceView: View {
     }
 }
 
-extension MultipleChoiceView {
+extension MultipleChoiceItemView {
     
     class ViewModel: ObservableObject {
         // The currently displayed survey question
