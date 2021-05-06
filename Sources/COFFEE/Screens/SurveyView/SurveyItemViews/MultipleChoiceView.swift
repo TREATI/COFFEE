@@ -20,8 +20,8 @@ struct MultipleChoiceView: View {
             Button(action: { viewModel.selectStep(optionIndex: optionIndex) }, label: {
                 VStack(alignment: .leading) {
                     HStack(alignment: .center, spacing: 6) {
-                        Image(systemName: viewModel.getImage(optionIndex: optionIndex)).font(.callout)
-                            .foregroundColor(Color(.systemGray2))
+                        Image(systemName: viewModel.getIcon(optionIndex: optionIndex)).font(.callout)
+                            .foregroundColor(viewModel.getIconColor(optionIndex: optionIndex))
                         Text(viewModel.options[optionIndex].label)
                             .font(.callout)
                             .foregroundColor(.primary)
@@ -49,8 +49,11 @@ extension MultipleChoiceView {
         private var itemResponse: MultipleChoiceResponse?
         
         // Compute the ordinal scale steps for this question
-        var options: [MultipleChoiceOption] {
-            return itemToRender.options
+        var options: [MultipleChoiceItem.Option] {
+            if itemToRender.isAscendingOrder {
+                return itemToRender.options.sorted(by: { $0.identifier < $1.identifier })
+            }
+            return itemToRender.options.sorted(by: { $0.identifier > $1.identifier })
         }
         
         init(itemToRender: MultipleChoiceItem, surveyViewModel: SurveyView.ViewModel) {
@@ -61,12 +64,19 @@ extension MultipleChoiceView {
         
         /// Action when user tapped at option row at given index
         func selectStep(optionIndex: Int) {
+            guard let itemResponse = itemResponse else {
+                return
+            }
             if getIsSelected(optionIndex: optionIndex) {
                 // If the new selection is already selected, toggle it
-                itemResponse?.value.removeAll(where: { $0 == options[optionIndex].identifier })
+                itemResponse.value.removeAll(where: { $0 == options[optionIndex].identifier })
             } else {
                 // Otherwise, update the item response to reflect the current selection
-                itemResponse?.value.append(options[optionIndex].identifier)
+                // If single choice, deselect previos selection
+                if itemToRender.minNumberOfSelections == 1 && itemToRender.maxNumberOfSelections == 1 {
+                    itemResponse.value.removeAll()
+                }
+                itemResponse.value.append(options[optionIndex].identifier)
             }
             
             // Notify the view that changes occurred
@@ -88,8 +98,16 @@ extension MultipleChoiceView {
         }
         
         /// Returns the image name for an option row at a given index
-        func getImage(optionIndex: Int) -> String {
+        func getIcon(optionIndex: Int) -> String {
+            if options[optionIndex].color != nil {
+                return "circle.fill"
+            }
             return getIsSelected(optionIndex: optionIndex) ? "circle.fill" : "circle"
+        }
+        
+        /// Returns the color for the icon for an option row at a given index
+        func getIconColor(optionIndex: Int) -> Color {
+            return options[optionIndex].color ?? Color(.systemGray2)
         }
     }
 }

@@ -10,6 +10,7 @@
 import UIKit
 
 public extension UIColor {
+    
     convenience init(hexString: String) {
         let hex = hexString.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int = UInt64()
@@ -28,23 +29,17 @@ public extension UIColor {
         self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: CGFloat(a) / 255)
     }
     
-    /**
-     Create a ligher color
-     */
+    /// Create a ligher color
     func lighter(by percentage: CGFloat = 30.0) -> UIColor {
         return self.adjustBrightness(by: abs(percentage))
     }
     
-    /**
-     Create a darker color
-     */
+    /// Create a darker color
     func darker(by percentage: CGFloat = 30.0) -> UIColor {
         return self.adjustBrightness(by: -abs(percentage))
     }
     
-    /**
-     Try to increase brightness or decrease saturation
-     */
+    /// Increase brightness or decrease saturation
     func adjustBrightness(by percentage: CGFloat = 30.0) -> UIColor {
         var h: CGFloat = 0, s: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
         if self.getHue(&h, saturation: &s, brightness: &b, alpha: &a) {
@@ -57,6 +52,13 @@ public extension UIColor {
             }
         }
         return self
+    }
+    
+    /// Return the hex value of the UIColor instance
+    var hexString: String {
+        cgColor.components![0..<3]
+            .map { String(format: "%02lX", Int($0 * 255)) }
+            .reduce("#", +)
     }
 }
 

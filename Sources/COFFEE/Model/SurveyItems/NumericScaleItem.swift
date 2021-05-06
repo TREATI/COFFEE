@@ -75,5 +75,4 @@ public struct NumericScaleStep: Codable {
         let colorHex = try container.decode(String.self, forKey: .color)
         color = Color(UIColor.init(hexString: colorHex))
     }
-    
 }

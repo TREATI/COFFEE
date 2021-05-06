@@ -161,7 +161,7 @@ extension SurveyView {
                     }
                 case .multipleChoice:
                     if let currentSurveyItem = currentSurveyItem as? MultipleChoiceItem {
-                        currentItemResponse = MultipleChoiceResponse(itemIdentifier: currentSurveyItem.identifier, minNumberOfSelections: currentSurveyItem.minNumberOfSelections ?? 1, maxNumberOfSelections: currentSurveyItem.maxNumberOfSelections ?? Int.max)
+                        currentItemResponse = MultipleChoiceResponse(itemIdentifier: currentSurveyItem.identifier, minNumberOfSelections: currentSurveyItem.minNumberOfSelections, maxNumberOfSelections: currentSurveyItem.maxNumberOfSelections)
                     }
                 case .text:
                     currentItemResponse = TextResponse(itemIdentifier: currentSurveyItem.identifier)
