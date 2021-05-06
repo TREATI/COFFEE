@@ -159,6 +159,20 @@ extension SurveyView {
                             currentItemResponse = NumericScaleResponse(itemIdentifier: currentSurveyItem.identifier, initialValue: nil)
                         }
                     }
+                case .slider:
+                    if let currentSurveyItem = currentSurveyItem as? SliderItem {
+                        if currentSurveyItem.isScaleContinuous {
+                            // For continous scales, center slider position
+                            let scaleRangeMax = currentSurveyItem.steps.max(by: { $0.value < $1.value })?.value ?? 1
+                            let scaleRangeMin = currentSurveyItem.steps.min(by: { $0.value < $1.value })?.value ?? -1
+                            let scaleRangeCenter = (Double(scaleRangeMax) - abs(Double(scaleRangeMin))) / 2.0
+                            currentItemResponse = SliderResponse(itemIdentifier: currentSurveyItem.identifier, initialValue: scaleRangeCenter)
+                        } else {
+                            // For discrete scales, select middle position
+                            let middleIndex = (currentSurveyItem.steps.count > 1 ? currentSurveyItem.steps.count - 1 : currentSurveyItem.steps.count) / 2
+                            currentItemResponse = SliderResponse(itemIdentifier: currentSurveyItem.identifier, initialValue: currentSurveyItem.steps[middleIndex].value)
+                        }
+                    }
                 case .multipleChoice:
                     if let currentSurveyItem = currentSurveyItem as? MultipleChoiceItem {
                         currentItemResponse = MultipleChoiceResponse(itemIdentifier: currentSurveyItem.identifier, minNumberOfSelections: currentSurveyItem.minNumberOfSelections, maxNumberOfSelections: currentSurveyItem.maxNumberOfSelections)

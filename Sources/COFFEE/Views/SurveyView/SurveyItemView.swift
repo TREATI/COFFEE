@@ -18,7 +18,7 @@ struct SurveyItemView: View {
     
     var descriptionText: String {
         var tempDescription = currentItem.description
-        if currentItem.isMandatory {
+        if !currentItem.isMandatory {
             tempDescription += " – You can skip this question"
         }
         return tempDescription
@@ -51,6 +51,10 @@ struct SurveyItemView: View {
                                 } else {
                                     NumericScaleView(viewModel: NumericScaleView.ViewModel(itemToRender: ordinalScaleItem, surveyViewModel: surveyViewModel))
                                 }
+                            }
+                        case .slider:
+                            if let sliderItem = currentItem as? SliderItem {
+                                SliderItemView(viewModel: SliderItemView.ViewModel(itemToRender: sliderItem, surveyViewModel: surveyViewModel))
                             }
                         case .multipleChoice:
                             if let multipleChoiceItem = currentItem as? MultipleChoiceItem {

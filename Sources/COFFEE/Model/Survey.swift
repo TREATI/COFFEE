@@ -9,12 +9,18 @@ import Foundation
 import SwiftUI
 
 public struct Survey: Codable {
+    /// Survey title that is shown in the overview screen
     public var title: String?
+    /// Description of the survey that is shown in the overview screen
     public var description: String?
+    /// The creator of the survey, shown in the overview screen
     public var researcher: Researcher?
+    /// Time frame of the survey, shown in the overview screen
     public var startDate: Date?
     public var endDate: Date?
+    /// The survey items, each item reflects one question
     public var items: [SurveyItem] = []
+    /// The brand color of the survey, which is used for e.g. the buttons
     public var color: Color
     public var reminders: [Reminder]?
     
@@ -54,6 +60,8 @@ public struct Survey: Codable {
         for anItem in items {
             if let ordinalScaleItem = anItem as? NumericScaleItem {
                 try itemsContainer.encode(ordinalScaleItem)
+            } else if let sliderItem = anItem as? SliderItem {
+                try itemsContainer.encode(sliderItem)
             } else if let multipleChoiceItem = anItem as? MultipleChoiceItem {
                 try itemsContainer.encode(multipleChoiceItem)
             } else if let locationPickerItem = anItem as? LocationPickerItem {
@@ -98,6 +106,8 @@ public struct Survey: Codable {
             switch itemType {
                 case .numericScale:
                     items.append(try itemsArray.decode(NumericScaleItem.self))
+                case .slider:
+                    items.append(try itemsArray.decode(SliderItem.self))
                 case .multipleChoice:
                     items.append(try itemsArray.decode(MultipleChoiceItem.self))
                 case .text:
