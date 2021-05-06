@@ -46,7 +46,7 @@ public struct Survey: Codable {
         try container.encode(researcher, forKey: .researcher)
         try container.encode(startDate, forKey: .startDate)
         try container.encode(endDate, forKey: .endDate)
-        try container.encode("8f4068", forKey: .color)
+        try container.encode(color.hexString, forKey: .color)
         try container.encode(reminders, forKey: .reminders)
 
         // Encode the items array (needs special treatment as they need to be assigned manually)
@@ -65,7 +65,7 @@ public struct Survey: Codable {
     }
     
     /// Memberwise initializer
-    public init(items: [SurveyItem], color: Color = Color(UIColor.init(hexString: "#8f4068"))) {
+    public init(items: [SurveyItem], color: Color = Color(hexString: "#8f4068")) {
         self.items = items
         self.color = color
     }
@@ -80,8 +80,11 @@ public struct Survey: Codable {
         researcher = try? container.decode(Researcher.self, forKey: .researcher)
         startDate = try? container.decode(Date.self, forKey: .startDate)
         endDate = try? container.decode(Date.self, forKey: .endDate)
-        let colorHex = try container.decode(String.self, forKey: .color)
-        color = Color(UIColor.init(hexString: colorHex))
+        if let colorHex = try? container.decode(String.self, forKey: .color) {
+            color = Color(hexString: colorHex)
+        } else {
+            color = Color(hexString: "#8f4068")
+        }
         reminders = try? container.decode([Reminder].self, forKey: .reminders)
         
         // Decode the items array (needs special treatment as items need to be assigned manually)

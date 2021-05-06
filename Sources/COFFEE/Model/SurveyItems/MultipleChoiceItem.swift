@@ -114,7 +114,7 @@ public struct MultipleChoiceItem: SurveyItem, Codable {
             try container.encode(identifier, forKey: .identifier)
             try container.encode(label, forKey: .label)
             if let color = color {
-                try container.encode(UIColor(color).hexString, forKey: .color)
+                try container.encode(color.hexString, forKey: .color)
             }
         }
         
@@ -122,11 +122,14 @@ public struct MultipleChoiceItem: SurveyItem, Codable {
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             
-            // Decode all regular values
+            // Decode all available values or set default values
             identifier = try container.decode(Int.self, forKey: .identifier)
             label = try container.decode(String.self, forKey: .label)
-            let colorHex = try container.decode(String.self, forKey: .color)
-            color = Color(UIColor.init(hexString: colorHex))
+            if let colorHex = try? container.decode(String.self, forKey: .color) {
+                color = Color(hexString: colorHex)
+            } else {
+                color = nil
+            }
         }
     }
 }
