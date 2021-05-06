@@ -57,8 +57,8 @@ struct SurveyItemView: View {
                                 MultipleChoiceView(viewModel: MultipleChoiceView.ViewModel(itemToRender: multipleChoiceItem, surveyViewModel: surveyViewModel))
                             }
                         case .text:
-                            if let textInputItem = currentItem as? TextualItem {
-                                TextInputView(viewModel: TextInputView.ViewModel(itemToRender: textInputItem, surveyViewModel: surveyViewModel))
+                            if let textInputItem = currentItem as? TextItem {
+                                TextItemView(viewModel: TextItemView.ViewModel(itemToRender: textInputItem, surveyViewModel: surveyViewModel))
                             }
                         case .locationPicker:
                             if let locationPickerItem = currentItem as? LocationPickerItem {

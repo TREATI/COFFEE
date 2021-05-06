@@ -58,7 +58,7 @@ public struct Survey: Codable {
                 try itemsContainer.encode(multipleChoiceItem)
             } else if let locationPickerItem = anItem as? LocationPickerItem {
                 try itemsContainer.encode(locationPickerItem)
-            } else if let textInputItem = anItem as? TextualItem {
+            } else if let textInputItem = anItem as? TextItem {
                 try itemsContainer.encode(textInputItem)
             }
         }
@@ -68,8 +68,6 @@ public struct Survey: Codable {
     public init(items: [SurveyItem], color: Color = Color(UIColor.init(hexString: "#8f4068"))) {
         self.items = items
         self.color = color
-        // Ensure the survey is not empty
-        assert(!items.isEmpty, "Survey is empty. The survey should have at least one item.")
     }
     
     /// Creates a new instance of survey from a decoder
@@ -100,7 +98,7 @@ public struct Survey: Codable {
                 case .multipleChoice:
                     items.append(try itemsArray.decode(MultipleChoiceItem.self))
                 case .text:
-                    items.append(try itemsArray.decode(TextualItem.self))
+                    items.append(try itemsArray.decode(TextItem.self))
                 case .locationPicker:
                     items.append(try itemsArray.decode(LocationPickerItem.self))
             }

@@ -1,5 +1,5 @@
 //
-//  TextualResponse.swift
+//  TextResponse.swift
 //
 //
 //  Created by Victor Prüfer on 04.05.21.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class TextualResponse: ObservableObject, ItemResponse, Codable {
+public class TextResponse: ObservableObject, ItemResponse, Codable {
     
     /// Specifies the type of the item this response is referring to
     public var type: SurveyItemType

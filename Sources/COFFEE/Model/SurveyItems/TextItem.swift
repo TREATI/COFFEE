@@ -8,7 +8,7 @@
 import Foundation
 
 /// This item lets the respondent enter a text
-public struct TextualItem: SurveyItem, Codable {
+public struct TextItem: SurveyItem, Codable {
     // General attributes
     public let type: SurveyItemType
     public let identifier: String

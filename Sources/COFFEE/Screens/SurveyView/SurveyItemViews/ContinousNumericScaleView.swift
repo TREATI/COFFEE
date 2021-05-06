@@ -29,7 +29,7 @@ struct ContinousNumericScaleView: View {
                 .cornerRadius(4)
                 .padding(4)
             
-            ValueSlider(value: $viewModel.currentSliderValue, in: viewModel.scaleRange)
+            ValueSlider(value: $viewModel.currentSliderValue, in: viewModel.scaleRange, step: 1)
                 .valueSliderStyle(
                     HorizontalValueSliderStyle(
                         track: LinearGradient(

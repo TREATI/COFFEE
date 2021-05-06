@@ -96,15 +96,15 @@ extension SurveyView {
             return !currentSurveyItem.isMandatory || currentItemResponse?.isValidInput == true
         }
         
-        init?(survey: Survey, completionHandler: ((Submission) -> ())?, showSurvey: Binding<Bool>) {
+        init(survey: Survey, completionHandler: ((Submission) -> ())?, showSurvey: Binding<Bool>) {
             // Make sure survey is not empty
-            guard let firstItem = survey.items.first else {
-                return nil
-            }
+            // Ensure the survey is not empty
+            assert(!survey.items.isEmpty, "Survey is empty. The survey should have at least one item.")
+
             self.survey = survey
             self.completionHandler = completionHandler
             self.numberOfSurveyItems = survey.items.count
-            self.currentSurveyItem = firstItem
+            self.currentSurveyItem = survey.items.first!
             self.isNextSurveyItemAvailable = survey.items.count > 1
             self._showSurvey = showSurvey
             
@@ -164,7 +164,7 @@ extension SurveyView {
                         currentItemResponse = MultipleChoiceResponse(itemIdentifier: currentSurveyItem.identifier, minNumberOfSelections: currentSurveyItem.minNumberOfSelections ?? 1, maxNumberOfSelections: currentSurveyItem.maxNumberOfSelections ?? Int.max)
                     }
                 case .text:
-                    currentItemResponse = TextualResponse(itemIdentifier: currentSurveyItem.identifier)
+                    currentItemResponse = TextResponse(itemIdentifier: currentSurveyItem.identifier)
                 case .locationPicker:
                     currentItemResponse = LocationPickerResponse(itemIdentifier: currentSurveyItem.identifier)
             }

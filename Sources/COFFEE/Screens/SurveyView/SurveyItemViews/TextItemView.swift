@@ -1,5 +1,5 @@
 //
-//  TextInputView.swift
+//  TextItemView.swift
 //  COFFEE
 //
 //  Created by Victor Prüfer on 01.03.21.
@@ -10,7 +10,7 @@
 import SwiftUI
 import Combine
 
-struct TextInputView: View {
+struct TextItemView: View {
     
     @StateObject var viewModel: ViewModel
     
@@ -26,25 +26,25 @@ struct TextInputView: View {
     }
 }
 
-extension TextInputView {
+extension TextItemView {
     
     class ViewModel: ObservableObject {
         // The currently displayed survey question
-        private var itemToRender: TextualItem
+        private var itemToRender: TextItem
         // Reference to the environment object, the survey view model
         private var surveyViewModel: SurveyView.ViewModel
         // Reference to the item response
-        private var itemResponse: TextualResponse?
+        private var itemResponse: TextResponse?
         
         // Store the current text input locally
         @Published var currentTextInput: String = " "
         
         var handler: AnyCancellable?
         
-        init(itemToRender: TextualItem, surveyViewModel: SurveyView.ViewModel) {
+        init(itemToRender: TextItem, surveyViewModel: SurveyView.ViewModel) {
             self.itemToRender = itemToRender
             self.surveyViewModel = surveyViewModel
-            self.itemResponse = surveyViewModel.currentItemResponse as? TextualResponse
+            self.itemResponse = surveyViewModel.currentItemResponse as? TextResponse
             
             // Once the text is changed locally, update the item response
             handler = $currentTextInput.sink { (textChange) in
