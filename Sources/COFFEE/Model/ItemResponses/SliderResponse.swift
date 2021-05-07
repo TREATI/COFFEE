@@ -15,6 +15,7 @@ public class SliderResponse: ObservableObject, ItemResponse, Codable {
     public var itemIdentifier: String
     /// The value of the response. The value type is a double which reflects the selected numeric scale step / position
     public var value: Double?
+    
     /// Boolean defining whether the current input is valid
     public var isValidInput: Bool {
         return value != nil

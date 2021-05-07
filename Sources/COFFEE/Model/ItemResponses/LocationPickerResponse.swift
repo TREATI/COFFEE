@@ -15,6 +15,7 @@ public class LocationPickerResponse: ObservableObject, ItemResponse, Codable {
     public var itemIdentifier: String
     /// The value of the response. The value type are the coordinates of the shared location
     public var value: [CoordinateType: Double]?
+    
     /// Boolean defining whether the current input is valid
     public var isValidInput: Bool {
         guard let value = value else {
@@ -33,7 +34,6 @@ public class LocationPickerResponse: ObservableObject, ItemResponse, Codable {
         }
         return "Longitude: \(longitude); Latitude: \(latitude)"
     }
-    
     
     public init(itemIdentifier: String) {
         self.type = .locationPicker
