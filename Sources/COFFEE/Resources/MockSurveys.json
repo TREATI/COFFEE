@@ -1,13 +1,6 @@
 {
     "title": "Thermal comfort in buildings with HVAC system",
     "description": "We investigate occupants' thermal comfort in buildings with heating, ventilation and air-conditioning (HVAC) systems. We are particularly interested in occupants' response to thermal discomfort. We appreciate your participation.",
-    "researcher": {
-        "name": "Powl Ole Fanger",
-        "mail": "hey@fanger.com",
-    },
-    "allowsMultipleSubmissions": true,
-    "startDate": "2021-02-21T08:00:00Z",
-    "endDate": "2021-02-21T20:00:00Z",
     "color": "8f4068",
     "items": [
         {
@@ -15,7 +8,6 @@
             "identifier": "0",
             "question": "How would you assess your current thermal sensation? How do you feel?",
             "description": "You can select one option.",
-            "isMandatory": true,
             "minNumberOfSelections": 1,
             "maxNumberOfSelections": 1,
             "isAscendingOrder": false,
@@ -59,181 +51,101 @@
         },
         {
             "type": "multipleChoice",
-            "identifier": "0",
-            "question": "How would you assess your current thermal sensation? How do you feel?",
-            "description": "You can select one option.",
-            "isMandatory": true,
-            "isAscendingOrder": false,
-            "minNumberOfSelections": 1,
-            "maxNumberOfSelections": 1,
+            "identifier": "1",
+            "question": "What fruits do you like?",
+            "description": "You can select multiple options.",
             "options": [
                 {
-                    "identifier": 3,
-                    "label": "Very hot",
+                    "identifier": 0,
+                    "label": "Apple",
                     "color": "c7520e"
-                },
-                {
-                    "identifier": 2,
-                    "label": "Hot",
-                    "color": "e3970b"
                 },
                 {
                     "identifier": 1,
-                    "label": "Warm",
-                    "color": "e3bf0e"
-                },
-                {
-                    "identifier": 0,
-                    "label": "Comfortable / Neutral",
-                    "color": "adadad"
-                },
-                {
-                    "identifier": -1,
-                    "label": "Cool",
-                    "color": "a6c7e3"
-                },
-                {
-                    "identifier": -2,
-                    "label": "Cold",
-                    "color": "5ba9eb"
-                },
-                {
-                    "identifier": -3,
-                    "label": "Very cold",
-                    "color": "0b80e3"
-                }
-            ]
-        },
-        {
-            "type": "numericScale",
-            "identifier": "1",
-            "question": "How would you assess your current thermal sensation? How do you feel?",
-            "description": "Adjust the slider to fit your assessment",
-            "isMandatory": true,
-            "isScaleContinous": true,
-            "steps": [
-                {
-                    "value": 3,
-                    "label": "Very hot",
-                    "color": "c7520e"
-                },
-                {
-                    "value": 2,
-                    "label": "Hot",
+                    "label": "Orange",
                     "color": "e3970b"
                 },
                 {
-                    "value": 1,
-                    "label": "Warm",
+                    "identifier": 2,
+                    "label": "Banana",
                     "color": "e3bf0e"
                 },
                 {
-                    "value": 0,
-                    "label": "Comfortable / Neutral",
+                    "identifier": 3,
+                    "label": "Watermelon",
                     "color": "adadad"
-                },
-                {
-                    "value": -1,
-                    "label": "Cool",
-                    "color": "a6c7e3"
-                },
-                {
-                    "value": -2,
-                    "label": "Cold",
-                    "color": "5ba9eb"
-                },
-                {
-                    "value": -3,
-                    "label": "Very cold",
-                    "color": "0b80e3"
                 }
             ]
         },
         {
-            "type": "numericScale",
+            "type": "slider",
             "identifier": "2",
-            "question": "Do you think the current room temperature is acceptable?",
+            "question": "How would you assess your current thermal sensation? How do you feel?",
             "description": "Adjust the slider to fit your assessment",
-            "isMandatory": true,
-            "isScaleContinous": true,
             "steps": [
                 {
-                    "value": 1,
-                    "label": "Acceptable",
-                    "color": "3eab32"
+                    "value": -1,
+                    "label": "Cold",
+                    "color": "c7520e"
                 },
                 {
                     "value": 0,
                     "label": "Neutral",
-                    "color": "b3b5b3"
+                    "color": "e3970b"
                 },
                 {
-                    "value": -1,
-                    "label": "Unacceptable",
-                    "color": "eb4034"
+                    "value": 1,
+                    "label": "Warm",
+                    "color": "e3bf0e"
                 }
             ]
         },
         {
-            "type": "multipleChoice",
-            "identifier": "4",
-            "question": "Which of the following statements to you agree with?",
-            "description": "You can select multiple options.",
-            "isMandatory": true,
-            "options": [
+            "type": "slider",
+            "identifier": "3",
+            "question": "How would you assess your current thermal sensation? How do you feel?",
+            "description": "Adjust the slider to fit your assessment",
+            "isContinuous": false,
+            "showSliderValue": false,
+            "steps": [
                 {
-                    "identifier": 0,
-                    "label": "I usually prefer it warm"
+                    "value": 0,
+                    "label": "0",
                 },
                 {
-                    "identifier": 1,
-                    "label": "It's important to me that my co-workers feel comfortable as well"
+                    "value": 1,
+                    "label": "1",
                 },
                 {
-                    "identifier": 2,
-                    "label": "I accept thermal conditions even if they make me feel uncomfortable as long as they satisfy the majority"
+                    "value": 2,
+                    "label": "2",
                 },
                 {
-                    "identifier": 3,
-                    "label": "In terms of room temperature at work I am very tolerant"
+                    "value": 3,
+                    "label": "3",
                 },
                 {
-                    "identifier": 4,
-                    "label": "I usually prefer it cold"
+                    "value": 4,
+                    "label": "4",
+                },
+                {
+                    "value": 5,
+                    "label": "5",
                 }
             ]
         },
         {
             "type": "text",
-            "identifier": "5",
-            "question": "Please describe in a few sentences how you felt today in terms of thermal comfort. Has your thermal satisfaction changed over the day?",
-            "description": "You can enter as much text as you want",
-            "isMandatory": true,
+            "identifier": "4",
+            "question": "Please describe what physical activities you have performed today.",
+            "description": "Enter as much text as you want"
         },
         {
             "type": "locationPicker",
-            "identifier": "6",
+            "identifier": "5",
             "question": "For a better avaluation we would like to access your current location.",
             "description": "This will access your current location",
-            "isMandatory": false,
-        }
-    ],
-    "reminders": [
-        {
-            "type": "dateTime",
-            "description": "When survey starts",
-            "date": "2021-02-21T08:00:00Z"
-        },
-        {
-            "type": "locationChange",
-            "description": "When location changes",
-            "threshold": 500
-        },
-        {
-            "type": "interval",
-            "description": "Every hour",
-            "startTime": "2021-02-21T08:00:00Z",
-            "endTime": "2021-02-21T20:00:00Z"
+            "isMandatory": false
         }
     ]
 }
