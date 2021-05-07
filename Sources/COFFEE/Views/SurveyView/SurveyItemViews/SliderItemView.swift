@@ -31,7 +31,7 @@ struct SliderItemView: View {
                 .cornerRadius(4)
                 .padding(4)
             
-            ValueSlider(value: $viewModel.currentSliderValue, in: viewModel.scaleRange, step: viewModel.itemToRender.isScaleContinuous ? 0.01 : 1)
+            ValueSlider(value: $viewModel.currentSliderValue, in: viewModel.scaleRange, step: viewModel.itemToRender.isContinuous ? 0.01 : 1)
                 .valueSliderStyle(
                     HorizontalValueSliderStyle(
                         track: LinearGradient(

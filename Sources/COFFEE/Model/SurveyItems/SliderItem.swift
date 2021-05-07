@@ -20,7 +20,7 @@ public struct SliderItem: SurveyItem, Codable {
     /// Specify at least two steps to define the scale's range
     public let steps: [Self.Step]
     /// Specify whether the scale is discrete or continous
-    public var isScaleContinuous: Bool
+    public var isContinuous: Bool
     /// Specify whether the slider value should be hidden or not
     public var showSliderValue: Bool
     
@@ -37,10 +37,17 @@ public struct SliderItem: SurveyItem, Codable {
         case description
         case isMandatory
         case steps
-        case isScaleContinuous
+        case isContinuous
         case showSliderValue
     }
     
+    /// Default initializer for `SliderItem`
+    /// - Parameters:
+    ///   - identifier: An identifier to be able to associate the responses to the question. By default set to a random uuid
+    ///   - question: The question that the respondent is supposed to answer with the slider
+    ///   - description: A more detailed description with additional instructions on how to answer the question
+    ///   - steps: The steps that define the slider range. There must be at least 2 steps
+    ///   - isContinuous: Specifies whether the slider should be discrete or continuous
     public init(identifier: String = UUID().uuidString, question: String, description: String, steps: [Self.Step], isScaleContinuous: Bool = true) {
         self.type = .slider
         self.isMandatory = true
@@ -50,9 +57,15 @@ public struct SliderItem: SurveyItem, Codable {
         self.question = question
         self.description = description
         self.steps = steps
-        self.isScaleContinuous = isScaleContinuous
+        self.isContinuous = isScaleContinuous
     }
     
+    /// Convenience initializer to setup a discrete `SliderItem` with steps that are named after the values
+    /// - Parameters:
+    ///   - identifier: An identifier to be able to associate the responses to the question. By default set to a random uuid
+    ///   - question: The question that the respondent is supposed to answer with the slider
+    ///   - description: A more detailed description with additional instructions on how to answer the question
+    ///   - stepRange: The range for which the steps should be created, e.g. `1...10` for ten steps from 1 to 10
     public init(identifier: String = UUID().uuidString, question: String, description: String, stepRange: ClosedRange<Int>) {
         let steps = stepRange.map({ SliderItem.Step(value: Double($0), label: String($0)) })
         self.init(identifier: identifier, question: question, description: description, steps: steps, isScaleContinuous: false)
@@ -77,10 +90,10 @@ public struct SliderItem: SurveyItem, Codable {
         } else {
             self.isMandatory = true
         }
-        if let isScaleContinuous = try? container.decode(Bool.self, forKey: .isScaleContinuous) {
-            self.isScaleContinuous = isScaleContinuous
+        if let isScaleContinuous = try? container.decode(Bool.self, forKey: .isContinuous) {
+            self.isContinuous = isScaleContinuous
         } else {
-            self.isScaleContinuous = true
+            self.isContinuous = true
         }
         if let showSliderValue = try? container.decode(Bool.self, forKey: .showSliderValue) {
             self.showSliderValue = showSliderValue
@@ -105,6 +118,11 @@ public struct SliderItem: SurveyItem, Codable {
             case color
         }
         
+        /// Default initializer for a single step on a slider.
+        /// - Parameters:
+        ///   - value: Describes the position on the slider, can also be negative. Should be unique
+        ///   - label: The human-readable description for the slider position at the given value
+        ///   - color: If all steps have a color provided, the slider computes a color gradient as slider background
         public init(value: Double, label: String, color: Color? = nil) {
             self.value = value
             self.label = label

@@ -148,7 +148,7 @@ extension SurveyView {
             switch currentSurveyItem.type {
                 case .slider:
                     if let currentSurveyItem = currentSurveyItem as? SliderItem {
-                        if currentSurveyItem.isScaleContinuous {
+                        if currentSurveyItem.isContinuous {
                             // For continous scales, center slider position
                             let scaleRangeMax = currentSurveyItem.steps.max(by: { $0.value < $1.value })?.value ?? 1
                             let scaleRangeMin = currentSurveyItem.steps.min(by: { $0.value < $1.value })?.value ?? -1
