@@ -38,7 +38,14 @@ public struct MultipleChoiceItem: SurveyItem, Codable {
         case maxNumberOfSelections
         case isAscendingOrder
     }
-    
+
+    /// Default initializer for `MultipleChoiceItem`
+    /// - Parameters:
+    ///   - identifier: An identifier to be able to associate the responses to the question. By default set to a random uuid
+    ///   - question: The question that the respondent is supposed to answer with the slider
+    ///   - description: A more detailed description with additional instructions on how to answer the question
+    ///   - options: The available options that the respondent can select
+    ///   - isSingleChoice: Set minNumberOfSelections and maxNumberOfSelections to 1, which means that the respondent can/must select only one option
     public init(identifier: String = UUID().uuidString, question: String, description: String, options: [Self.Option], isSingleChoice: Bool = false) {
         self.type = .multipleChoice
         self.isMandatory = true
@@ -103,6 +110,11 @@ public struct MultipleChoiceItem: SurveyItem, Codable {
             case color
         }
         
+        /// Default initializer for a single multiple choice option
+        /// - Parameters:
+        ///   - identifier: Unique numeric identifier of the option. Can be negative, can be used to order the options
+        ///   - label: The human-readable description of the option
+        ///   - color: A color associated with the option, will be shown next to it
         public init(identifier: Int, label: String, color: Color? = nil) {
             self.identifier = identifier
             self.label = label
