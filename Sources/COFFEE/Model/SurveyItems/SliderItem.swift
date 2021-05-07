@@ -29,6 +29,18 @@ public struct SliderItem: SurveyItem, Codable {
         return steps.first(where: { $0.color == nil }) == nil
     }
     
+    /// The coding keys for a text item
+    enum CodingKeys: String, CodingKey {
+        case type
+        case identifier
+        case question
+        case description
+        case isMandatory
+        case steps
+        case isScaleContinuous
+        case showSliderValue
+    }
+    
     public init(identifier: String = UUID().uuidString, question: String, description: String, steps: [Self.Step], isScaleContinuous: Bool = true) {
         self.type = .slider
         self.isMandatory = true
@@ -45,6 +57,36 @@ public struct SliderItem: SurveyItem, Codable {
         let steps = stepRange.map({ SliderItem.Step(value: Double($0), label: String($0)) })
         self.init(identifier: identifier, question: question, description: description, steps: steps, isScaleContinuous: false)
         self.showSliderValue = false
+    }
+    
+    /// Creates a new instance of slider item from a decoder
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.type = .slider
+        
+        // Decode all required values
+        self.identifier = try container.decode(String.self, forKey: .identifier)
+        self.question = try container.decode(String.self, forKey: .question)
+        self.description = try container.decode(String.self, forKey: .description)
+        self.steps = try container.decode([SliderItem.Step].self, forKey: .steps)
+        
+        // Decode option values / set default values
+        if let isMandatory = try? container.decode(Bool.self, forKey: .isMandatory) {
+            self.isMandatory = isMandatory
+        } else {
+            self.isMandatory = true
+        }
+        if let isScaleContinuous = try? container.decode(Bool.self, forKey: .isScaleContinuous) {
+            self.isScaleContinuous = isScaleContinuous
+        } else {
+            self.isScaleContinuous = true
+        }
+        if let showSliderValue = try? container.decode(Bool.self, forKey: .showSliderValue) {
+            self.showSliderValue = showSliderValue
+        } else {
+            self.showSliderValue = true
+        }
     }
     
     /// A single step on an ordinal scale

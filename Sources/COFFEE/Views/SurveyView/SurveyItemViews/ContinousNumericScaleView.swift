@@ -9,7 +9,7 @@
 
 import SwiftUI
 import Sliders
-
+/*
 struct ContinousNumericScaleView: View {
     
     @ObservedObject var viewModel: ViewModel
@@ -99,5 +99,5 @@ extension ContinousNumericScaleView {
         }
     }
 }
-
+*/
 #endif

@@ -8,7 +8,7 @@
 #if !os(macOS)
 
 import SwiftUI
-
+/*
 struct NumericScaleView: View {
     
     @ObservedObject var viewModel: ViewModel
@@ -84,5 +84,5 @@ extension NumericScaleView {
         }
     }
 }
-
+*/
 #endif

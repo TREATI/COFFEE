@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-
+/*
 /// This question type displays a numeric scale
 public struct NumericScaleItem: SurveyItem, Codable {
     // General attributes
@@ -76,3 +76,4 @@ public struct NumericScaleStep: Codable {
         color = Color(UIColor.init(hexString: colorHex))
     }
 }
+*/

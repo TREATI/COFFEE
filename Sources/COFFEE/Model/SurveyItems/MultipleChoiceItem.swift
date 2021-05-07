@@ -56,17 +56,20 @@ public struct MultipleChoiceItem: SurveyItem, Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        // Decode all values or set default values
         type = .multipleChoice
+        
+        // Decode all required values
         identifier = try container.decode(String.self, forKey: .identifier)
         question = try container.decode(String.self, forKey: .question)
         description = try container.decode(String.self, forKey: .description)
+        options = try container.decode([MultipleChoiceItem.Option].self, forKey: .options)
+
+        // Decode optional values / set default values
         if let isMandatory = try? container.decode(Bool.self, forKey: .isMandatory) {
             self.isMandatory = isMandatory
         } else {
             self.isMandatory = true
         }
-        options = try container.decode([MultipleChoiceItem.Option].self, forKey: .options)
         if let minNumberOfSelections = try? container.decode(Int.self, forKey: .minNumberOfSelections) {
             self.minNumberOfSelections = minNumberOfSelections
         } else {

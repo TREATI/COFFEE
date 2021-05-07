@@ -44,14 +44,6 @@ struct SurveyItemView: View {
                 // The rendered input view, depending on the survey item type
                 Group {
                     switch currentItem.type {
-                        case .numericScale:
-                            if let ordinalScaleItem = currentItem as? NumericScaleItem {
-                                if ordinalScaleItem.isScaleContinous == true {
-                                    ContinousNumericScaleView(viewModel: ContinousNumericScaleView.ViewModel(itemToRender: ordinalScaleItem, surveyViewModel: surveyViewModel))
-                                } else {
-                                    NumericScaleView(viewModel: NumericScaleView.ViewModel(itemToRender: ordinalScaleItem, surveyViewModel: surveyViewModel))
-                                }
-                            }
                         case .slider:
                             if let sliderItem = currentItem as? SliderItem {
                                 SliderItemView(viewModel: SliderItemView.ViewModel(itemToRender: sliderItem, surveyViewModel: surveyViewModel))

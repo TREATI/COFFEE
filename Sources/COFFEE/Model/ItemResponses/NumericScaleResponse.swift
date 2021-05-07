@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+/*
 public class NumericScaleResponse: ObservableObject, ItemResponse, Codable {
     
     /// Specifies the type of the item this response is referring to
@@ -33,3 +33,4 @@ public class NumericScaleResponse: ObservableObject, ItemResponse, Codable {
         self.value = initialValue
     }
 }
+*/

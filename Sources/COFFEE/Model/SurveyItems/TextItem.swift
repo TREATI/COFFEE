@@ -16,11 +16,49 @@ public struct TextItem: SurveyItem, Codable {
     public let description: String
     public var isMandatory: Bool
     
+    /// The minimum number of characters required to consider the input valid
+    public var minNumberOfCharacters: Int
+    
+    /// The coding keys for a text item
+    enum CodingKeys: String, CodingKey {
+        case type
+        case identifier
+        case question
+        case description
+        case isMandatory
+        case minNumberOfCharacters
+    }
+    
     public init(identifier: String = UUID().uuidString, question: String, description: String) {
         self.type = .text
         self.identifier = identifier
         self.question = question
         self.description = description
         self.isMandatory = true
+        self.minNumberOfCharacters = 5
+    }
+    
+    /// Creates a new instance of text item from a decoder
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.type = .text
+        
+        // Decode all required values
+        self.identifier = try container.decode(String.self, forKey: .identifier)
+        self.question = try container.decode(String.self, forKey: .question)
+        self.description = try container.decode(String.self, forKey: .description)
+        
+        // Decode option values / set default values
+        if let isMandatory = try? container.decode(Bool.self, forKey: .isMandatory) {
+            self.isMandatory = isMandatory
+        } else {
+            self.isMandatory = true
+        }
+        if let minNumberOfCharacters = try? container.decode(Int.self, forKey: .minNumberOfCharacters) {
+            self.minNumberOfCharacters = minNumberOfCharacters
+        } else {
+            self.minNumberOfCharacters = 5
+        }
     }
 }

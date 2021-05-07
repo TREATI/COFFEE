@@ -11,45 +11,47 @@
     "color": "8f4068",
     "items": [
         {
-            "type": "numericScale",
+            "type": "multipleChoice",
             "identifier": "0",
             "question": "How would you assess your current thermal sensation? How do you feel?",
             "description": "You can select one option.",
             "isMandatory": true,
-            "isScaleContinous": false,
-            "steps": [
+            "minNumberOfSelections": 1,
+            "maxNumberOfSelections": 1,
+            "isAscendingOrder": false,
+            "options": [
                 {
-                    "value": 3,
+                    "identifier": 3,
                     "label": "Very hot",
                     "color": "c7520e"
                 },
                 {
-                    "value": 2,
+                    "identifier": 2,
                     "label": "Hot",
                     "color": "e3970b"
                 },
                 {
-                    "value": 1,
+                    "identifier": 1,
                     "label": "Warm",
                     "color": "e3bf0e"
                 },
                 {
-                    "value": 0,
+                    "identifier": 0,
                     "label": "Comfortable / Neutral",
                     "color": "adadad"
                 },
                 {
-                    "value": -1,
+                    "identifier": -1,
                     "label": "Cool",
                     "color": "a6c7e3"
                 },
                 {
-                    "value": -2,
+                    "identifier": -2,
                     "label": "Cold",
                     "color": "5ba9eb"
                 },
                 {
-                    "value": -3,
+                    "identifier": -3,
                     "label": "Very cold",
                     "color": "0b80e3"
                 }
