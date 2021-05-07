@@ -96,6 +96,11 @@ extension SurveyView {
             return !currentSurveyItem.isMandatory || currentItemResponse?.isValidInput == true
         }
         
+        /// Default initializer for the `SurveyView`'s view model
+        /// - Parameters:
+        ///   - survey: The survey to display
+        ///   - completionHandler: A function that is called when the survey is completed
+        ///   - showSurvey: A binding to a boolean value that defines whether the survey view is shown or not
         init(survey: Survey, completionHandler: ((Submission) -> ())?, showSurvey: Binding<Bool>) {
             // Make sure survey is not empty
             // Ensure the survey is not empty

@@ -19,7 +19,7 @@ https://github.com/TREATI/COFFEE
 </center>
 
 ### Setup Survey and Display it
-In order to use COFFEE and to display your custom survey, you need to embed `SurveyOverviewScreen` in your SwiftUI view, which takes two arguments:
+In order to use COFFEE and to display your custom survey, you need to embed `SurveyView` in your SwiftUI view, which takes two arguments:
 - An instance of `Survey`: The survey that you want to display
 - A completion handler that takes a `Submission` as parameter. COFFEE calls this function once the respondent completes the survey. The submission contains all responses and other meta data such as the submission date and time.
 
