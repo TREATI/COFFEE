@@ -28,6 +28,7 @@ struct TextItemView: View {
             }
             // The actual multiline text editor
             TextEditor(text: $viewModel.currentTextInput)
+                .keyboardType(viewModel.isInputNumerical ? .numberPad : .default)
                 .frame(minHeight: 38)
             // Invisible text to auto-size the text area (workaround)
             Text(viewModel.currentTextInput)
@@ -54,6 +55,10 @@ extension TextItemView {
         
         // Store the current text input locally
         @Published var currentTextInput: String = ""
+        
+        var isInputNumerical: Bool {
+            return itemToRender.isInputNumerical
+        }
         
         var handler: AnyCancellable?
         

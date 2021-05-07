@@ -1,10 +1,15 @@
 # COFFEE
-COFFEE - Customizable Occupant-Friendly FEEdback applications. COFFEE is a lightweight, flexible and extensible SwiftUI framework to build customizable feedback applications for thermal comfort and IEQ research.
+COFFEE is a lightweight, flexible, and extensible SwiftUI framework to build customizable feedback applications, particularly for thermal comfort and IEQ research.
 
-## How to use
+To setup COFFEE, you need to provide a *survey configuration* that defines your survey questions and other characteristics. COFFEE will visualize the survey and collect the responses. Once a respondent completes the survey, COFFEE returns a *submission* that contains all responses. You can then process the submission e.g. by sending it to a backend.
+<center>
+<img src="Sources/COFFEE/Resources/PackageVisual.jpeg" width="500"/>
+</center>
+
+## Setup Guide
 
 ### Add Swift Package to Xcode Project
-1. Create a new iOS application project in Xcode, set language to Swift and interface to SwiftUI.
+1. Prerequisite: You need an iOS application project in Xcode that uses Swift and SwiftUI
 2. Add the COFFEE swift package to your project by copying the link below and following the steps in the image
 ```
 https://github.com/TREATI/COFFEE

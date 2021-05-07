@@ -18,6 +18,8 @@ public struct TextItem: SurveyItem, Codable {
     
     /// The minimum number of characters required to consider the input valid
     public var minNumberOfCharacters: Int
+    /// Whether the text input is supposed to be numerical
+    public var isInputNumerical: Bool
     
     /// The coding keys for a text item
     enum CodingKeys: String, CodingKey {
@@ -27,6 +29,7 @@ public struct TextItem: SurveyItem, Codable {
         case description
         case isMandatory
         case minNumberOfCharacters
+        case isInputNumerical
     }
     
     public init(identifier: String = UUID().uuidString, question: String, description: String) {
@@ -36,6 +39,7 @@ public struct TextItem: SurveyItem, Codable {
         self.description = description
         self.isMandatory = true
         self.minNumberOfCharacters = 5
+        self.isInputNumerical = false
     }
     
     /// Creates a new instance of text item from a decoder
@@ -59,6 +63,11 @@ public struct TextItem: SurveyItem, Codable {
             self.minNumberOfCharacters = minNumberOfCharacters
         } else {
             self.minNumberOfCharacters = 5
+        }
+        if let isInputNumerical = try? container.decode(Bool.self, forKey: .isInputNumerical) {
+            self.isInputNumerical = isInputNumerical
+        } else {
+            self.isInputNumerical = false
         }
     }
 }
