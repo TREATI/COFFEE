@@ -17,10 +17,26 @@ struct TextItemView: View {
     @EnvironmentObject var surveyViewModel: SurveyView.ViewModel
             
     var body: some View {
-        ZStack {
-            TextEditor(text: $viewModel.currentTextInput).background(Color(.systemGray5)).cornerRadius(6)
-            Text(viewModel.currentTextInput).opacity(0).padding(.all, 8)
-        }.onAppear {
+        ZStack (alignment: .topLeading) {
+            // Placeholder text
+            if viewModel.currentTextInput.isEmpty {
+                Text("Write here...")
+                    .foregroundColor(Color(.systemGray2))
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 5)
+                    .allowsHitTesting(false)
+            }
+            // The actual multiline text editor
+            TextEditor(text: $viewModel.currentTextInput)
+                .frame(minHeight: 38)
+            // Invisible text to auto-size the text area (workaround)
+            Text(viewModel.currentTextInput)
+                .opacity(0)
+                .padding(.all, 8)
+        }
+        .background(Color(.systemGray5))
+        .cornerRadius(6)
+        .onAppear {
             UITextView.appearance().backgroundColor = .clear
         }
     }
@@ -37,7 +53,7 @@ extension TextItemView {
         private var itemResponse: TextResponse?
         
         // Store the current text input locally
-        @Published var currentTextInput: String = " "
+        @Published var currentTextInput: String = ""
         
         var handler: AnyCancellable?
         
