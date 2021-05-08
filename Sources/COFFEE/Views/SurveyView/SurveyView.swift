@@ -13,11 +13,7 @@ import SwiftUI
 public struct SurveyView: View {
     
     // View model for this survey session, also provided to the subviews as environment object
-    @StateObject var viewModel: ViewModel
-    
-    public init(viewModel: SurveyView.ViewModel) {
-        self.viewModel = viewModel
-    }
+    @StateObject public var viewModel: ViewModel
             
     public var body: some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -56,9 +52,9 @@ public struct SurveyView: View {
     }
 }
 
-extension SurveyView {
+public extension SurveyView {
     
-    public class ViewModel: ObservableObject {
+    class ViewModel: ObservableObject {
         // The survey to take
         private let survey: Survey
         // The responses to the survey items
