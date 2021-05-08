@@ -10,7 +10,7 @@ import SwiftUI
 #if !os(macOS)
 
 /// A screen presenting a given survey
-struct SurveyView: View {
+public struct SurveyView: View {
     
     // View model for this survey session, also provided to the subviews as environment object
     @StateObject var viewModel: ViewModel
