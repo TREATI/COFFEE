@@ -137,7 +137,7 @@ Attribute | Description | Default Value
 
 ### TextItem
 
-Use the text item for questions that the respondent should answer in written form. You can specify how many characters the respondent should enter at least. 
+Use the `TextItem` for questions that the respondent should answer in written form. You can specify how many characters the respondent should enter at least. 
 
 Attribute | Description | Default Value
 --- | --- | ---
@@ -153,7 +153,16 @@ Attribute | Description | Default Value
     textQuestion.isInputNumerical = // Whether a number pad should be shown as keyboard
 ```
 
+### LocationPickerItem
 
+The `LocationPickerItem` can be used to access the respondent's current geolocation.
+
+*Example*
+```swift
+    var locationPickerQuestion = LocationPickerItem(question: "Can we access your current location for better evaluation?", description: "You can share your current coordinates.")
+    // It is recommended to make privacy-invasive questions optional
+    locationPickerQuestion.isMandatory = false
+```
 
 ## JSON En- and Decoding
 
