@@ -13,9 +13,9 @@ import SwiftUI
 public struct SurveyView: View {
     
     // View model for this survey session, also provided to the subviews as environment object
-    @StateObject var viewModel: ViewModel
+    @StateObject public var viewModel: ViewModel
             
-    var body: some View {
+    public var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             // Progress indicator
             ProgressView(value: Double(viewModel.currentSurveyItemIndex + 1), total: Double(viewModel.numberOfSurveyItems), label: {
@@ -54,7 +54,7 @@ public struct SurveyView: View {
 
 extension SurveyView {
     
-    class ViewModel: ObservableObject {
+    public class ViewModel: ObservableObject {
         // The survey to take
         private let survey: Survey
         // The responses to the survey items
