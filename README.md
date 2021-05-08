@@ -176,7 +176,7 @@ textQuestion.isInputNumerical = // Whether a number pad should be shown as keybo
 
 ### LocationPickerItem
 
-The `LocationPickerItem` can be used to access the respondent's current geolocation.
+The `LocationPickerItem` can be used to access the respondent's current geolocation. In order to make this work, you must add the `NSLocationWhenInUseUsageDescription` key to your project's Info.plist file
 
 *Example*:
 ```swift
