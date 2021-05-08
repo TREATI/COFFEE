@@ -12,7 +12,7 @@ public class MockProvider {
     
     /// Returns a single mock survey
     public static func getSingleSurvey() -> Survey! {
-        guard let url = Bundle.main.url(forResource: "MockSurveys", withExtension: "json"),
+        guard let url = Bundle.module.url(forResource: "MockSurveys", withExtension: "json"),
               let data = try? Data(contentsOf: url) else {
             return nil
         }
