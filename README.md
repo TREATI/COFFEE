@@ -97,8 +97,12 @@ Attribute | Description | Default Value
 *Example 1*: A multiple choice question with four colored options
 ```swift
 var multipleChoiceQuestion = MultipleChoiceItem(question: "What fruits do you like?", 
-description: "Pick all fruits that you like", 
-options: [MultipleChoiceItem.Option(identifier: 0, label: "Apple", color: .red), MultipleChoiceItem.Option(identifier: 1, label: "Orange", color: .orange), MultipleChoiceItem.Option(identifier: 2, label: "Banana", color: .yellow), MultipleChoiceItem.Option(identifier: 3, label: "Watermelon", color: .green)])
+                                             description: "Pick all fruits that you like", 
+                                                 options: 
+                                                 [MultipleChoiceItem.Option(identifier: 0, label: "Apple", color: .red), 
+                                                 MultipleChoiceItem.Option(identifier: 1, label: "Orange", color: .orange), 
+                                                 MultipleChoiceItem.Option(identifier: 2, label: "Banana", color: .yellow), 
+                                                 MultipleChoiceItem.Option(identifier: 3, label: "Watermelon", color: .green)])
 
 // Additional attributes (optional)
 multipleChoiceQuestion.isMandatory = ... // Can the question be skipped?
