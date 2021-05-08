@@ -7,9 +7,9 @@ To setup COFFEE, you need to provide a *survey configuration* that defines your 
 <img src="Sources/COFFEE/Resources/PackageVisual.jpeg" width="500"/>
 </p>
 
-## Setup Guide
+## ⚒️ Setup Guide
 
-### Add Swift Package to Xcode Project
+### 1. Add Swift Package to Xcode Project
 1. Prerequisite: You need an iOS application project in Xcode that uses Swift and SwiftUI
 2. Add the COFFEE swift package to your project by copying the link below and following the steps in the image
 ```
@@ -19,13 +19,13 @@ https://github.com/TREATI/COFFEE
 <img src="Sources/COFFEE/Resources/AddPackageInstructions.jpg"/>
 </center>
 
-### Embed `SurveyView` in Your Content View
+### 2. Embed `SurveyView` in Your Content View
 In order to display your custom survey using COFFEE, you need to embed `SurveyView` in your content view and provide an instance of `SurveyView.ViewModel`. The view model requires three arguments:
 - An instance of `Survey`: The survey that you want to display
 - A completion handler of type `((Submission) -> ())` that takes a `Submission` as parameter. COFFEE calls this function once the respondent completes the survey. The submission contains all responses and other meta data such as the submission date and time
 - A `Binding<Bool>` that defines whether the survey view is currently shown
 
-**Recommendation:** You can copy the following code snippet into your `ContentView` as a starting point. It already provides the completion handler and outlines the creation of a survey.
+**Recommendation:** You can copy the following code snippet into your `ContentView` as a starting point. It already provides the completion handler and outlines the creation of a survey. If you want to test the package without creating your own survey, you can use the provided demo survey by calling `MockProvider.getSingleSurvey()`
 
 ```swift
 import SwiftUI
@@ -64,9 +64,11 @@ struct ContentView: View {
 }
 ```
 
-## Survey Items
+## 🎚 Survey Items
 
 For each question that you want to add to your survey, you need to instantiate a survey item. COFFEE comes with a variety of different item types, so you can choose the one that fits best to your question type. An item type describes the response type and the UI component of a question. 
+
+### Overview
 
 The following taxonomy shows the currently available item types. 
 
@@ -78,10 +80,10 @@ All item types conform to the `SurveyItem` protocol and thus have to provide a s
 
 Attribute | Description | Default Value
 --- | --- | ---
-`identifier` | Each survey item requires a unique identifier. This identifier can be used to link the responses to the questions | `UUID().uuidString`
-`question` | The actual question that the respondent is supposed to answer | *None*
-`description` | A more detailed description with additional information / instructions on how to answer the question | *None*
-`isMandatory` | Specifies whether the question can be skipped | `true`
+`identifier` |Each survey item requires a unique identifier. This identifier can be used to link the responses to the questions | `UUID().uuidString`
+`question` |The actual question that the respondent is supposed to answer | *None*
+`description` |A more detailed description with additional information / instructions on how to answer the question | *None*
+`isMandatory` |Specifies whether the question can be skipped | `true`
 
 ### MultipleChoiceItem
 
@@ -89,10 +91,10 @@ This item can be used to let the respondent pick from a set of options. The opti
 
 Attribute | Description | Default Value
 --- | --- | ---
-`options` | Array of `MultipleChoiceItem.Option` that defines the available options | *None*
-`minNumberOfSelections` | Defines how many of the provided options have to be selected at least | `1`
-`maxNumberOfSelections` | Defines how many of the provided options can be selected at max | `Int.max`
-`isAscendingOrder` | The options are sorted by their identifiers. Specify the order | `true`
+`options` |Array of `MultipleChoiceItem.Option` that defines the available options | *None*
+`minNumberOfSelections` |Defines how many of the provided options have to be selected at least | `1`
+`maxNumberOfSelections` |Defines how many of the provided options can be selected at max | `Int.max`
+`isAscendingOrder` |The options are sorted by their identifiers. Specify the order | `true`
 
 *Example 1*: A multiple choice question with four colored options
 ```swift
@@ -118,7 +120,8 @@ var singleChoiceQuestion = MultipleChoiceItem(question: "Pick the fruit that you
                                                options: 
                                                [MultipleChoiceItem.Option(identifier: 0, label: "Apple"), 
                                                MultipleChoiceItem.Option(identifier: 1, label: "Orange"), 
-                                               MultipleChoiceItem.Option(identifier: 2, label: "Banana")], isSingleChoice: true)
+                                               MultipleChoiceItem.Option(identifier: 2, label: "Banana")], 
+                                        isSingleChoice: true)
 ```
 
 ### SliderItem
@@ -140,9 +143,9 @@ var continuousSliderQuestion = SliderItem(question: "Move the slider to a positi
                                              SliderItem.Step(value: 0, label: "Okayish mood", color: .yellow), 
                                              SliderItem.Step(value: 1, label: "Good mood", color: .green)])
     
-    // Additional attributes (optional)
-    continuousSliderQuestion.isContinuous = ... // Should the slider be continuous or discrete?
-    continuousSliderQuestion.showSliderValue = ... // Should the the step value be shown besides the step label?
+// Additional attributes (optional)
+continuousSliderQuestion.isContinuous = ... // Should the slider be continuous or discrete?
+continuousSliderQuestion.showSliderValue = ... // Should the the step value be shown besides the step label?
 ```
 
 *Example 2*: A discrete slider with eleven steps from 0 to 10
@@ -158,10 +161,10 @@ Use the `TextItem` for questions that the respondent should answer in written fo
 
 Attribute | Description | Default Value
 --- | --- | ---
-`minNumberOfCharacters` | Defines how many characters the respondent has to enter at least before the input is considered valid | 5
-`isInputNumerical` | Controls the keyboard type. When set to `true`, a number pad is shown instead of the default keyboard | `false`
+`minNumberOfCharacters` |Defines how many characters the respondent has to enter at least before the input is considered valid | 5
+`isInputNumerical` |Controls the keyboard type. When set to `true`, a number pad is shown instead of the default keyboard | `false`
 
-*Example*
+*Example*:
 ```swift
 var textQuestion = TextItem(question: "Please describe what physical activities you have performed today.", 
                          description: "Enter as much text as you want")
@@ -175,7 +178,7 @@ textQuestion.isInputNumerical = // Whether a number pad should be shown as keybo
 
 The `LocationPickerItem` can be used to access the respondent's current geolocation.
 
-*Example*
+*Example*:
 ```swift
 var locationPickerQuestion = LocationPickerItem(question: "Can we access your current location for better evaluation?", 
                                              description: "You can share your current coordinates.")
@@ -183,49 +186,15 @@ var locationPickerQuestion = LocationPickerItem(question: "Can we access your cu
 locationPickerQuestion.isMandatory = false
 ```
 
-## JSON En- and Decoding
+## 💾 JSON En- and Decoding
 
 You can either specify your survey by instanciating it in the code or by decoding it from a JSON file. Also, you can encode the resulting submission to JSON in order to e.g. upload it to a server. All model entities conform to the `Codable` protocol.
 
 ### Decode Survey from JSON
 
-Prepare a JSON file that contains the survey that you wish to present. Example `MockSurvey.json`:
-```json
-{
-    "title": "...",
-    "description": "...",
-    "researcher": {
-        "name": "...",
-        "mail": "...",
-    },
-    "allowsMultipleSubmissions": true,
-    "startDate": "2021-04-08T15:00:00Z",
-    "endDate": "2021-04-25T20:00:00Z",
-    "color": "...",
-    "items": [
-        {
-            "type": "ordinalScale",
-            "identifier": "...",
-            "question": "...",
-            "description": "...",
-            "isOptional": false,
-            "scaleTitle": "...",
-            "isScaleContinous": false,
-            "ordinalScaleSteps": [
-                {
-                    "value": 3,
-                    "label": "Very hot",
-                    "color": "c7520e"
-                }
-            ]
-        }
-    ],
-    "reminders": []
-}
+Provide a JSON file that contains the survey and all survey items that you wish to present. All item attributes that have a default value do not have to be specified. To see an example JSON you can check out `Sources/COFFEE/Resources/MockSurvey.json`:
 
-```
-
-Decode the JSON survey.
+You can decode the JSON survey with the following code snippet:
 ```swift
 func decodeJSONSurvey() -> Survey? {
     guard let url = Bundle.main.url(forResource: "MockSurvey", withExtension: "json"),
@@ -245,6 +214,8 @@ func decodeJSONSurvey() -> Survey? {
 ```
 
 ### Encode Submission to JSON
+
+With the following code snippet, you can encode the resulting submission into JSON in order to e.g. send it to the backend easily. Regarding the responses array, COFFEE automatically only encodes the relevant values, i.e. the `itemIdentifier`, the response `value` and the `type` of the survey item the response refers to.
 
 ```swift
 let jsonEncoder = JSONEncoder()
