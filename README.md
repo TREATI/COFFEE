@@ -7,7 +7,7 @@ To setup COFFEE, you need to provide a *survey configuration* that defines your 
 <img src="Sources/COFFEE/Resources/PackageVisual.jpeg" width="500"/>
 </p>
 
-## ⚒️ Setup Guide
+## Setup Guide ⚒️
 
 ### 1. Add Swift Package to Xcode Project
 1. Prerequisite: You need an iOS application project in Xcode that uses Swift and SwiftUI
@@ -64,7 +64,7 @@ struct ContentView: View {
 }
 ```
 
-## 🎚 Survey Items
+## Survey Items 🎚
 
 For each question that you want to add to your survey, you need to instantiate a survey item. COFFEE comes with a variety of different item types, so you can choose the one that fits best to your question type. An item type describes the response type and the UI component of a question. 
 
@@ -186,7 +186,7 @@ var locationPickerQuestion = LocationPickerItem(question: "Can we access your cu
 locationPickerQuestion.isMandatory = false
 ```
 
-## 💾 JSON En- and Decoding
+## JSON En- and Decoding 💾
 
 You can either specify your survey by instanciating it in the code or by decoding it from a JSON file. Also, you can encode the resulting submission to JSON in order to e.g. upload it to a server. All model entities conform to the `Codable` protocol.
 
