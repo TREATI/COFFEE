@@ -13,7 +13,11 @@ import SwiftUI
 public struct SurveyView: View {
     
     // View model for this survey session, also provided to the subviews as environment object
-    @StateObject public var viewModel: ViewModel
+    @StateObject var viewModel: ViewModel
+    
+    public init(viewModel: SurveyView.ViewModel) {
+        self.viewModel = viewModel
+    }
             
     public var body: some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -101,7 +105,7 @@ extension SurveyView {
         ///   - survey: The survey to display
         ///   - completionHandler: A function that is called when the survey is completed
         ///   - showSurvey: A binding to a boolean value that defines whether the survey view is shown or not
-        init(survey: Survey, completionHandler: ((Submission) -> ())?, showSurvey: Binding<Bool>) {
+        public init(survey: Survey, completionHandler: ((Submission) -> ())?, showSurvey: Binding<Bool>) {
             // Make sure survey is not empty
             // Ensure the survey is not empty
             assert(!survey.items.isEmpty, "Survey is empty. The survey should have at least one item.")
