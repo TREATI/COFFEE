@@ -113,7 +113,12 @@ multipleChoiceQuestion.isAscendingOrder = ... // Should the options be sorted as
 
 *Example 2*: A single choice question with three uncolored options
 ```swift
-var singleChoiceQuestion = MultipleChoiceItem(question: "Pick the fruit that you like best", description: "Only pick one fruit", options: [MultipleChoiceItem.Option(identifier: 0, label: "Apple"), MultipleChoiceItem.Option(identifier: 1, label: "Orange"), MultipleChoiceItem.Option(identifier: 2, label: "Banana")], isSingleChoice: true)
+var singleChoiceQuestion = MultipleChoiceItem(question: "Pick the fruit that you like best", 
+                                           description: "Only pick one fruit", 
+                                               options: 
+                                               [MultipleChoiceItem.Option(identifier: 0, label: "Apple"), 
+                                               MultipleChoiceItem.Option(identifier: 1, label: "Orange"), 
+                                               MultipleChoiceItem.Option(identifier: 2, label: "Banana")], isSingleChoice: true)
 ```
 
 ### SliderItem
@@ -122,13 +127,18 @@ This item displays a slider and lets the respondent answer the question by adjus
  
 Attribute | Description | Default Value
 --- | --- | ---
-`steps` | Array at least two `SliderItem.Step`s that define the slider's range and possible positions | *None*
-`isContinuous` | Defines whether the slider is continuous or discrete, i.e. whether positions between two steps are considered as valid input | `true`
-`showSliderValue` | Defines whether both the step values and labels are shown or only the labels | `true`
+`steps` |Array of at least two `SliderItem.Step`s that define the slider's range and possible positions | *None*
+`isContinuous` |Defines whether the slider is continuous or discrete, i.e. whether positions between two steps are considered as valid input | `true`
+`showSliderValue` |Defines whether both the step values and labels are shown or only the labels | `true`
 
 *Example 1*: A continuous, colored slider with three steps
 ```swift
-    var continuousSliderQuestion = SliderItem(question: "Move the slider to a position that reflects your current mood!", description: "Please move the slider", steps: [SliderItem.Step(value: -1, label: "Bad mood", color: .red), SliderItem.Step(value: 0, label: "Okayish mood", color: .yellow), SliderItem.Step(value: 1, label: "Good mood", color: .green)])
+var continuousSliderQuestion = SliderItem(question: "Move the slider to a position that reflects your current mood!", 
+                                       description: "Please move the slider", 
+                                             steps: 
+                                             [SliderItem.Step(value: -1, label: "Bad mood", color: .red), 
+                                             SliderItem.Step(value: 0, label: "Okayish mood", color: .yellow), 
+                                             SliderItem.Step(value: 1, label: "Good mood", color: .green)])
     
     // Additional attributes (optional)
     continuousSliderQuestion.isContinuous = ... // Should the slider be continuous or discrete?
@@ -137,7 +147,9 @@ Attribute | Description | Default Value
 
 *Example 2*: A discrete slider with eleven steps from 0 to 10
 ```swift
-    var discreteSliderQuestion = SliderItem(question: "From 0 to 10, how would you assess your tolerance unsatisfactory indoor temperatures?", description: "Please move the slider to a position that reflects your assessment best", stepRange: 0...10)
+var discreteSliderQuestion = SliderItem(question: "From 0 to 10, how would you assess your tolerance unsatisfactory indoor temperatures?", 
+                                     description: "Please move the slider to a position that reflects your assessment best", 
+                                       stepRange: 0...10)
 ```
 
 ### TextItem
@@ -151,11 +163,12 @@ Attribute | Description | Default Value
 
 *Example*
 ```swift
-    var textQuestion = TextItem(question: "Please describe what physical activities you have performed today.", description: "Enter as much text as you want")
+var textQuestion = TextItem(question: "Please describe what physical activities you have performed today.", 
+                         description: "Enter as much text as you want")
 
-    // Additional attributes (optional)
-    textQuestion.minNumberOfCharacters = ... // Specify how many characters have to be entered at least
-    textQuestion.isInputNumerical = // Whether a number pad should be shown as keyboard
+// Additional attributes (optional)
+textQuestion.minNumberOfCharacters = ... // Specify how many characters have to be entered at least
+textQuestion.isInputNumerical = // Whether a number pad should be shown as keyboard
 ```
 
 ### LocationPickerItem
@@ -164,9 +177,10 @@ The `LocationPickerItem` can be used to access the respondent's current geolocat
 
 *Example*
 ```swift
-    var locationPickerQuestion = LocationPickerItem(question: "Can we access your current location for better evaluation?", description: "You can share your current coordinates.")
-    // It is recommended to make privacy-invasive questions optional
-    locationPickerQuestion.isMandatory = false
+var locationPickerQuestion = LocationPickerItem(question: "Can we access your current location for better evaluation?", 
+                                             description: "You can share your current coordinates.")
+// It is recommended to make privacy-invasive questions optional
+locationPickerQuestion.isMandatory = false
 ```
 
 ## JSON En- and Decoding
