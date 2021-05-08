@@ -13,7 +13,11 @@ import SwiftUI
 public struct SurveyView: View {
     
     // View model for this survey session, also provided to the subviews as environment object
-    @StateObject public var viewModel: ViewModel
+    @ObservedObject public var viewModel: ViewModel
+    
+    public init(viewModel: SurveyView.ViewModel) {
+        self.viewModel = viewModel
+    }
             
     public var body: some View {
         VStack(alignment: .leading, spacing: 6) {
