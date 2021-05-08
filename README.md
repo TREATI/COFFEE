@@ -2,9 +2,10 @@
 COFFEE is a lightweight, flexible, and extensible SwiftUI framework to build customizable feedback applications, particularly for thermal comfort and IEQ research.
 
 To setup COFFEE, you need to provide a *survey configuration* that defines your survey questions and other characteristics. COFFEE will visualize the survey and collect the responses. Once a respondent completes the survey, COFFEE returns a *submission* that contains all responses. You can then process the submission e.g. by sending it to a backend.
-<center>
+
+<p align="center">
 <img src="Sources/COFFEE/Resources/PackageVisual.jpeg" width="500"/>
-</center>
+</p>
 
 ## Setup Guide
 
