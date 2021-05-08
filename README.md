@@ -137,6 +137,24 @@ Attribute | Description | Default Value
 
 ### TextItem
 
+Use the text item for questions that the respondent should answer in written form. You can specify how many characters the respondent should enter at least. 
+
+Attribute | Description | Default Value
+--- | --- | ---
+`minNumberOfCharacters` | Defines how many characters the respondent has to enter at least before the input is considered valid | 5
+`isInputNumerical` | Controls the keyboard type. When set to `true`, a number pad is shown instead of the default keyboard | `false`
+
+*Example*
+```swift
+    var textQuestion = TextItem(question: "Please describe what physical activities you have performed today.", description: "Enter as much text as you want")
+
+    // Additional attributes (optional)
+    textQuestion.minNumberOfCharacters = ... // Specify how many characters have to be entered at least
+    textQuestion.isInputNumerical = // Whether a number pad should be shown as keyboard
+```
+
+
+
 ## JSON En- and Decoding
 
 You can either specify your survey by instanciating it in the code or by decoding it from a JSON file. Also, you can encode the resulting submission to JSON in order to e.g. upload it to a server. All model entities conform to the `Codable` protocol.
