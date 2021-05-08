@@ -1,7 +1,7 @@
 # COFFEE
 COFFEE is a lightweight, flexible, and extensible SwiftUI framework to build customizable feedback applications, particularly for thermal comfort and IEQ research.
 
-To setup COFFEE, you need to provide a *survey configuration* that defines your survey questions and other characteristics. COFFEE will visualize the survey and collect the responses. Once a respondent completes the survey, COFFEE returns a *submission* that contains all responses. You can then process the submission e.g. by sending it to a backend.
+To setup COFFEE, you need to provide a *survey configuration* that defines your survey questions and other characteristics. COFFEE will visualize the survey and collect the responses. Once a respondent completes the survey, COFFEE returns a *submission* that contains all item responses. You can then process the submission e.g. by sending it to a backend.
 
 <p align="center">
 <img src="Sources/COFFEE/Resources/PackageVisual.jpeg" width="500"/>
@@ -22,7 +22,7 @@ https://github.com/TREATI/COFFEE
 ### Embed `SurveyView` in Your Content View
 In order to display your custom survey using COFFEE, you need to embed `SurveyView` in your content view and provide an instance of `SurveyView.ViewModel`. The view model requires three arguments:
 - An instance of `Survey`: The survey that you want to display
-- A completion handler (`((Submission) -> ())`) that takes a `Submission` as parameter. COFFEE calls this function once the respondent completes the survey. The submission contains all responses and other meta data such as the submission date and time
+- A completion handler of type `((Submission) -> ())` that takes a `Submission` as parameter. COFFEE calls this function once the respondent completes the survey. The submission contains all responses and other meta data such as the submission date and time
 - A `Binding<Bool>` that defines whether the survey view is currently shown
 
 **Recommendation:** You can copy the following code snippet into your `ContentView` as a starting point. It already provides the completion handler and outlines the creation of a survey.
@@ -70,7 +70,9 @@ For each question that you want to add to your survey, you need to instantiate a
 
 The following taxonomy shows the currently available item types. 
 
-
+<center>
+<img src="Sources/COFFEE/Resources/SurveyItemTaxonomy.jpg"/>
+</center>
 
 All item types conform to the `SurveyItem` protocol and thus have to provide a set of attributes:
 
@@ -80,10 +82,6 @@ Attribute | Description | Default Value
 `question` | The actual question that the respondent is supposed to answer | *None*
 `description` | A more detailed description with additional information / instructions on how to answer the question | *None*
 `isMandatory` | Specifies whether the question can be skipped | `true`
-
-<center>
-<img src="Sources/COFFEE/Resources/SurveyItemTaxonomy.jpg"/>
-</center>
 
 ### MultipleChoiceItem
 
@@ -98,18 +96,20 @@ Attribute | Description | Default Value
 
 *Example 1*: A multiple choice question with four colored options
 ```swift
-    var multipleChoiceQuestion = MultipleChoiceItem(question: "What fruits do you like?", description: "Pick all fruits that you like", options: [MultipleChoiceItem.Option(identifier: 0, label: "Apple", color: .red), MultipleChoiceItem.Option(identifier: 1, label: "Orange", color: .orange), MultipleChoiceItem.Option(identifier: 2, label: "Banana", color: .yellow), MultipleChoiceItem.Option(identifier: 3, label: "Watermelon", color: .green)])
+var multipleChoiceQuestion = MultipleChoiceItem(question: "What fruits do you like?", 
+description: "Pick all fruits that you like", 
+options: [MultipleChoiceItem.Option(identifier: 0, label: "Apple", color: .red), MultipleChoiceItem.Option(identifier: 1, label: "Orange", color: .orange), MultipleChoiceItem.Option(identifier: 2, label: "Banana", color: .yellow), MultipleChoiceItem.Option(identifier: 3, label: "Watermelon", color: .green)])
 
-    // Additional attributes (optional)
-    multipleChoiceQuestion.isMandatory = ... // Can the question be skipped?
-    multipleChoiceQuestion.minNumberOfSelections = ... // How many fruits should be selected as least?
-    multipleChoiceQuestion.maxNumberOfSelections = ... // How many fruits can be selected at max?
-    multipleChoiceQuestion.isAscendingOrder = ... // Should the options be sorted ascending or descending (by id)?
+// Additional attributes (optional)
+multipleChoiceQuestion.isMandatory = ... // Can the question be skipped?
+multipleChoiceQuestion.minNumberOfSelections = ... // How many fruits should be selected as least?
+multipleChoiceQuestion.maxNumberOfSelections = ... // How many fruits can be selected at max?
+multipleChoiceQuestion.isAscendingOrder = ... // Should the options be sorted ascending or descending (by id)?
 ```
 
 *Example 2*: A single choice question with three uncolored options
 ```swift
-    var singleChoiceQuestion = MultipleChoiceItem(question: "Pick the fruit that you like best", description: "Only pick one fruit", options: [MultipleChoiceItem.Option(identifier: 0, label: "Apple"), MultipleChoiceItem.Option(identifier: 1, label: "Orange"), MultipleChoiceItem.Option(identifier: 2, label: "Banana")], isSingleChoice: true)
+var singleChoiceQuestion = MultipleChoiceItem(question: "Pick the fruit that you like best", description: "Only pick one fruit", options: [MultipleChoiceItem.Option(identifier: 0, label: "Apple"), MultipleChoiceItem.Option(identifier: 1, label: "Orange"), MultipleChoiceItem.Option(identifier: 2, label: "Banana")], isSingleChoice: true)
 ```
 
 ### SliderItem
