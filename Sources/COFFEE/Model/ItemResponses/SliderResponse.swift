@@ -7,30 +7,23 @@
 
 import Foundation
 
-public class SliderResponse: ObservableObject, ItemResponse, Codable {
+public struct SliderResponse: ItemResponse, Codable {
     
     /// Specifies the type of the item this response is referring to
-    public var type: SurveyItemType
+    public let type: SurveyItemType
     /// The unique identifier of the item this response is referring to
-    public var itemIdentifier: String
+    public let itemIdentifier: String
     /// The value of the response. The value type is a double which reflects the selected numeric scale step / position
-    public var value: Double?
-    
-    /// Boolean defining whether the current input is valid
-    public var isValidInput: Bool {
-        return value != nil
-    }
+    public let value: Double
+ 
     /// A description of the value
     public var valueDescription: String {
-        guard let value = value else {
-            return "No value"
-        }
         return String(value)
     }
     
-    public init(itemIdentifier: String, initialValue: Double?) {
+    public init(itemIdentifier: String, value: Double) {
         self.type = .slider
         self.itemIdentifier = itemIdentifier
-        self.value = initialValue
+        self.value = value
     }
 }

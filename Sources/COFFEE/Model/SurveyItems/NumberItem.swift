@@ -1,14 +1,14 @@
 //
 //  TextInputSurveyItem.swift
-//  
 //
-//  Created by Victor Prüfer on 13.04.21.
+//
+//  Created by Victor Prüfer on 22.05.21.
 //
 
 import Foundation
 
-/// This item lets the respondent enter a text
-public final class TextItem: ObservableObject, SurveyItem, Codable {
+/// This item lets the respondent enter a number
+public final class NumberItem: ObservableObject, SurveyItem, Codable {
     
     // MARK: - Public Properties
     
@@ -26,12 +26,7 @@ public final class TextItem: ObservableObject, SurveyItem, Codable {
     public var isResponseValidPublisher: Published<Bool>.Publisher { $isResponseValid }
     
     // MARK: Item-specific properties
-    
-    /// The minimum number of characters required to consider the input valid
-    public var minNumberOfCharacters: Int
-    /// Whether the text input is supposed to be numerical
-    public var isInputNumerical: Bool
-    
+        
     /// The coding keys for a text item
     enum CodingKeys: String, CodingKey {
         case type
@@ -39,44 +34,40 @@ public final class TextItem: ObservableObject, SurveyItem, Codable {
         case question
         case description
         case isMandatory
-        case minNumberOfCharacters
-        case isInputNumerical
     }
 
     // MARK: - Internal Properties
     
     /// The current response on this item
-    @Published var currentResponse: String {
+    @Published var currentResponse: Double? {
         didSet {
             // Validate the value and update the 'isResponseValid' flag accordingly
-            self.isResponseValid = currentResponse.count >= minNumberOfCharacters
+            self.isResponseValid = currentResponse != nil
         }
     }
     
     // MARK: - Initialization
     
-    /// Default initializer for `TextItem`
+    /// Default initializer for `NumberItem`
     /// - Parameters:
     ///   - identifier: An identifier to be able to associate the responses to the question. By default set to a random uuid
-    ///   - question: The question that the respondent is supposed to answer with the text field
+    ///   - question: The question that the respondent is supposed to answer
     ///   - description: A more detailed description with additional instructions on how to answer the question
     public init(identifier: String = UUID().uuidString, question: String, description: String? = nil) {
-        self.type = .text
+        self.type = .number
         self.identifier = identifier
         self.question = question
         self.description = description
         self.isMandatory = true
-        self.minNumberOfCharacters = 5
-        self.isInputNumerical = false
         // Setup initial response value
-        self.currentResponse = ""
+        self.currentResponse = 0
     }
     
     /// Creates a new instance of text item from a decoder
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        self.type = .text
+        self.type = .number
         
         // Decode all required values
         self.identifier = try container.decode(String.self, forKey: .identifier)
@@ -89,25 +80,15 @@ public final class TextItem: ObservableObject, SurveyItem, Codable {
         } else {
             self.isMandatory = true
         }
-        if let minNumberOfCharacters = try? container.decode(Int.self, forKey: .minNumberOfCharacters) {
-            self.minNumberOfCharacters = minNumberOfCharacters
-        } else {
-            self.minNumberOfCharacters = 5
-        }
-        if let isInputNumerical = try? container.decode(Bool.self, forKey: .isInputNumerical) {
-            self.isInputNumerical = isInputNumerical
-        } else {
-            self.isInputNumerical = false
-        }
         // Setup initial response value
-        self.currentResponse = ""
+        self.currentResponse = 0
     }
     
     /// Transforms the current value into a permanent response object
     /// - Returns: An encodable response object if the current value is valid, nil otherwise
     public func generateResponseObject() -> ItemResponse? {
-        if isResponseValid {
-            return TextResponse(itemIdentifier: identifier, value: currentResponse)
+        if isResponseValid, let currentResponse = currentResponse {
+            return NumberResponse(itemIdentifier: identifier, value: currentResponse)
         }
         return nil
     }

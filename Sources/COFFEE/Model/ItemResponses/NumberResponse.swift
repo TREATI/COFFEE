@@ -1,21 +1,21 @@
 //
-//  MultipleChoiceResponse.swift
+//  TextResponse.swift
 //
 //
-//  Created by Victor Prüfer on 04.05.21.
+//  Created by Victor Prüfer on 22.05.21.
 //
 
 import Foundation
 
-public struct MultipleChoiceResponse: ItemResponse, Codable {
+public struct NumberResponse: ItemResponse, Codable {
     
     /// Specifies the type of the item this response is referring to
     public let type: SurveyItemType
     /// The unique identifier of the item this response is referring to
     public let itemIdentifier: String
-    /// The value of the response. The value type is an array of the selected options' identifiers
-    public let value: [Int]
-
+    /// The value of the response. The value type is a String that reflects the textual input
+    public let value: Double
+    
     /// A description of the value
     public var valueDescription: String {
         return String(describing: value)
@@ -28,8 +28,8 @@ public struct MultipleChoiceResponse: ItemResponse, Codable {
         case value
     }
     
-    public init(itemIdentifier: String, value: [Int]) {
-        self.type = .multipleChoice
+    public init(itemIdentifier: String, value: Double) {
+        self.type = .number
         self.itemIdentifier = itemIdentifier
         self.value = value
     }

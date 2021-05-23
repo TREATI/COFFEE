@@ -13,8 +13,7 @@ import Combine
 
 struct LocationPickerView: View {
     
-    @ObservedObject var viewModel: ViewModel
-    
+    @StateObject var viewModel: ViewModel
     @EnvironmentObject var surveyViewModel: SurveyView.ViewModel
     
     var body: some View {
@@ -94,12 +93,13 @@ struct LocationPickerView: View {
                 return
             }
             
-            if let currentItemResponse = surveyViewModel.currentItemResponse as? LocationPickerResponse {
-                currentItemResponse.value = [
-                    CoordinateType.longitude: currentLocation.coordinate.longitude,
-                    CoordinateType.latitude: currentLocation.coordinate.latitude
-                ]
-            }
+            itemToRender.currentResponse = [
+                CoordinateType.longitude: currentLocation.coordinate.longitude,
+                CoordinateType.latitude: currentLocation.coordinate.latitude
+            ]
+
+            self.objectWillChange.send()
+            self.surveyViewModel.objectWillChange.send()
             
             hasSharedLocation = true
         }

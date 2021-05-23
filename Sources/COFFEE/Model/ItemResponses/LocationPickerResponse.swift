@@ -7,37 +7,28 @@
 
 import Foundation
 
-public class LocationPickerResponse: ObservableObject, ItemResponse, Codable {
+public struct LocationPickerResponse: ItemResponse, Codable {
     
     /// Specifies the type of the item this response is referring to
-    public var type: SurveyItemType
+    public let type: SurveyItemType
     /// The unique identifier of the item this response is referring to
-    public var itemIdentifier: String
+    public let itemIdentifier: String
     /// The value of the response. The value type are the coordinates of the shared location
-    public var value: [CoordinateType: Double]?
+    public let value: [CoordinateType: Double]
     
-    /// Boolean defining whether the current input is valid
-    public var isValidInput: Bool {
-        guard let value = value else {
-            return false
-        }
-        return value.contains(where: { $0.key == .latitude}) &&
-            value.contains(where: { $0.key == .longitude}) &&
-            value.count == 2
-    }
     /// A description of the value.
     public var valueDescription: String {
-        guard let value = value,
-              let longitude = value.first(where: { $0.key == .longitude }),
+        guard let longitude = value.first(where: { $0.key == .longitude }),
               let latitude = value.first(where: { $0.key == .latitude }) else {
-            return "No value"
+            return "Invalid value"
         }
         return "Longitude: \(longitude); Latitude: \(latitude)"
     }
     
-    public init(itemIdentifier: String) {
+    public init(itemIdentifier: String, value: [CoordinateType: Double]) {
         self.type = .locationPicker
         self.itemIdentifier = itemIdentifier
+        self.value = value
     }
 }
 

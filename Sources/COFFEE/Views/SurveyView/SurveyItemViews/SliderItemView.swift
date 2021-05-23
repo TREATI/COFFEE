@@ -13,13 +13,12 @@ import Sliders
 struct SliderItemView: View {
     
     @ObservedObject var viewModel: ViewModel
-    
     @EnvironmentObject var surveyViewModel: SurveyView.ViewModel
     
     var body: some View {
         VStack(alignment: .center) {
             if (viewModel.itemToRender.showSliderValue) {
-                Text(viewModel.numberFormatter.string(for: viewModel.currentSliderValue) ?? "Invalid input")
+                Text(viewModel.numberFormatter.string(for: viewModel.itemToRender.currentResponse) ?? "Invalid input")
                     .font(.callout)
                     .padding(4)
             }
@@ -31,7 +30,10 @@ struct SliderItemView: View {
                 .cornerRadius(4)
                 .padding(4)
             
-            ValueSlider(value: $viewModel.currentSliderValue, in: viewModel.scaleRange, step: viewModel.itemToRender.isContinuous ? 0.01 : 1)
+            ValueSlider(value: $viewModel.itemToRender.currentResponse, in: viewModel.scaleRange, step: viewModel.itemToRender.isContinuous ? 0.01 : 1)
+                .onChange(of: viewModel.itemToRender.currentResponse, perform: { value in
+                    surveyViewModel.objectWillChange.send()
+                })
                 .valueSliderStyle(
                     HorizontalValueSliderStyle(
                         track: LinearGradient(
@@ -53,24 +55,15 @@ extension SliderItemView {
     
     class ViewModel: ObservableObject {
         // The currently displayed survey question
-        private(set) var itemToRender: SliderItem
+        @Published var itemToRender: SliderItem
         // Reference to the environment object, the survey view model
         private var surveyViewModel: SurveyView.ViewModel
-        // Reference to the item response
-        private var itemResponse: SliderResponse?
-        
+
         var numberFormatter: NumberFormatter = {
             let numberFormatter = NumberFormatter()
             numberFormatter.maximumFractionDigits = 2
             return numberFormatter
         }()
-        
-        // Binding to the slider, defining the current value in range 0 to 1
-        @Published var currentSliderValue: Double = 0 {
-            didSet {
-                itemResponse?.value = currentSliderValue
-            }
-        }
         
         // Compute the ordinal scale steps for this question
         var steps: [SliderItem.Step] {
@@ -89,7 +82,7 @@ extension SliderItemView {
         
         // The step that the current slider position is nearest to
         var nearestStep: SliderItem.Step? {
-            return steps.map({ (difference: currentSliderValue - $0.value, step: $0) }).min { (a, b) -> Bool in
+            return steps.map({ (difference: itemToRender.currentResponse - $0.value, step: $0) }).min { (a, b) -> Bool in
                 return abs(a.difference) < abs(b.difference)
             }?.step
         }
@@ -97,8 +90,6 @@ extension SliderItemView {
         init(itemToRender: SliderItem, surveyViewModel: SurveyView.ViewModel) {
             self.itemToRender = itemToRender
             self.surveyViewModel = surveyViewModel
-            self.itemResponse = surveyViewModel.currentItemResponse as? SliderResponse
-            self.currentSliderValue = itemResponse?.value ?? 0
         }
     }
 }

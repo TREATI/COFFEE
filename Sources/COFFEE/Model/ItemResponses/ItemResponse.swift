@@ -15,8 +15,6 @@ public protocol ItemResponse: Codable {
     var itemIdentifier: String { get }
     /// Return a readable description of the value
     var valueDescription: String { get }
-    /// Boolean defining whether the current input is valid
-    var isValidInput: Bool { get }
 }
 
 extension ItemResponse {

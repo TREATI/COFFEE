@@ -110,6 +110,8 @@ public struct Survey: Codable {
                     items.append(try itemsArray.decode(TextItem.self))
                 case .locationPicker:
                     items.append(try itemsArray.decode(LocationPickerItem.self))
+                case .number:
+                    items.append(try itemsArray.decode(NumberItem.self))
             }
         }
     }

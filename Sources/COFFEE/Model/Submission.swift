@@ -54,6 +54,8 @@ public struct Submission: Codable {
                     responses.append(try itemsArray.decode(TextResponse.self))
                 case .locationPicker:
                     responses.append(try itemsArray.decode(LocationPickerResponse.self))
+                case .number:
+                    responses.append(try itemsArray.decode(NumberResponse.self))
             }
         }
     }

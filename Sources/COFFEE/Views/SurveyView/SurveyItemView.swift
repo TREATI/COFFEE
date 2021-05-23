@@ -12,13 +12,13 @@ import SwiftUI
 /// A container view that displays a given survey item in the correct visual appearance
 struct SurveyItemView: View {
     
-    var currentItem: SurveyItem
-    
     @EnvironmentObject var surveyViewModel: SurveyView.ViewModel
     
-    var descriptionText: String {
-        var tempDescription = currentItem.description
-        if !currentItem.isMandatory {
+    var descriptionText: String? {
+        guard var tempDescription = surveyViewModel.currentSurveyItem.description else {
+            return nil
+        }
+        if !surveyViewModel.currentSurveyItem.isMandatory {
             tempDescription += " – You can skip this question"
         }
         return tempDescription
@@ -28,37 +28,43 @@ struct SurveyItemView: View {
         ScrollView {
             VStack(alignment: .leading) {
                 // The question of the displayed survey item
-                Text(currentItem.question)
+                Text(surveyViewModel.currentSurveyItem.question)
                     .font(.headline)
                     .padding(.top)
                     .padding(.bottom, 4)
                     .padding(.horizontal)
-                
+            
                 // Question type description, bottom-aligned
-                Label(descriptionText, systemImage: "info.circle")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-                    .padding(.horizontal)
-                    .padding(.bottom, 8)
+                if let descriptionText = descriptionText {
+                    Label(descriptionText, systemImage: "info.circle")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .padding(.horizontal)
+                        .padding(.bottom, 8)
+                }
                 
                 // The rendered input view, depending on the survey item type
                 Group {
-                    switch currentItem.type {
+                    switch surveyViewModel.currentSurveyItem.type {
                         case .slider:
-                            if let sliderItem = currentItem as? SliderItem {
+                            if let sliderItem = surveyViewModel.currentSurveyItem as? SliderItem {
                                 SliderItemView(viewModel: SliderItemView.ViewModel(itemToRender: sliderItem, surveyViewModel: surveyViewModel))
                             }
                         case .multipleChoice:
-                            if let multipleChoiceItem = currentItem as? MultipleChoiceItem {
+                            if let multipleChoiceItem = surveyViewModel.currentSurveyItem as? MultipleChoiceItem {
                                 MultipleChoiceItemView(viewModel: MultipleChoiceItemView.ViewModel(itemToRender: multipleChoiceItem, surveyViewModel: surveyViewModel))
                             }
                         case .text:
-                            if let textInputItem = currentItem as? TextItem {
-                                TextItemView(viewModel: TextItemView.ViewModel(itemToRender: textInputItem, surveyViewModel: surveyViewModel))
+                            if let textInputItem = surveyViewModel.currentSurveyItem as? TextItem {
+                                TextItemView(viewModel: TextItemView.ViewModel(itemToRender: textInputItem))
                             }
                         case .locationPicker:
-                            if let locationPickerItem = currentItem as? LocationPickerItem {
+                            if let locationPickerItem = surveyViewModel.currentSurveyItem as? LocationPickerItem {
                                 LocationPickerView(viewModel: LocationPickerView.ViewModel(itemToRender: locationPickerItem, surveyViewModel: surveyViewModel))
+                            }
+                        case .number:
+                            if let numberItem = surveyViewModel.currentSurveyItem as? NumberItem {
+                                NumberItemView(viewModel: NumberItemView.ViewModel(itemToRender: numberItem))
                             }
                     }
                 }.padding(.horizontal)

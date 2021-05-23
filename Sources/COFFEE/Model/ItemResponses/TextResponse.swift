@@ -7,39 +7,31 @@
 
 import Foundation
 
-public class TextResponse: ObservableObject, ItemResponse, Codable {
+public struct TextResponse: ItemResponse, Codable {
     
     /// Specifies the type of the item this response is referring to
-    public var type: SurveyItemType
+    public let type: SurveyItemType
     /// The unique identifier of the item this response is referring to
-    public var itemIdentifier: String
+    public let itemIdentifier: String
     /// The value of the response. The value type is a String that reflects the textual input
-    public var value: String = ""
+    public let value: String
     
-    /// Boolean defining whether the current input is valid
-    public var isValidInput: Bool {
-        return value.count > minNumberOfCharacters
-    }
     /// A description of the value
     public var valueDescription: String {
         return String(describing: value)
     }
-    
-    /// The minimum number of characters required to consider the input valid
-    private var minNumberOfCharacters: Int
     
     /// The coding keys for a multiple choice response
     enum CodingKeys: String, CodingKey {
         case type
         case itemIdentifier
         case value
-        case minNumberOfCharacters
     }
     
-    public init(itemIdentifier: String, minNumberOfCharacters: Int = 5) {
+    public init(itemIdentifier: String, value: String) {
         self.type = .text
         self.itemIdentifier = itemIdentifier
-        self.minNumberOfCharacters = minNumberOfCharacters
+        self.value = value
     }
     
     // Encodes an instance of multiple choice response

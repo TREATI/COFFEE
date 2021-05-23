@@ -9,16 +9,27 @@ import Foundation
 import SwiftUI
 
 /// This item displays a set of options and lets the respondent choose multiple ones
-public struct MultipleChoiceItem: SurveyItem, Codable {
-    // General attributes
+public final class MultipleChoiceItem: ObservableObject, SurveyItem, Codable {
+
+    // MARK: - Public Properties
+    
+    // MARK: General item attributes required by the 'SurveyItem' protocol
+
     public let type: SurveyItemType
     public let identifier: String
     public let question: String
-    public let description: String
+    public let description: String?
     public var isMandatory: Bool
     
+    /// Whether the current response is valid
+    @Published public var isResponseValid: Bool = false
+    public var isResponseValidPublished: Published<Bool> { _isResponseValid }
+    public var isResponseValidPublisher: Published<Bool>.Publisher { $isResponseValid }
+    
+    // MARK: Item-specific properties
+
     /// Specify a set of available options
-    public let options: [Self.Option]
+    public let options: [MultipleChoiceItem.Option]
     /// The minimum number of selections required
     public var minNumberOfSelections: Int
     /// The maximum number of selections allowed
@@ -38,15 +49,27 @@ public struct MultipleChoiceItem: SurveyItem, Codable {
         case maxNumberOfSelections
         case isAscendingOrder
     }
+    
+    // MARK: - Internal Properties
+
+    // The current response on this item
+    @Published var currentResponse: [Int] {
+        didSet {
+            // Validate the value and update the 'isResponseValid' flag accordingly
+            self.isResponseValid = (minNumberOfSelections...maxNumberOfSelections) ~= currentResponse.count
+        }
+    }
+    
+    // MARK: - Initialization
 
     /// Default initializer for `MultipleChoiceItem`
     /// - Parameters:
     ///   - identifier: An identifier to be able to associate the responses to the question. By default set to a random uuid
-    ///   - question: The question that the respondent is supposed to answer with the slider
+    ///   - question: The question that the respondent is supposed to answer with by selecting options
     ///   - description: A more detailed description with additional instructions on how to answer the question
     ///   - options: The available options that the respondent can select
     ///   - isSingleChoice: Set minNumberOfSelections and maxNumberOfSelections to 1, which means that the respondent can/must select only one option
-    public init(identifier: String = UUID().uuidString, question: String, description: String, options: [Self.Option], isSingleChoice: Bool = false) {
+    public init(identifier: String = UUID().uuidString, question: String, description: String? = nil, options: [MultipleChoiceItem.Option], isSingleChoice: Bool = false) {
         self.type = .multipleChoice
         self.isMandatory = true
         self.isAscendingOrder = true
@@ -57,6 +80,9 @@ public struct MultipleChoiceItem: SurveyItem, Codable {
         self.question = question
         self.description = description
         self.options = options
+        
+        // Setup initial response value
+        self.currentResponse = []
     }
     
     /// Creates a new instance of a multiple choice item from a decoder
@@ -68,7 +94,7 @@ public struct MultipleChoiceItem: SurveyItem, Codable {
         // Decode all required values
         identifier = try container.decode(String.self, forKey: .identifier)
         question = try container.decode(String.self, forKey: .question)
-        description = try container.decode(String.self, forKey: .description)
+        description = try? container.decode(String.self, forKey: .description)
         options = try container.decode([MultipleChoiceItem.Option].self, forKey: .options)
 
         // Decode optional values / set default values
@@ -92,7 +118,22 @@ public struct MultipleChoiceItem: SurveyItem, Codable {
         } else {
             self.isAscendingOrder = true
         }
+        
+        // Setup initial response value
+        self.currentResponse = []
     }
+    
+    /// Transforms the current value into a permanent response object
+    /// - Returns: An encodable response object if the current value is valid, nil otherwise
+    public func generateResponseObject() -> ItemResponse? {
+        if isResponseValid {
+            return MultipleChoiceResponse(itemIdentifier: identifier, value: currentResponse)
+        }
+        return nil
+    }
+}
+
+extension MultipleChoiceItem {
     
     /// One multiple choice option
     public struct Option: Codable {

@@ -12,9 +12,7 @@ import SwiftUI
 struct MultipleChoiceItemView: View {
     
     @ObservedObject var viewModel: ViewModel
-    
-    @EnvironmentObject var surveyViewModel: SurveyView.ViewModel
-        
+            
     var body: some View {
         ForEach(viewModel.options.indices, id: \.self) { optionIndex in
             Button(action: { viewModel.selectStep(optionIndex: optionIndex) }, label: {
@@ -45,8 +43,6 @@ extension MultipleChoiceItemView {
         private var itemToRender: MultipleChoiceItem
         // Reference to the environment object, the survey view model
         private var surveyViewModel: SurveyView.ViewModel
-        // Reference to the item response
-        private var itemResponse: MultipleChoiceResponse?
         
         // Compute the ordinal scale steps for this question
         var options: [MultipleChoiceItem.Option] {
@@ -59,24 +55,20 @@ extension MultipleChoiceItemView {
         init(itemToRender: MultipleChoiceItem, surveyViewModel: SurveyView.ViewModel) {
             self.itemToRender = itemToRender
             self.surveyViewModel = surveyViewModel
-            self.itemResponse = surveyViewModel.currentItemResponse as? MultipleChoiceResponse
         }
         
         /// Action when user tapped at option row at given index
         func selectStep(optionIndex: Int) {
-            guard let itemResponse = itemResponse else {
-                return
-            }
             if getIsSelected(optionIndex: optionIndex) {
                 // If the new selection is already selected, toggle it
-                itemResponse.value.removeAll(where: { $0 == options[optionIndex].identifier })
+                itemToRender.currentResponse.removeAll(where: { $0 == options[optionIndex].identifier })
             } else {
                 // Otherwise, update the item response to reflect the current selection
                 // If single choice, deselect previos selection
                 if itemToRender.minNumberOfSelections == 1 && itemToRender.maxNumberOfSelections == 1 {
-                    itemResponse.value.removeAll()
+                    itemToRender.currentResponse.removeAll()
                 }
-                itemResponse.value.append(options[optionIndex].identifier)
+                itemToRender.currentResponse.append(options[optionIndex].identifier)
             }
             
             // Notify the view that changes occurred
@@ -86,10 +78,7 @@ extension MultipleChoiceItemView {
         
         /// Returns whether an option at a given index is selected or not
         func getIsSelected(optionIndex: Int) -> Bool {
-            guard let currentItemResponse = surveyViewModel.currentItemResponse as? MultipleChoiceResponse else {
-                return false
-            }
-            return currentItemResponse.value.contains(options[optionIndex].identifier)
+            return itemToRender.currentResponse.contains(options[optionIndex].identifier)
         }
         
         /// Returns the background color for an option row at a given index
