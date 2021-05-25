@@ -9,13 +9,18 @@ import Foundation
 
 /// A submission groups multiple item responses
 public struct Submission: Codable {
+    /// The date of the submission
     public let submissionDate: Date
+    /// The responses to the survey questions. For each valid response, there is one response item.
     public var responses: [ItemResponse]
+    /// An optional settable identifier to identify the respondent (e.g. a user id)
+    public var identifier: String?
     
     /// The coding keys for a text item
     enum CodingKeys: String, CodingKey {
         case submissionDate
         case responses
+        case identifier
     }
     
     /// The coding key for the survey item type in a survey item
@@ -35,6 +40,7 @@ public struct Submission: Codable {
                 
         // Decode all required values
         self.submissionDate = try container.decode(Date.self, forKey: .submissionDate)
+        self.identifier = try? container.decode(String.self, forKey: .identifier)
         self.responses = []
         
         // Decode the responses array (needs special treatment as items need to be assigned manually)
@@ -66,7 +72,10 @@ public struct Submission: Codable {
         
         // Encode all required values
         try container.encode(submissionDate, forKey: .submissionDate)
-
+        if let identifier = identifier {
+            try container.encode(identifier, forKey: .identifier)
+        }
+            
         // Encode the items array (needs special treatment as they need to be assigned manually)
         var itemsContainer = container.nestedUnkeyedContainer(forKey: .responses)
         for anItem in responses {
@@ -78,6 +87,8 @@ public struct Submission: Codable {
                 try itemsContainer.encode(locationPickerItem)
             } else if let textInputItem = anItem as? TextResponse {
                 try itemsContainer.encode(textInputItem)
+            } else if let numberItem = anItem as? NumberResponse {
+                try itemsContainer.encode(numberItem)
             }
         }
     }
@@ -87,7 +98,7 @@ extension Submission: CustomStringConvertible {
     
     public var description: String {
         let responsesString = responses.map({ "+ " + $0.description }).joined(separator: "\n")
-        return "Submission at \(submissionDate.description):\n" + responsesString
+        return "Submission [\(identifier ?? "No identifier")] at \(submissionDate.description):\n" + responsesString
     }
     
 }
