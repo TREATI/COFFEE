@@ -16,7 +16,7 @@ struct NumberItemView: View {
     @EnvironmentObject var surveyViewModel: SurveyView.ViewModel
     
     var body: some View {
-        TextField("Hey", text: viewModel.numberProxy)
+        TextField("0", text: viewModel.numberProxy)
             .keyboardType(.decimalPad)
             .onChange(of: viewModel.numberProxy.wrappedValue, perform: { value in
                 surveyViewModel.objectWillChange.send()

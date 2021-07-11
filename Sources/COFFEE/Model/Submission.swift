@@ -10,7 +10,7 @@ import Foundation
 /// A submission groups multiple item responses
 public struct Submission: Codable {
     /// The date of the submission
-    public let submissionDate: Date
+    public var submissionDate: Date
     /// The responses to the survey questions. For each valid response, there is one response item.
     public var responses: [ItemResponse]
     /// An optional settable identifier to identify the respondent (e.g. a user id)
